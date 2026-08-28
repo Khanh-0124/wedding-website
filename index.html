@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="css/e37503463b981e2f.css" data-precedence="next">
   <link rel="stylesheet" href="css/3589a66456341371.css" data-precedence="next">
   <link rel="stylesheet" href="css/65d7d42e0e662d1e.css" data-precedence="next">
-  <link rel="preload" as="script" fetchpriority="low" href="/_next/static/chunks/webpack-8b2f088adaff30e1.js">
   <script src="js/4bd1b696-100b9d70ed4e49c1.js" async=""></script>
   <script src="js/1255-642c76f13c20a3ec.js" async=""></script>
   <script src="js/main-app-0ee650784ad95c4e.js" async=""></script>
@@ -29,9 +28,9 @@
   <script src="js/5563-54046f3635db0d38.js" async=""></script>
   <script src="js/2810-d6b2f5b42f980c21.js" async=""></script>
   <script src="js/6382-f14b34efbd1d008b.js" async=""></script>
-  <script src="js/page-0ed3f40a2bc9315d.js" async=""></script>
+  <script src="js/page-0ed3f40a2bc9315d.js?v=layout-19" async=""></script>
   <meta name="next-size-adjust" content="">
-  <title>Vũ Khánh & Thị Huế</title>
+  <title>Vũ Khánh & Nguyễn Huế</title>
   <meta name="description" content="Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới">
   <meta name="generator" content="v0.app">
   <meta name="og:image"
@@ -41,14 +40,14 @@
   <meta name="og:image:type" content="image/png">
   <meta name="og:image:width" content="1200">
   <meta name="og:image:height" content="630">
-  <meta property="og:title" content="Vũ Khánh & Thị Huế">
+  <meta property="og:title" content="Vũ Khánh & Nguyễn Huế">
   <meta property="og:description" content="Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới">
   <meta property="og:url" content="https://suns-wedding.vercel.app/hang-huy?guest=b%E1%BA%A1n%20Minh%20Hi%E1%BA%BFu">
   <meta property="og:locale" content="vi_VN">
   <meta property="og:image" content="images/download_1_bq8fyl_j9segm.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Vũ Khánh & Thị Huế">
+  <meta name="twitter:title" content="Vũ Khánh & Nguyễn Huế">
   <meta name="twitter:description" content="Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới">
   <meta name="twitter:image"
     content="https://res.cloudinary.com/djrwanubz/image/upload/v1785306757/download_1_bq8fyl_j9segm.jpg">
@@ -57,58 +56,539 @@
   <link rel="icon" href="images/icon-light-32x32.png" type="image/svg+xml">
   <link rel="apple-touch-icon" href="images/icon-light-32x32.png">
   <script src="js/polyfills-42372ed130431b0a.js" nomodule=""></script>
+  <style>
+    @keyframes ripple-wave {
+      0% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 18px rgba(212, 175, 55, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+      }
+    }
+    @keyframes hand-tap {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      40% {
+        transform: translate(-3px, -8px) scale(0.92);
+      }
+      70% {
+        transform: translate(0, 0) scale(1.05);
+      }
+    }
+    .fixed.right-4.bottom-6.z-50 {
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+    /* Timeline sang trọng */
+    .wedding-timeline-list {
+      position: relative;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 12px 0;
+    }
+    .wedding-timeline-line {
+      position: absolute;
+      left: 27px;
+      top: 15px;
+      bottom: 25px;
+      width: 2px;
+      background: linear-gradient(180deg, #d4af37 0%, #e77895 50%, #d4af37 100%);
+      opacity: 0.5;
+      border-radius: 99px;
+    }
+    .wedding-timeline-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .wedding-timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    .wedding-timeline-node {
+      position: relative;
+      z-index: 2;
+      width: 54px;
+      height: 54px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffffff 0%, #fff2f5 100%);
+      border: 2px solid #e8b4b8;
+      box-shadow: 0 4px 14px rgba(139, 30, 63, 0.12), inset 0 0 8px rgba(212, 175, 55, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .wedding-timeline-node::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px dashed rgba(212, 175, 55, 0.4);
+      pointer-events: none;
+    }
+    .wedding-timeline-card {
+      flex: 1;
+      background: #ffffff;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 16px;
+      padding: 14px 18px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .wedding-timeline-card::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      border-left: 1px solid rgba(212, 175, 55, 0.3);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    .wedding-timeline-time {
+      align-self: flex-start;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #8b1e3f;
+      background: linear-gradient(135deg, rgba(139, 30, 63, 0.08), rgba(212, 175, 55, 0.15));
+      border: 1px solid rgba(139, 30, 63, 0.15);
+      padding: 2px 10px;
+      border-radius: 999px;
+      margin-bottom: 5px;
+    }
+    .wedding-timeline-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #3d3028;
+      margin: 0;
+      line-height: 1.3;
+    }
+    .wedding-timeline-desc {
+      font-size: 13px;
+      color: #8b6b54;
+      margin-top: 3px;
+      margin-bottom: 0;
+      font-weight: 400;
+    }
+    /* Chuyển động nền liên tục cho toàn bộ thiệp cưới */
+    @keyframes wedding-title-glow {
+      0%, 100% { filter: drop-shadow(0 0 0 rgba(212, 175, 55, 0)); }
+      50% { filter: drop-shadow(0 0 7px rgba(212, 175, 55, 0.55)); }
+    }
+    @keyframes wedding-photo-breathe {
+      0%, 100% { filter: brightness(1) saturate(1); }
+      50% { filter: brightness(1.08) saturate(1.12); }
+    }
+    @keyframes wedding-soft-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+    @keyframes wedding-heart-beat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.2); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.12); }
+    }
+    @keyframes wedding-line-flow {
+      from { background-position: 0 0; }
+      to { background-position: 0 180px; }
+    }
+    @keyframes wedding-card-glow {
+      0%, 100% { box-shadow: 0 4px 18px rgba(139, 30, 63, 0.06); }
+      50% { box-shadow: 0 8px 25px rgba(212, 175, 55, 0.24); }
+    }
+    @keyframes wedding-heart-rise {
+      0% { transform: translate3d(0, 12vh, 0) rotate(-12deg) scale(0.7); opacity: 0; }
+      12% { opacity: 0.5; }
+      75% { opacity: 0.28; }
+      100% { transform: translate3d(var(--drift), -115vh, 0) rotate(25deg) scale(1.2); opacity: 0; }
+    }
+    @keyframes wedding-scroll-hint {
+      0%, 100% { transform: translateY(5px); opacity: .45; }
+      50% { transform: translateY(-3px); opacity: 1; }
+    }
+    @keyframes wedding-gift-hand-tap {
+      0%, 16%, 100% { transform: translate3d(7px, 9px, 0) rotate(-18deg) scale(1); }
+      32% { transform: translate3d(0, 0, 0) rotate(-18deg) scale(1); }
+      42% { transform: translate3d(0, 0, 0) rotate(-18deg) scale(.86); }
+      55% { transform: translate3d(4px, 5px, 0) rotate(-18deg) scale(1); }
+    }
+    @keyframes wedding-gift-tap-ring {
+      0%, 25%, 100% { transform: scale(.35); opacity: 0; }
+      38% { transform: scale(.55); opacity: .85; }
+      68% { transform: scale(1.65); opacity: 0; }
+    }
+    body .text-secondary {
+      animation: wedding-title-glow 3.2s ease-in-out infinite;
+    }
+    section img {
+      animation: wedding-photo-breathe 6s ease-in-out infinite;
+    }
+    svg.lucide-heart {
+      transform-origin: center;
+      animation: wedding-heart-beat 2.2s ease-in-out infinite;
+    }
+    .wedding-timeline-line {
+      background-size: 100% 180px;
+      animation: wedding-line-flow 3s linear infinite;
+    }
+    .wedding-timeline-item {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .wedding-timeline-item:nth-child(even) .wedding-timeline-node {
+      animation-delay: -1.3s;
+    }
+    .wedding-timeline-node,
+    .gift-trigger:not(.is-opening) {
+      animation: wedding-soft-float 2.8s ease-in-out infinite;
+    }
+    .wedding-timeline-card {
+      animation: wedding-card-glow 3.5s ease-in-out infinite;
+    }
+    .wedding-ambient-hearts {
+      position: fixed;
+      inset: 0;
+      z-index: 45;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .wedding-ambient-heart {
+      position: absolute;
+      left: var(--left);
+      bottom: -12vh;
+      color: rgba(209, 77, 114, 0.62);
+      font-size: var(--size);
+      line-height: 1;
+      text-shadow: 0 0 9px rgba(255, 255, 255, 0.85);
+      animation: wedding-heart-rise var(--duration) linear var(--delay) infinite;
+      will-change: transform, opacity;
+    }
+    .wedding-scroll-cue {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 3px;
+      border: 0;
+      padding: 0 12px 2px;
+      color: #a94f68;
+      background: transparent;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      max-height: 48px;
+      opacity: 1;
+      overflow: hidden;
+      transition: opacity .3s ease, transform .3s ease, max-height .35s ease, margin .35s ease, padding .35s ease;
+    }
+    .wedding-scroll-cue.is-hidden {
+      max-height: 0;
+      margin-top: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      opacity: 0;
+      transform: translateY(-7px);
+      pointer-events: none;
+    }
+    .wedding-scroll-cue-arrows {
+      position: relative;
+      display: block;
+      width: 22px;
+      height: 20px;
+      animation: wedding-scroll-hint 1.35s ease-in-out infinite;
+    }
+    .wedding-scroll-cue-arrows::before,
+    .wedding-scroll-cue-arrows::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: translateX(-50%) rotate(225deg);
+    }
+    .wedding-scroll-cue-arrows::before { top: 0; }
+    .wedding-scroll-cue-arrows::after { top: 7px; opacity: .55; }
+    .wedding-gift-hand-guide {
+      position: absolute;
+      z-index: 20;
+      top: 22px;
+      right: -18px;
+      display: block;
+      width: 42px;
+      height: 44px;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    .wedding-gift-hand-guide.is-hidden {
+      opacity: 0;
+      transform: scale(.8);
+    }
+    .wedding-gift-hand {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      filter: drop-shadow(0 3px 3px rgba(92,36,52,.24));
+      transform-origin: 45% 15%;
+      animation: wedding-gift-hand-tap 1.9s ease-in-out infinite;
+    }
+    .wedding-gift-hand svg {
+      display: block;
+      width: 32px;
+      height: 38px;
+      overflow: visible;
+    }
+    .wedding-gift-hand-palm {
+      fill: #fffaf4;
+      stroke: #a94f68;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .wedding-gift-hand-rays {
+      fill: none;
+      stroke: #d4af37;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+    }
+    .wedding-gift-tap-ring {
+      position: absolute;
+      z-index: -1;
+      top: 1px;
+      left: 8px;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(212,175,55,.8);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(212,175,55,.45);
+      animation: wedding-gift-tap-ring 1.9s ease-out infinite;
+    }
+    #wedding-door-replay {
+      position: fixed;
+      inset: 0 auto 0 50%;
+      z-index: 2147483647;
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    #wedding-door-replay .door-replay-panel {
+      position: relative;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--background, #e9a5b4);
+      transition: transform 1.5s cubic-bezier(.25, 1, .5, 1);
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+    #wedding-door-replay .door-replay-left { border-right: 1px solid rgba(255,255,255,.2); }
+    #wedding-door-replay .door-replay-right { border-left: 1px solid rgba(255,255,255,.2); }
+    #wedding-door-replay.is-open .door-replay-left { transform: translate3d(-100%,0,0); }
+    #wedding-door-replay.is-open .door-replay-right { transform: translate3d(100%,0,0); }
+    #wedding-door-replay .door-replay-mark {
+      position: absolute;
+      top: 45%;
+      z-index: 2;
+      width: 100px;
+      height: 110px;
+      color: var(--foreground, #fdfdf5);
+      font-size: 100px;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      transform: translateY(-50%);
+      user-select: none;
+    }
+    #wedding-door-replay .door-replay-mark-left { right: -50px; }
+    #wedding-door-replay .door-replay-mark-right { left: -50px; }
+    @media (min-width: 768px) {
+      #wedding-door-replay { width: 50vw; }
+    }
+  </style>
 </head>
 
 <body class="__variable_f367f3 __variable_0a80b4 font-sans antialiased">
+  <div id="wedding-door-replay" aria-hidden="true">
+    <div class="door-replay-panel door-replay-left">
+      <div class="door-replay-mark door-replay-mark-left">囍</div>
+    </div>
+    <div class="door-replay-panel door-replay-right">
+      <div class="door-replay-mark door-replay-mark-right">囍</div>
+    </div>
+  </div>
+  <script>
+    (function replayOriginalWeddingDoors() {
+      const stage = document.getElementById('wedding-door-replay');
+      if (!stage) return;
+      let finished = false;
+
+      // Nếu hydrate thay nội dung body, gắn lại cửa ngay trong cùng microtask.
+      const observer = new MutationObserver(function() {
+        if (!finished && !stage.isConnected && document.body) {
+          document.body.appendChild(stage);
+        }
+      });
+      observer.observe(document.documentElement, { childList: true, subtree: true });
+
+      function playDoorsAfterHydration() {
+        if (!stage.isConnected) document.body.appendChild(stage);
+
+        window.requestAnimationFrame(function() {
+          window.requestAnimationFrame(function() {
+            window.setTimeout(function() {
+              stage.classList.add('is-open');
+            }, 1200);
+          });
+        });
+
+        window.setTimeout(function() {
+          finished = true;
+          observer.disconnect();
+          stage.remove();
+        }, 2850);
+      }
+
+      if (document.readyState === 'complete') {
+        playDoorsAfterHydration();
+      } else {
+        window.addEventListener('load', playDoorsAfterHydration, { once: true });
+      }
+    })();
+  </script>
   <div hidden=""><!--$--><!--/$--></div>
   <div class="bg-foreground">
     <div
       class="mx-auto relative md:w-[50%] h-screen  max-h-screen bg-foreground shadow-2xl overflow-hidden flex items-center justify-center">
       <div class="absolute inset-0 z-0 overflow-y-auto overflow-x-hidden bg-foreground">
-        <div class="relative h-screen w-full overflow-hidden shadow-xl">
-          <div class="flex h-full flex-col px-5 pt-4 pb-12">
+        <div class="relative w-full overflow-hidden flex flex-col justify-between pt-2 pb-2" style="height:auto;min-height:0;box-shadow:none">
+          <div class="flex flex-col px-4 pt-1 pb-1">
             <div class="text-center">
-              <h1 class="__className_85880b text-[16px] font-bold tracking-widest text-secondary">THIỆP MỜI</h1>
+              <h1 class="__className_85880b text-[14px] font-bold tracking-widest text-secondary">THIỆP MỜI</h1>
             </div>
             <div
-              class="__className_ca60d3 mt-1 flex items-center justify-center font-normal text-secondary text-[40px]">
-              <span>05</span><span class="mx-2">.</span><span>12</span><span class="mx-2">.</span><span>2026</span>
+              class="__className_ca60d3 mt-0.5 flex items-center justify-center font-normal text-secondary text-[32px] leading-tight">
+              <span>29</span><span class="mx-2">.</span><span>11</span><span class="mx-2">.</span><span>2026</span>
             </div>
             <h2
-              class="__className_7d6f79 mt-2 flex items-center justify-center gap-2 text-[34px] leading-none text-accent">
+              class="__className_7d6f79 flex items-center justify-center gap-2 text-[26px] text-accent" style="margin-top:10px;margin-bottom:6px;line-height:1.2">
               <span class="text-center">Vũ Khánh</span>
-              <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              <div><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                   fill="var(--foreground)" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" class="lucide lucide-heart h-5 w-5 text-secondary mx-2" aria-hidden="true">
+                  stroke-linejoin="round" class="lucide lucide-heart h-4 w-4 text-secondary mx-1.5" aria-hidden="true">
                   <path
                     d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5">
                   </path>
-                </svg></div><span class="text-center">Thị Huế</span>
+                </svg></div><span class="text-center">Nguyễn Huế</span>
             </h2>
-            <div class="relative mx-auto mt-4 flex w-[70vw] md:w-[340px] flex-1 flex-col">
-              <div class="flex-1 border-[4px] border-border">
-                <div class="relative h-full overflow-hidden bg-black"><img alt="couple" loading="lazy" decoding="async"
-                    data-nimg="fill" class="object-cover"
-                    style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                    src="images/download_1_bq8fyl_j9segm.jpg"></div>
+            <div class="relative mx-auto mt-2 flex w-[92vw] md:w-[520px] flex-col items-center" style="width:min(92vw,520px,calc(57dvh - 135px),calc(100% - 24px))">
+              <div class="w-full aspect-[3/4] border-[4px] border-border relative overflow-hidden bg-black shadow-md">
+                <img alt="couple" loading="eager" decoding="async" class="object-cover w-full h-full absolute inset-0"
+                    src="images/download_1_bq8fyl_j9segm.jpg">
               </div>
-              <div class="mt-6 text-center">
-                <p class="__className_85880b
-      text-[15px]
-      uppercase
-      tracking-[0.25em]
-      text-secondary
-      font-bold">Trân Trọng Kính Mời</p>
-                <h3 class="__className_3336bb
-      mt-3
-      text-[20px]
-      leading-none
-      text-[#3a322f]">b%E1%BA%A1n%20Minh%20Hi%E1%BA%BFu</h3>
-                <div class="mx-auto h-px w-60 bg-[#c8b39b]/50"></div>
+              <div class="mt-2 text-center">
+                <p class="__className_85880b text-[13px] uppercase tracking-[0.25em] text-secondary font-bold">Trân Trọng Kính Mời</p>
+                <h3 class="__className_3336bb mt-0.5 text-[17px] leading-none text-[#3a322f]">bạn Minh Hiếu</h3>
+                <div class="hidden" aria-hidden="true"></div>
               </div>
             </div>
           </div>
         </div>
+
+        <section class="gift-section flex flex-col justify-center py-1 px-3 relative overflow-hidden select-none" id="wedding-gift" style="height:auto;min-height:0">
+          <style>
+            .gift-section { background: transparent; }
+            .gift-section::before, .gift-section::after { content:""; position:absolute; border-radius:999px; filter:blur(2px); opacity:.45; pointer-events:none; }
+            .gift-section::before, .gift-section::after { display:none; }
+            .gift-section::before { width:180px; height:180px; left:-85px; top:-75px; background:radial-gradient(circle,#d4af3755,transparent 68%); }
+            .gift-section::after { width:220px; height:220px; right:-110px; bottom:-130px; background:radial-gradient(circle,#8b1e3f30,transparent 68%); }
+            .gift-trigger { position:relative; width:76px; height:58px; border:0; padding:0; background:transparent; cursor:pointer; perspective:700px; -webkit-tap-highlight-color:transparent; }
+            .gift-trigger:focus-visible { outline:2px solid #8b1e3f; outline-offset:8px; border-radius:20px; }
+            .gift-aura { display:none; position:absolute; inset:6px 10px 2px; border-radius:50%; background:radial-gradient(circle,#ffe9a866 0,#d4af3733 35%,transparent 70%); filter:blur(6px); }
+            .gift-shadow { display:none; position:absolute; left:18px; bottom:2px; width:54px; height:9px; border-radius:50%; background:#4b1b2733; filter:blur(4px); transition:transform .5s, opacity .5s; }
+            .gift-box { position:absolute; left:31px; bottom:14px; width:88px; height:72px; border-radius:5px 5px 10px 10px; background:linear-gradient(135deg,#b52d55,#7f1737 74%); box-shadow:inset 7px 0 10px #ffffff1f,inset -8px -8px 12px #4b0a1b33,0 16px 30px #6c1a3030; transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+            .gift-box::before { content:""; position:absolute; left:36px; top:0; width:17px; height:100%; background:linear-gradient(90deg,#b88a24,#f4d978 48%,#ae7d17); box-shadow:0 0 9px #ffe9a777; }
+            .gift-lid { position:absolute; z-index:3; left:22px; bottom:78px; width:106px; height:26px; border-radius:7px; background:linear-gradient(135deg,#ca3c63,#8b1e3f 75%); box-shadow:inset 5px 3px 8px #ffffff2b,0 7px 12px #5c13263d; transform-origin:88% 100%; transition:transform .75s cubic-bezier(.16,1,.3,1); }
+            .gift-lid::before { content:""; position:absolute; left:44px; top:0; width:18px; height:100%; background:linear-gradient(90deg,#b88a24,#f4d978,#ae7d17); }
+            .gift-bow { position:absolute; z-index:4; left:58px; bottom:101px; width:34px; height:24px; transition:transform .75s cubic-bezier(.16,1,.3,1); }
+            .gift-bow::before,.gift-bow::after { content:""; position:absolute; top:2px; width:25px; height:19px; border:6px solid #d4af37; background:#fff2b51c; }
+            .gift-bow::before { right:17px; border-radius:80% 45% 55% 45%; transform:rotate(18deg); }
+            .gift-bow::after { left:17px; border-radius:45% 80% 45% 55%; transform:rotate(-18deg); }
+            .gift-knot { position:absolute; z-index:5; left:68px; bottom:106px; width:15px; height:15px; border-radius:50%; background:linear-gradient(135deg,#f5dc83,#a87917); transition:transform .75s cubic-bezier(.16,1,.3,1); }
+            .gift-spark { position:absolute; color:#d4af37; font-size:18px; opacity:0; text-shadow:0 0 8px #fff; pointer-events:none; }
+            .gift-spark.s1 { left:16px; top:24px; animation:sparkle 2s .1s infinite; }.gift-spark.s2 { right:14px; top:37px; animation:sparkle 2.3s .65s infinite; }.gift-spark.s3 { left:6px; top:76px; font-size:11px; animation:sparkle 1.8s 1s infinite; }
+            .gift-trigger:hover .gift-box { transform:translateY(-3px) scale(1.04); }.gift-trigger:hover .gift-lid,.gift-trigger:hover .gift-bow,.gift-trigger:hover .gift-knot { transform:translateY(-5px) rotate(-3deg); }
+            .gift-trigger.is-opening .gift-box { animation:box-hop .75s ease both; }.gift-trigger.is-opening .gift-lid,.gift-trigger.is-opening .gift-bow,.gift-trigger.is-opening .gift-knot { transform:translate(-18px,-45px) rotate(-24deg); }
+            .gift-trigger.is-opening .gift-aura { animation:gift-flash .8s ease both; }.gift-trigger.is-opening .gift-shadow { transform:scale(1.25); opacity:.2; }
+            .touch-guide { position:absolute; display:inline-block; width:28px; height:30px; left:calc(50% + 20px); top:42px; transform:rotate(-35deg); transform-origin:8px 5px; pointer-events:none; }
+            .touch-hand { position:absolute; width:22px; height:26px; left:5px; top:4px; overflow:visible; animation:touch-press 3.2s ease-in-out infinite; }
+            .touch-wave { position:absolute; width:12px; height:12px; left:9px; top:6px; transform:translate(-50%,-50%); border:0; border-radius:50%; opacity:0; background:radial-gradient(circle,transparent 0%,transparent 58%,rgba(212,175,55,.28) 66%,rgba(168,50,80,.14) 72%,transparent 80%); filter:blur(1px); will-change:width,height,opacity; animation:touch-ripple 5.4s cubic-bezier(.16,1,.3,1) infinite; }
+            .touch-wave:nth-child(2) { animation-delay:2.7s; }
+            .gift-particle { position:absolute; z-index:20; left:50%; top:48%; width:8px; height:12px; border-radius:2px; pointer-events:none; animation:confetti-pop 1s cubic-bezier(.1,.7,.2,1) forwards; }
+            .gift-modal { position:relative; z-index:80; display:grid; place-items:start center; width:100%; max-height:0; margin-top:0; padding:0 4px; overflow:hidden; background:transparent; opacity:0; visibility:hidden; transition:max-height .65s cubic-bezier(.16,1,.3,1),opacity .35s,margin-top .5s,visibility .35s; }
+            .gift-modal.is-visible { max-height:1600px; margin-top:16px; opacity:1; visibility:visible; }.gift-dialog { position:relative; width:min(100%,720px); overflow:visible; border:1px solid #d4af3780; border-radius:24px; padding:24px 18px 18px; background:linear-gradient(145deg,#fffdf9,#f8eee8); box-shadow:0 18px 55px #6b26302e; transform:translateY(25px) scale(.94); transition:transform .5s cubic-bezier(.16,1,.3,1); }
+            .gift-modal.is-visible .gift-dialog { transform:none; }.gift-close { position:absolute; right:14px; top:14px; width:38px; height:38px; border:1px solid #8b1e3f2e; border-radius:50%; background:#fff9; color:#8b1e3f; font-size:24px; cursor:pointer; }
+            .gift-accounts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:20px; }.gift-account { padding:16px; border-radius:18px; background:#fff; border:1px solid #d4af374f; box-shadow:0 8px 25px #6b263014; }.gift-account img { width:min(100%,210px); margin:auto; border-radius:12px; }.gift-qr { cursor:pointer; transition:box-shadow .25s,opacity .25s; }.gift-qr:hover { box-shadow:0 0 0 4px #d4af3740,0 8px 24px #8b1e3f24; opacity:.94; }.gift-qr:focus-visible { outline:3px solid #d4af37; outline-offset:4px; }.gift-copy { margin-top:10px; border:0; border-radius:999px; padding:9px 14px; background:#8b1e3f; color:#fff; font-size:12px; cursor:pointer; }
+            @keyframes gift-breathe { 0%,100%{transform:translateY(0) rotate(0) scale(1)} 35%{transform:translateY(-4px) rotate(-1.8deg) scale(1.015)} 70%{transform:translateY(-2px) rotate(1.8deg) scale(1)} } @keyframes touch-press { 0%,100%{transform:translateY(7px) rotate(2deg)} 50%{transform:translateY(0) rotate(0)} } @keyframes touch-ripple { 0%{width:14px;height:14px;opacity:0} 16%{opacity:.46} 48%{width:42vw;height:42vw;opacity:.2} 100%{width:115vw;height:115vw;opacity:0} } @keyframes sparkle { 0%,100%{opacity:0;transform:scale(.3) rotate(0)} 45%{opacity:1;transform:scale(1.2) rotate(90deg)} 65%{opacity:.4} } @keyframes hint-float { 50%{transform:translateY(6px)} } @keyframes box-hop { 35%{transform:translateY(-14px) scale(1.06)} 70%{transform:translateY(2px) scale(.98)} } @keyframes gift-flash { 45%{transform:scale(1.7);opacity:1} 100%{transform:scale(2.2);opacity:0} } @keyframes confetti-pop { from{transform:translate(-50%,-50%) rotate(0);opacity:1} to{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(var(--r));opacity:0} }
+            @media(max-width:560px){.gift-dialog{padding:38px 12px 14px;border-radius:18px}.gift-accounts{grid-template-columns:1fr;margin-top:10px}.gift-account{padding:10px}.gift-account img{width:160px}.gift-dialog .text-center>p{display:none}}
+            @media(prefers-reduced-motion:reduce){.gift-section *{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}.gift-trigger *,.gift-dialog{transition-duration:.01ms!important}}
+          </style>
+          <div class="mx-auto max-w-xl flex flex-col items-center text-center">
+            <button class="gift-trigger" type="button" aria-label="Mở hộp mừng cưới" aria-haspopup="dialog">
+              <span class="gift-aura"></span><span class="gift-shadow"></span><img src="images/wedding-heart-gift.png" alt="Hộp quà cưới hình trái tim" style="position:relative;z-index:2;width:60px;max-width:none;left:8px;filter:drop-shadow(0 6px 6px rgba(92,36,52,.2));animation:gift-breathe 2.4s ease-in-out infinite">
+              <span class="wedding-gift-hand-guide" aria-hidden="true">
+                <span class="wedding-gift-tap-ring"></span>
+                <span class="wedding-gift-hand">
+                  <svg viewBox="0 0 32 38" focusable="false">
+                    <path class="wedding-gift-hand-rays" d="M15 1v3M7.8 4.2l2.1 2.1M22.2 4.2l-2.1 2.1"></path>
+                    <path class="wedding-gift-hand-palm" d="M12.2 19.4V8.1a2.8 2.8 0 0 1 5.6 0v7.1-2.6a2.5 2.5 0 0 1 5 0v3.1-1.7a2.35 2.35 0 0 1 4.7 0v7.2c0 7.5-3.9 12.3-10.3 12.3h-1.7c-3.1 0-5.7-1.4-7.5-3.8l-4.6-6.3a2.7 2.7 0 0 1 4.1-3.5l4.7 3.9v-4.4Z"></path>
+                  </svg>
+                </span>
+              </span>
+            </button>
+
+            <h2 class="__className_7d6f79 text-lg md:text-xl font-semibold leading-tight mt-0 cursor-pointer" style="color: #5C2434;">
+              Hộp Mừng Cưới
+            </h2>
+            <button class="wedding-scroll-cue" type="button" aria-label="Vuốt lên để xem tiếp">
+              <span>Vuốt lên xem tiếp</span>
+              <span class="wedding-scroll-cue-arrows" aria-hidden="true"></span>
+            </button>
+          </div>
+          <div class="gift-modal" role="dialog" aria-modal="true" aria-labelledby="gift-modal-title">
+            <div class="gift-dialog">
+              <button class="gift-close" type="button" aria-label="Đóng">×</button>
+              <div class="text-center"><div class="text-3xl">💝</div><h3 id="gift-modal-title" class="__className_7d6f79 text-3xl mt-1" style="color:#5c2434">Mừng cưới Cô Dâu &amp; Chú Rể</h3><p class="text-sm mt-2" style="color:#7d6257">Sự hiện diện và lời chúc của bạn đã là món quà quý giá nhất.</p></div>
+              <div class="gift-accounts">
+                <article class="gift-account"><img class="gift-qr" src="images/9f74ef9e-6625-488b-a3fb-5f98abf8f2c9.webp" alt="Mã QR mừng cưới chú rể" loading="lazy" role="button" tabindex="0" title="Chạm để quay về hộp quà"><h4 class="font-semibold mt-3" style="color:#5c2434">Chú rể · VU KHANH</h4><p class="text-sm mt-1 text-gray-600">Vietcombank · 1234567890</p><button class="gift-copy" type="button" data-copy="1234567890">Sao chép số tài khoản</button></article>
+                <article class="gift-account"><img class="gift-qr" src="images/5af401dd-f7eb-4be4-8f35-681263087a9f.webp" alt="Mã QR mừng cưới cô dâu" loading="lazy" role="button" tabindex="0" title="Chạm để quay về hộp quà"><h4 class="font-semibold mt-3" style="color:#5c2434">Cô dâu · NGUYEN HUE</h4><p class="text-sm mt-1 text-gray-600">Vietcombank · 9876543210</p><button class="gift-copy" type="button" data-copy="9876543210">Sao chép số tài khoản</button></article>
+              </div>
+            </div>
+          </div>
+        </section>
         <div
           class="mx-auto mt-0 my-6 flex w-full max-w-2xl items-center justify-between bg-background p-6 px-3 shadow-xl text-white select-none"
           style="opacity:0;transform:translateY(50px)">
@@ -207,25 +687,24 @@
             </div>
           </div>
         </div>
-        <div class="relative mx-auto w-full max-w-xl overflow-hidden bg-foreground py-10 shadow-lg select-none pt-2"
+        <div class="relative mx-auto w-full max-w-xl overflow-hidden py-4 select-none"
           style="opacity:0;transform:translateY(60px)">
-          <div class="flex flex-col items-center justify-center mb-0">
-            <div class="relative flex h-16 w-16 items-center justify-center rounded-full border border-secondary p-1">
+          <div class="flex flex-col items-center justify-center mb-4">
+            <div class="relative flex h-14 w-14 items-center justify-center rounded-full border border-secondary p-1">
               <div class="absolute h-full w-full rounded-full border-t-2 border-secondary animate-spin-slow opacity-20">
-              </div><span class="text-3xl font-bold text-secondary">囍</span>
+              </div><span class="text-2xl font-bold text-secondary">囍</span>
             </div>
-            <div class="mt-2 h-10 w-[1px] bg-gradient-to-b from-secondary to-transparent"></div>
           </div>
           <div class="grid grid-cols-2 gap-4 text-center mb-6 px-2">
             <div class="flex flex-col space-y-1" style="opacity:0;transform:translateX(-40px)">
-              <h3 class="__className_7d6f79 text-2xl text-secondary">Nhà Gái</h3>
+              <h3 class="__className_7d6f79 text-2xl text-secondary">Nhà Trai</h3>
               <p class="__className_85880b text-sm font-bold text-gray-900"><span class="font-medium">Ông: </span>
-                <!-- -->Nguyễn Văn Huy </p>
-              <p class="__className_85880b text-sm font-bold text-gray-900"><span class="font-medium">Bà: </span>Nguyễn
-                Thị Sáu</p>
+                <!-- -->Vũ Văn Khang </p>
+              <p class="__className_85880b text-sm font-bold text-gray-900"><span class="font-medium">Bà: </span>Phạm
+                Thị Tính</p>
             </div>
             <div class="flex flex-col space-y-1" style="opacity:0;transform:translateX(40px)">
-              <h3 class="__className_7d6f79 text-2xl text-secondary">Nhà Trai</h3>
+              <h3 class="__className_7d6f79 text-2xl text-secondary">Nhà Gái</h3>
               <p class="__className_85880b text-sm font-bold text-gray-900"><span class="font-medium">Ông: </span>
                 <!-- -->Nguyễn Văn Huy </p>
               <p class="__className_85880b text-sm font-bold text-gray-900"><span class="font-medium">Bà: </span>Nguyễn
@@ -234,7 +713,7 @@
           </div>
           <div class="flex items-start justify-between bg-background px-2 md:px-6">
             <div class="flex flex-col items-center p-2">
-              <div class="relative h-40 w-30 overflow-hidden shadow-sm mb-3"><img alt="Vũ Khánh" loading="lazy"
+              <div class="relative h-40 w-30 overflow-hidden shadow-sm mb-3 bg-[#e2e0d9]"><img alt="Vũ Khánh" loading="lazy"
                   decoding="async" data-nimg="fill" class="object-cover scale-110"
                   style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
                   src="images/ef1b6b49-facd-486a-82db-9fa953cbecfd.webp"></div>
@@ -244,15 +723,15 @@
             <div class="self-stretch flex items-center"><span
                 class="__className_7d6f79 text-2xl text-white/70 italic">&</span></div>
             <div class="flex flex-col items-center p-2">
-              <div class="relative h-40 w-30 overflow-hidden  shadow-sm mb-3"><img alt="Thị Huế" loading="lazy"
+              <div class="relative h-40 w-30 overflow-hidden shadow-sm mb-3 bg-[#e2e0d9]"><img alt="Nguyễn Huế" loading="lazy"
                   decoding="async" data-nimg="fill" class="object-cover scale-110"
                   style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
                   src="images/790acde3-5d0c-425d-855f-2787de9c312d.webp"></div>
               <p class="mb-2 text-[8px] uppercase tracking-[0.2em] text-white/70"></p>
-              <p class="__className_7d6f79 text-2xl text-white transform">Thị Huế</p>
+              <p class="__className_7d6f79 text-2xl text-white transform">Nguyễn Huế</p>
             </div>
           </div>
-          <div class="mt-12 flex justify-center opacity-20">
+          <div class="mt-6 flex justify-center opacity-20">
             <div class="h-[1px] w-32 bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
           </div>
         </div>
@@ -270,7 +749,7 @@
             nhàng của em như vạt nắng đầu mùa, sưởi ấm và thắp sáng cả khoảng trời thanh xuân chông chênh của anh.</p>
           <div class="mt-6 flex items-center justify-center">
             <div class="flex-1 h-[1px] bg-gradient-to-r from-transparent via-secondary to-transparent opacity-70"></div>
-            <p class="__className_7d6f79 text-xl text-secondary mx-4 whitespace-nowrap">Vũ Khánh & Thị Huế</p>
+            <p class="__className_7d6f79 text-xl text-secondary mx-4 whitespace-nowrap">Vũ Khánh & Nguyễn Huế</p>
             <div class="flex-1 h-[1px] bg-gradient-to-l from-transparent via-secondary to-transparent opacity-70"></div>
           </div>
         </div>
@@ -287,7 +766,7 @@
             </div>
             <div class="grid gap-3 md:gap-6 grid-cols-1 md:grid-cols-2">
               <div class=" overflow-hidden  bg-[#faf8f5] shadow-md " style="opacity:0;transform:translateY(40px)">
-                <div class="relative overflow-hidden h-70 md:h-[420px]"><img alt="Lễ Vu Quy" loading="lazy"
+                <div class="relative overflow-hidden h-70 md:h-[420px] bg-[#e8e2d8]"><img alt="Nhà Trai" loading="lazy"
                     decoding="async" data-nimg="fill" class="object-cover"
                     style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
                     src="images/download_u9sseh.jpg">
@@ -300,7 +779,7 @@
                     font-semibold
                     text-secondary
                     md:text-[28px]
-                  ">Lễ Vu Quy</h3>
+                  ">Nhà Trai</h3>
                   <div class="space-y-3">
                     <div class="flex gap-2 items-start"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -315,7 +794,7 @@
         text-[#8b6b54]
         md:text-sm
         font-medium
-      ">9:00 - 10:30</span></div>
+      ">9:00 - 11:30</span></div>
                     </div>
                     <div class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -333,49 +812,20 @@
                           text-[#3d3028]
                           md:text-[17px]
                           font-medium
-                        ">Số 12, Đường Phan Đình Phùng</p>
+                        ">Tư gia Nhà Trai</p>
                         <p class="__className_85880b
                           text-[16px]
                           text-[#8b6b54]
                           md:text-[14px]
                           font-medium
-                        ">Nhà Gái - Quận Thanh Khê, Đà Nẵng</p>
+                        ">Cát Thành, Trực Ninh, Nam Định</p>
                       </div>
                     </div>
-                  </div><a href="https://maps.app.goo.gl/3LYqUiMHEDbiQ541A" target="_blank" rel="noopener noreferrer"
-                    class="
-                    mt-4
-                    flex
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-full
-                    border
-                    border-secondary
-                    px-4
-                    py-2
-                    text-[10px]
-                    tracking-[0.15em]
-                    text-secondary
-                    transition-all
-                    hover:bg-secondary
-                    hover:text-white
-                    md:text-xs
-                    font-medium
-                  " tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-car h-4 w-4" aria-hidden="true">
-                      <path
-                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
-                      </path>
-                      <circle cx="7" cy="17" r="2"></circle>
-                      <path d="M9 17h6"></path>
-                      <circle cx="17" cy="17" r="2"></circle>
-                    </svg>Chỉ đường</a>
+                  </div>
                 </div>
               </div>
               <div class=" overflow-hidden  bg-[#faf8f5] shadow-md " style="opacity:0;transform:translateY(40px)">
-                <div class="relative overflow-hidden h-70 md:h-[420px]"><img alt="Tiệc cưới" loading="lazy"
+                <div class="relative overflow-hidden h-70 md:h-[420px] bg-[#e8e2d8]"><img alt="Nhà Gái" loading="lazy"
                     decoding="async" data-nimg="fill" class="object-cover"
                     style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
                     src="images/download_1_bq8fyl.jpg">
@@ -388,7 +838,7 @@
                     font-semibold
                     text-secondary
                     md:text-[28px]
-                  ">Tiệc cưới</h3>
+                  ">Nhà Gái</h3>
                   <div class="space-y-3">
                     <div class="flex gap-2 items-start"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -421,120 +871,56 @@
                           text-[#3d3028]
                           md:text-[17px]
                           font-medium
-                        ">Trung Tâm Tiệc Cưới White Palace</p>
+                        ">Tư gia Nhà Gái</p>
                         <p class="__className_85880b
                           text-[16px]
                           text-[#8b6b54]
                           md:text-[14px]
                           font-medium
-                        ">Trung Tâm Tiệc Cưới White Palace</p>
+                        ">Quảng Bị, Chương Mỹ, Hà Nội</p>
                       </div>
                     </div>
-                  </div><a href="https://maps.app.goo.gl/3LYqUiMHEDbiQ541A" target="_blank" rel="noopener noreferrer"
-                    class="
-                    mt-4
-                    flex
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-full
-                    border
-                    border-secondary
-                    px-4
-                    py-2
-                    text-[10px]
-                    tracking-[0.15em]
-                    text-secondary
-                    transition-all
-                    hover:bg-secondary
-                    hover:text-white
-                    md:text-xs
-                    font-medium
-                  " tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                      class="lucide lucide-car h-4 w-4" aria-hidden="true">
-                      <path
-                        d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2">
-                      </path>
-                      <circle cx="7" cy="17" r="2"></circle>
-                      <path d="M9 17h6"></path>
-                      <circle cx="17" cy="17" r="2"></circle>
-                    </svg>Chỉ đường</a>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class=" mt-12 border bg-[#faf8f5] p-8 text-center shadow-md "
-              style="opacity:0;transform:translateY(40px)">
-              <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/10"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-shirt h-8 w-8 text-secondary" aria-hidden="true">
-                  <path
-                    d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z">
-                  </path>
-                </svg></div>
-              <h3 class="__className_85880b
-        text-[15px]
-        tracking-[0.2em]
-        text-secondary
-        font-bold
-      ">MÀU TRANG PHỤC</h3>
-              <p class="__className_85880b
-        mt-1
-        italic
-        text-[#8b6b54]
-        font-medium
-      ">Dress Code</p>
-              <div class="mt-6 flex flex-wrap justify-center gap-4">
-                <div
-                  class=" h-12 w-12 rounded-full border border-[#e8d9c9] transition-transform hover:scale-105 md:h-16 md:w-16 "
-                  style="background-color:#ffffff;box-shadow:0 6px 15px rgba(0,0,0,.08)"></div>
-                <div
-                  class=" h-12 w-12 rounded-full border border-[#e8d9c9] transition-transform hover:scale-105 md:h-16 md:w-16 "
-                  style="background-color:#000000;box-shadow:0 6px 15px rgba(0,0,0,.08)"></div>
-              </div>
-            </div>
+
           </div>
         </section>
-        <section class="py-10 md:py-20">
-          <div class="mx-auto max-w-4xl px-6">
-            <div class="mb-16 text-center" style="opacity:0;transform:translateY(40px)">
-              <p class="__className_7d6f79 text-3xl text-secondary mb-3">Timeline</p>
+        <section class="py-10 md:py-16 wedding-timeline-section">
+          <div class="mx-auto max-w-xl px-5">
+            <div class="mb-10 text-center" style="opacity:0;transform:translateY(40px)">
+              <p class="__className_7d6f79 text-3xl text-secondary mb-2">Lịch Trình Tiệc Cưới</p>
+              <div class="mx-auto h-0.5 w-16 bg-gradient-to-r from-transparent via-secondary to-transparent opacity-60"></div>
             </div>
-            <div class="relative">
-              <div class="absolute left-6 top-0 bottom-0 w-px bg-border md:left-1/2"></div>
-              <div class="relative mb-5 last:mb-0 md:pr-1/2" style="opacity:0;transform:translateY(30px) scale(0.95)">
-                <div class="flex items-start gap-6 md:flex-row">
-                  <div
-                    class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-background text-primary-foreground shadow-lg text-xl">
-                    📷</div>
-                  <div class="flex-1 rounded-lg bg-card p-4 shadow-sm transition-shadow hover:shadow-md md:text-right">
-                    <span
-                      class="mb-2 inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-gray-700">9:00</span>
-                    <h3 class="mb-2 font-serif md:text-xl text-base text-gray-700">Đón khách</h3>
-                    <p class="mb-1 text-sm font-medium text-muted-foreground"></p>
-                    <p class="text-sm text-muted-foreground"></p>
-                  </div>
+            <div class="wedding-timeline-list relative">
+              <div class="wedding-timeline-line"></div>
+
+              <div class="wedding-timeline-item" style="opacity:0;transform:translateY(30px) scale(0.95)">
+                <div class="wedding-timeline-node">
+                  <span class="wedding-timeline-icon">📷</span>
+                </div>
+                <div class="wedding-timeline-card">
+                  <span class="wedding-timeline-time">9:00</span>
+                  <h3 class="wedding-timeline-title">Đón khách</h3>
+                  <p class="wedding-timeline-desc">Chụp ảnh lưu niệm cùng Cô dâu &amp; Chú rể</p>
                 </div>
               </div>
-              <div class="relative mb-5 last:mb-0 md:pl-1/2 md:ml-auto"
-                style="opacity:0;transform:translateY(30px) scale(0.95)">
-                <div class="flex items-start gap-6 md:flex-row-reverse">
-                  <div
-                    class="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-background text-primary-foreground shadow-lg text-xl">
-                    🥂</div>
-                  <div class="flex-1 rounded-lg bg-card p-4 shadow-sm transition-shadow hover:shadow-md md:text-left">
-                    <span
-                      class="mb-2 inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-gray-700">11:00</span>
-                    <h3 class="mb-2 font-serif md:text-xl text-base text-gray-700">Khai tiệc</h3>
-                    <p class="mb-1 text-sm font-medium text-muted-foreground"></p>
-                    <p class="text-sm text-muted-foreground"></p>
-                  </div>
+
+              <div class="wedding-timeline-item" style="opacity:0;transform:translateY(30px) scale(0.95)">
+                <div class="wedding-timeline-node">
+                  <span class="wedding-timeline-icon">🥂</span>
+                </div>
+                <div class="wedding-timeline-card">
+                  <span class="wedding-timeline-time">11:00</span>
+                  <h3 class="wedding-timeline-title">Khai tiệc</h3>
+                  <p class="wedding-timeline-desc">Nâng ly chúc mừng hạnh phúc đôi uyên ương</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
         <section class="py-10 md:py-20 pb-0 md:pb-0 pt-4 md:pt-4" id="gallery">
           <div class="mx-auto max-w-[1200px] px-6 text-center">
             <h2 class="__className_7d6f79
@@ -551,17 +937,17 @@
         <section class="pb-10 md:pb-20">
           <div class="relative mx-auto max-w-[1200px] px-6">
             <div class="grid grid-cols-2 gap-2 md:grid-cols-3">
-              <div class="relative aspect-[3/4] cursor-pointer overflow-hidden"
+              <div class="relative aspect-[3/4] cursor-pointer overflow-hidden bg-[#e8e2d8]"
                 style="opacity:0;transform:translateX(-100px) translateY(30px) scale(0.9)"><img alt="" loading="lazy"
                   decoding="async" data-nimg="fill" class="object-cover"
                   style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
                   src="images/download_u9sseh.jpg"></div>
-              <div class="relative aspect-[3/4] cursor-pointer overflow-hidden"
+              <div class="relative aspect-[3/4] cursor-pointer overflow-hidden bg-[#e8e2d8]"
                 style="opacity:0;transform:translateY(30px) scale(0.9)"><img alt="" loading="lazy" decoding="async"
                   data-nimg="fill" class="object-cover"
                   style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
                   src="images/download_1_bq8fyl.jpg"></div>
-              <div class="relative aspect-[3/4] cursor-pointer overflow-hidden"
+              <div class="relative aspect-[3/4] cursor-pointer overflow-hidden bg-[#e8e2d8]"
                 style="opacity:0;transform:translateX(100px) translateY(30px) scale(0.9)"><img alt="" loading="lazy"
                   decoding="async" data-nimg="fill" class="object-cover"
                   style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
@@ -569,252 +955,7 @@
             </div>
           </div>
         </section>
-        <section id="wishes" class="py-20 md:py-32 bg-background">
-          <div class="mx-auto max-w-6xl px-6">
-            <div class="text-center mb-12" style="opacity:0;transform:translateY(30px)">
-              <h2 class="__className_7d6f79
-              mt-2
-              text-[30px]
-              leading-none
-              text-white
-              md:text-[58px]
-              text-center
-              mb-6
-            ">Những lời chúc tốt đẹp</h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6"></div>
-            <div class="mt-8 flex flex-col items-center gap-3"><button
-                class=" cursor-pointer rounded-full bg-primary px-6 py-3 text-xs text-white shadow transition-all duration-300 ease-out hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 ">XEM
-                TẤT CẢ (<!-- -->0<!-- -->)</button><button
-                class=" cursor-pointer inline-flex items-center gap-2 text-sm text-white/90 transition-opacity duration-300 hover:opacity-80 "><span>✨</span><span
-                  class="underline">Gửi lời chúc cho cô dâu chú rể</span></button></div>
-          </div>
-        </section>
-        <section id="rsvp" class="py-20 md:py-32">
-          <div class="mx-auto max-w-3xl px-6">
-            <div class="mb-16 text-center" style="opacity:0;transform:translateY(40px)">
-              <h2 class="__className_7d6f79
-              mt-2
-              text-[30px]
-              leading-none
-              text-secondary
-              md:text-[58px]
-              text-center
-              mb-6
-            ">Gửi lời chúc và xác nhận tham dự</h2>
-              <p class="mt-4 text-muted-foreground text-sm">Mỗi lời chúc của bạn đều là niềm hạnh phúc với chúng mình.
-              </p>
-            </div>
-            <form novalidate="" class="rounded-2xl bg-card p-8 shadow-lg md:p-12"
-              style="opacity:0;transform:translateY(40px)">
-              <div class="grid gap-6 md:grid-cols-2 text-muted-foreground">
-                <div class="md:col-span-2"><label class="mb-2 block text-sm font-medium">Lời Chúc 💌</label>
-                  <div class="relative"><textarea name="message" rows="4"
-                      class="w-full rounded-xl border border-border-input bg-cream px-4 py-3 text-color-input placeholder:text-[#b8b1a8] focus:outline-none focus:ring-2 focus:ring-focus-ring/40 focus:border-focus-ring transition resize-none"
-                      placeholder="Viết vài lời chúc thật dễ thương cho tụi mình nhé..." required=""></textarea>
-                    <div class="absolute bottom-14 right-0 z-50"></div><button type="button"
-                      class="absolute bottom-3 right-3 text-xl hover:scale-110 transition cursor-pointer"
-                      title="Chèn biểu tượng"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-smile" aria-hidden="true">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                        <line x1="9" x2="9.01" y1="9" y2="9"></line>
-                        <line x1="15" x2="15.01" y1="9" y2="9"></line>
-                      </svg></button>
-                  </div>
-                </div>
-                <div class="md:col-span-2"><label class="mb-3 block text-sm font-medium">Bạn là khách mời của
-                    ai?</label>
-                  <div class="grid grid-cols-3 gap-4"><button type="button"
-                      class="cursor-pointer relative aspect-square overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.02]"><img
-                        src="images/ef1b6b49-facd-486a-82db-9fa953cbecfd.webp"
-                        class="absolute inset-0 h-full w-full object-cover" alt="Cô dâu">
-                      <div class="absolute inset-0 bg-black/35"></div>
-                      <div class="absolute bottom-2 left-0 right-0 text-center"><span
-                          class="text-white text-sm font-medium">Cô dâu</span></div>
-                    </button><button type="button"
-                      class="cursor-pointer relative aspect-square overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.02]"><img
-                        src="images/790acde3-5d0c-425d-855f-2787de9c312d.webp"
-                        class="absolute inset-0 h-full w-full object-cover" alt="Chú rể">
-                      <div class="absolute inset-0 bg-black/35"></div>
-                      <div class="absolute bottom-2 left-0 right-0 text-center"><span
-                          class="text-white text-sm font-medium">Chú rể</span></div>
-                    </button><button type="button"
-                      class="cursor-pointer relative aspect-square overflow-hidden rounded-xl transition-all duration-300 hover:scale-[1.02]"><img
-                        src="images/download_4_wiubgq.jpg" class="absolute inset-0 h-full w-full object-cover"
-                        alt="Cả hai">
-                      <div class="absolute inset-0 bg-black/35"></div>
-                      <div class="absolute bottom-2 left-0 right-0 text-center"><span
-                          class="text-white text-sm font-medium">Cả hai</span></div>
-                    </button></div>
-                </div>
-                <div class="md:col-span-2"><label class="mb-2 block text-sm font-medium">Tên của bạn</label><input
-                    required=""
-                    class="w-full rounded-xl border border-border-input bg-cream px-4 py-3 text-color-input placeholder:text-[#b8b1a8] focus:outline-none focus:ring-2 focus:ring-focus-ring/40 focus:border-focus-ring transition"
-                    placeholder="Nguyễn Văn Huy" name="name" value=""></div>
-                <div class="md:col-span-2"><label class="mb-2 block text-sm font-medium">Biệt danh</label><input
-                    required=""
-                    class="w-full rounded-xl border border-border-input bg-cream px-4 py-3 text-color-input placeholder:text-[#b8b1a8] focus:outline-none focus:ring-2 focus:ring-focus-ring/40 focus:border-focus-ring transition"
-                    placeholder="VD: Bạn cấp 3 của cô dâu, Bạn đồng nghiệp của chú rể ..." name="nickname" value="">
-                </div>
-                <div><label class="mb-2 block text-sm font-medium">Bạn có thể tham dự không?</label><select
-                    name="attending"
-                    class="w-full rounded-xl border border-border-input bg-cream px-4 py-3 text-color-input placeholder:text-[#b8b1a8] focus:outline-none focus:ring-2 focus:ring-focus-ring/40 focus:border-focus-ring transition"
-                    required="">
-                    <option value="" disabled="" selected="">-- Chọn câu trả lời --</option>
-                    <option value="yes">✨ Chắc chắn rồi, mình sẽ đến</option>
-                    <option value="maybe">🤍 Mình sẽ cố gắng sắp xếp</option>
-                    <option value="no">💌 Rất tiếc mình không thể tham dự</option>
-                  </select></div>
-                <div><label class="mb-2 block text-sm font-medium">Số người tham dự</label><select name="guests"
-                    class="w-full rounded-xl border border-border-input bg-cream px-4 py-3 text-color-input placeholder:text-[#b8b1a8] focus:outline-none focus:ring-2 focus:ring-focus-ring/40 focus:border-focus-ring transition opacity-60 cursor-not-allowed"
-                    disabled="">
-                    <option value="" disabled="" selected="">-- Số người --</option>
-                    <option value="1">1 người</option>
-                    <option value="2">2 người</option>
-                    <option value="3">3 người</option>
-                    <option value="4">4 người</option>
-                    <option value="5">5+ người</option>
-                  </select></div>
-              </div><button type="submit" class="
-    mt-8 flex w-full items-center justify-center gap-2 rounded-xl px-8 py-4 font-medium transition text-sm
-    bg-background text-white hover:bg-muted hover:text-foreground
-  "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-send h-4 w-4" aria-hidden="true">
-                  <path
-                    d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
-                  </path>
-                  <path d="m21.854 2.147-10.94 10.939"></path>
-                </svg>GỬI LỜI CHÚC</button>
-            </form>
-          </div>
-        </section>
-        <section class="py-20 md:py-32 bg-background" id="wedding-gift">
-          <div class="mx-auto max-w-4xl px-6">
-            <div class="mb-16 text-center" style="opacity:0;transform:translateY(40px)">
-              <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-gift h-8 w-8 text-primary" aria-hidden="true">
-                  <path d="M12 7v14"></path>
-                  <path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"></path>
-                  <path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"></path>
-                  <rect x="3" y="7" width="18" height="4" rx="1"></rect>
-                </svg></div>
-              <h2 class="__className_7d6f79
-              mt-2
-              text-[30px]
-              leading-none
-              text-foreground
-              md:text-[58px]
-              text-center
-              mb-6
-            ">Hộp mừng cưới</h2>
-            </div>
-            <div class="grid gap-6 md:grid-cols-2">
-              <div class="perspective w-full max-w-md" style="opacity:0;transform:translateY(40px)">
-                <div
-                  class="relative h-[260px] w-full cursor-pointer transition-transform duration-700 transform-style preserve-3d ">
-                  <div class="absolute inset-0 backface-hidden rounded-xl bg-card shadow-lg overflow-hidden">
-                    <div class="flex items-center gap-4 border-b bg-muted/50 p-4">
-                      <div class="relative h-12 w-12 overflow-hidden rounded-full border border-border"><img alt=""
-                          loading="lazy" decoding="async" data-nimg="fill" class="object-cover"
-                          style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                          src="images/ef1b6b49-facd-486a-82db-9fa953cbecfd.webp"></div>
-                      <div>
-                        <h3 class="font-medium text-muted-foreground">Vietcombank</h3>
-                        <p class="text-sm text-muted-foreground">Cô dâu</p>
-                      </div>
-                    </div>
-                    <div class="p-6">
-                      <p class="text-sm text-muted-foreground">Số tài khoản</p>
-                      <div class="flex items-center gap-2">
-                        <p class="text-muted-foreground text-lg font-medium">12345</p><button
-                          class="flex h-8 w-8 items-center justify-center rounded-lg bg-muted hover:bg-muted/80"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-copy h-4 w-4 text-muted-foreground" aria-hidden="true">
-                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-                            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-                          </svg></button>
-                      </div>
-                      <p class="mt-4 text-sm text-muted-foreground">Chủ tài khoản</p>
-                      <p class="font-medium text-muted-foreground">NGUYEN VAN A</p>
-                      <p class="mt-4 text-xs font-semibold text-primary">👆 Chạm để xem mã QR</p>
-                    </div>
-                  </div>
-                  <div
-                    class="absolute inset-0 rotate-y-180 backface-hidden rounded-xl bg-card shadow-lg flex flex-col items-center justify-center p-6">
-                    <p class="mb-4 text-sm text-muted-foreground">Quét mã để mừng cưới</p><img alt="QR Code"
-                      loading="lazy" width="160" height="160" decoding="async" data-nimg="1"
-                      class="rounded-lg border bg-white p-2" style="color:transparent"
-                      src="images/9f74ef9e-6625-488b-a3fb-5f98abf8f2c9.webp">
-                    <p class="mt-4 text-xs text-muted-foreground">👆 Chạm để quay lại</p>
-                  </div>
-                </div>
-              </div>
-              <div class="perspective w-full max-w-md" style="opacity:0;transform:translateY(40px)">
-                <div
-                  class="relative h-[260px] w-full cursor-pointer transition-transform duration-700 transform-style preserve-3d ">
-                  <div class="absolute inset-0 backface-hidden rounded-xl bg-card shadow-lg overflow-hidden">
-                    <div class="flex items-center gap-4 border-b bg-muted/50 p-4">
-                      <div class="relative h-12 w-12 overflow-hidden rounded-full border border-border"><img alt=""
-                          loading="lazy" decoding="async" data-nimg="fill" class="object-cover"
-                          style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                          src="images/790acde3-5d0c-425d-855f-2787de9c312d.webp"></div>
-                      <div>
-                        <h3 class="font-medium text-muted-foreground">Vietcombank</h3>
-                        <p class="text-sm text-muted-foreground">Chú rể</p>
-                      </div>
-                    </div>
-                    <div class="p-6">
-                      <p class="text-sm text-muted-foreground">Số tài khoản</p>
-                      <div class="flex items-center gap-2">
-                        <p class="text-muted-foreground text-lg font-medium">12345</p><button
-                          class="flex h-8 w-8 items-center justify-center rounded-lg bg-muted hover:bg-muted/80"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-copy h-4 w-4 text-muted-foreground" aria-hidden="true">
-                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-                            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-                          </svg></button>
-                      </div>
-                      <p class="mt-4 text-sm text-muted-foreground">Chủ tài khoản</p>
-                      <p class="font-medium text-muted-foreground">NGUYEN VAN B</p>
-                      <p class="mt-4 text-xs font-semibold text-primary">👆 Chạm để xem mã QR</p>
-                    </div>
-                  </div>
-                  <div
-                    class="absolute inset-0 rotate-y-180 backface-hidden rounded-xl bg-card shadow-lg flex flex-col items-center justify-center p-6">
-                    <p class="mb-4 text-sm text-muted-foreground">Quét mã để mừng cưới</p><img alt="QR Code"
-                      loading="lazy" width="160" height="160" decoding="async" data-nimg="1"
-                      class="rounded-lg border bg-white p-2" style="color:transparent"
-                      src="images/5af401dd-f7eb-4be4-8f35-681263087a9f.webp">
-                    <p class="mt-4 text-xs text-muted-foreground">👆 Chạm để quay lại</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="mt-12 flex items-center justify-center gap-2 text-foreground"
-              style="opacity:0;transform:translateY(20px)"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-heart h-4 w-4 fill-primary text-primary" aria-hidden="true">
-                <path
-                  d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5">
-                </path>
-              </svg><span>Cảm ơn bạn đã yêu thương và chúc phúc cho chúng tôi</span><svg
-                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="lucide lucide-heart h-4 w-4 fill-primary text-primary" aria-hidden="true">
-                <path
-                  d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5">
-                </path>
-              </svg></div>
-          </div>
-        </section>
+
         <div class="mx-auto my-6 w-full max-w-sm text-center select-none">
           <p class="__className_625110 mb-4 text-sm uppercase tracking-[0.2em] text-border font-semibold">Đếm ngược đến
             ngày cưới</p>
@@ -842,7 +983,7 @@
           </div>
         </div>
         <div class="relative mx-auto w-full max-w-2xl overflow-hidden bg-background shadow-2xl select-none">
-          <div class="relative aspect-[3/4] w-full"><img alt="Thank you from the couple" loading="lazy" decoding="async"
+          <div class="relative aspect-[3/4] w-full bg-[#e8e2d8]"><img alt="Thank you from the couple" loading="lazy" decoding="async"
               data-nimg="fill" class="object-cover object-top"
               style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
               src="images/download_2_ankule.jpg">
@@ -915,9 +1056,434 @@
   <script>self.__next_f.push([1, "0:{\"P\":null,\"b\":\"fGNIe_P0_vyVQB4kQ1kNW\",\"p\":\"\",\"c\":[\"\",\"hang-huy?guest=b%25E1%25BA%25A1n%2520Minh%2520Hi%25E1%25BA%25BFu\"],\"i\":false,\"f\":[[[\"\",{\"children\":[[\"slug\",\"hang-huy\",\"d\"],{\"children\":[\"__PAGE__?{\\\"guest\\\":\\\"b%E1%BA%A1n%20Minh%20Hi%E1%BA%BFu\\\"}\",{}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/0e25af96e424a88d.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/8a1d248376c1523d.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"suppressHydrationWarning\":true,\"lang\":\"vi\",\"className\":\"bg-background font-sans __variable_246ccd\",\"children\":[\"$\",\"body\",null,{\"className\":\"__variable_f367f3 __variable_0a80b4 font-sans antialiased\",\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"$L4\",null,{}]]}]}]]}],{\"children\":[[\"slug\",\"hang-huy\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L5\",[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/bc9a5f4b634e0d5a.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/e37503463b981e2f.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"2\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/3589a66456341371.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"3\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/65d7d42e0e662d1e.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"$L6\",null,{\"children\":[\"$L7\",[\"$\",\"$L8\",null,{\"promise\":\"$@9\"}]]}]]}],{},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[[\"$\",\"$La\",null,{\"children\":\"$Lb\"}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]],[\"$\",\"$Lc\",null,{\"children\":[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$d\",null,{\"fallback\":null,\"children\":\"$Le\"}]}]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$f\",[]],\"s\":false,\"S\":false}\n"])</script>
   <script>self.__next_f.push([1, "b:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n7:null\n"])</script>
   <script>self.__next_f.push([1, "10:I[63472,[\"5479\",\"static/chunks/795d4814-f8bca3e16566d480.js\",\"2150\",\"static/chunks/59650de3-27b48b761a1827c4.js\",\"7672\",\"static/chunks/385cb88d-6f1fb143145cd4d0.js\",\"2666\",\"static/chunks/fcfb803e-6d015a352bb44e77.js\",\"5563\",\"static/chunks/5563-54046f3635db0d38.js\",\"2810\",\"static/chunks/2810-d6b2f5b42f980c21.js\",\"6382\",\"static/chunks/6382-f14b34efbd1d008b.js\",\"7182\",\"static/chunks/app/%5Bslug%5D/page-0ed3f40a2bc9315d.js\"],\"default\"]\n11:I[80622,[],\"IconMark\"]\n"])</script>
-  <script>self.__next_f.push([1, "5:[\"$\",\"$L10\",null,{\"initialData\":{\"id\":\"dc62406c-3f00-4261-b053-d2599e3b4eca\",\"name\":\"Hằng và Huy Wedding\",\"slug\":\"hang-huy\",\"version\":2,\"hero\":{\"city\":\"Hà Nội, Việt Nam\",\"date\":\"2026-12-05\",\"date2\":\"\",\"image\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785306757/download_1_bq8fyl_j9segm.jpg\",\"title\":\"LỄ THÀNH HÔN\",\"lunarDate\":\"\",\"metaImage\":\"\",\"nameLayout\":\"two-lines\"},\"page\":{\"order\":[]},\"side\":\"bride\",\"story\":{\"image\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785304122/download_4_wiubgq.jpg\",\"content\":[{\"desc\":\"Giữa biển người xa lạ năm ấy, ánh mắt em là điều duy nhất khiến thời gian trong anh ngừng lại. Nụ cười nhẹ nhàng của em như vạt nắng đầu mùa, sưởi ấm và thắp sáng cả khoảng trời thanh xuân chông chênh của anh.\",\"title\":\"Lần Đầu Gặp Gỡ\"},{\"desc\":\"\",\"title\":\"Lời Tỏ Tình\"},{\"desc\":\"\",\"title\":\"Lời Cầu Hôn\"}]},\"theme\":\"pink02\",\"video\":{\"url\":\"\",\"desc\":\"\",\"title\":\"\"},\"couple\":{\"bride\":{\"bio\":\"\",\"name\":\"Vũ Khánh\",\"rank\":\"\",\"image\":\"https://pub-4ee034abad814cf5b2219f594c28724f.r2.dev/prod/hang-huy/ef1b6b49-facd-486a-82db-9fa953cbecfd.webp\",\"father\":\"Nguyễn Văn Huy \",\"mother\":\"Nguyễn Thị Sáu\",\"address\":\"\",\"shortName\":\"\"},\"groom\":{\"bio\":\"\",\"name\":\"Thị Huế\",\"rank\":\"\",\"image\":\"https://pub-4ee034abad814cf5b2219f594c28724f.r2.dev/prod/hang-huy/790acde3-5d0c-425d-855f-2787de9c312d.webp\",\"father\":\"Nguyễn Văn Huy \",\"mother\":\"Nguyễn Thị Sáu\",\"address\":\"\",\"shortName\":\"\"},\"title\":\"Đôi Nét Về Chúng Tôi\"},\"events\":[{\"icon\":\"📷\",\"time\":\"9:00\",\"title\":\"Đón khách\",\"location\":\"\",\"description\":\"\"},{\"icon\":\"🥂\",\"time\":\"11:00\",\"title\":\"Khai tiệc\",\"location\":\"\",\"description\":\"\"}],\"venues\":[{\"area\":\"Nhà Gái - Quận Thanh Khê, Đà Nẵng\",\"icon\":\"🏠\",\"time\":\"9:00 - 10:30\",\"image\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785305916/download_u9sseh.jpg\",\"title\":\"Lễ Vu Quy\",\"mapUrl\":\"https://maps.app.goo.gl/3LYqUiMHEDbiQ541A\",\"address\":\"Số 12, Đường Phan Đình Phùng\"},{\"area\":\"Trung Tâm Tiệc Cưới White Palace\",\"icon\":\"💒\",\"time\":\"11:00 - 14:00\",\"image\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785305915/download_1_bq8fyl.jpg\",\"title\":\"Tiệc cưới\",\"mapUrl\":\"https://maps.app.goo.gl/3LYqUiMHEDbiQ541A\",\"address\":\"Trung Tâm Tiệc Cưới White Palace\"}],\"wishes\":{\"coverImage\":\"https://pub-4ee034abad814cf5b2219f594c28724f.r2.dev/prod/hang-huy/ab0bc9c1-615d-48c2-a98c-e75cf0f46db6.webp\"},\"gallery\":{\"title\":\"\",\"portrait\":[{\"src\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785305916/download_u9sseh.jpg\"},{\"src\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785305915/download_1_bq8fyl.jpg\"},{\"src\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785304122/download_4_wiubgq.jpg\"},{\"src\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785305915/download_3_hirhak.jpg\"},{\"src\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785304079/download_5_qgonqk.jpg\"},{\"src\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785305915/download_2_ankule.jpg\"}],\"editorial\":[],\"landscape\":[],\"loveFlowey\":[]},\"features\":{\"lang\":\"vi\",\"showRSVP\":true,\"customLogo\":\"\",\"showWishes\":true,\"showNickname\":true,\"titlePreview\":\"\",\"showInvitedBy\":true,\"showRSVPField\":true,\"partnerWeddingId\":\"\",\"requireAttending\":true,\"requireInvitedBy\":true,\"wishesFirstInForm\":true,\"requireNoOfAttendee\":true},\"playlist\":[{\"src\":\"https://pub-4ee034abad814cf5b2219f594c28724f.r2.dev/songs/le-duong-b33db5e2.mp3\",\"title\":\"Lễ đường\",\"artist\":\"\"},{\"src\":\"https://pub-4ee034abad814cf5b2219f594c28724f.r2.dev/songs/ta-la-cua-nhau-b0957dcf.mp3\",\"title\":\"Ta là của nhau\",\"artist\":\"\"},{\"src\":\"https://pub-4ee034abad814cf5b2219f594c28724f.r2.dev/songs/mot-doi-ed2a6f03.mp3\",\"title\":\"Một đời\",\"artist\":\"\"}],\"thankyou\":{\"title\":\"\",\"coverImage\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785305915/download_2_ankule.jpg\",\"description\":\"\"},\"countdown\":{\"coverImage\":\"\",\"showSeconds\":true,\"useFirstDate\":true},\"groomsmen\":[],\"bridesmaids\":[],\"dressColors\":[\"#ffffff\",\"#000000\"],\"bankAccounts\":[{\"qr\":\"https://pub-4ee034abad814cf5b2219f594c28724f.r2.dev/prod/hang-huy/9f74ef9e-6625-488b-a3fb-5f98abf8f2c9.webp\",\"bankName\":\"Vietcombank\",\"accountHolder\":\"NGUYEN VAN A\",\"accountNumber\":\"12345\"},{\"qr\":\"https://pub-4ee034abad814cf5b2219f594c28724f.r2.dev/prod/hang-huy/5af401dd-f7eb-4be4-8f35-681263087a9f.webp\",\"bankName\":\"Vietcombank\",\"accountHolder\":\"NGUYEN VAN B\",\"accountNumber\":\"12345\"}]}}]\n"])</script>
-  <script>self.__next_f.push([1, "9:{\"metadata\":[[\"$\",\"title\",\"0\",{\"children\":\"Vũ Khánh \u0026 Thị Huế\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"2\",{\"name\":\"generator\",\"content\":\"v0.app\"}],[\"$\",\"meta\",\"3\",{\"name\":\"og:image\",\"content\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785306757/download_1_bq8fyl_j9segm.jpg\"}],[\"$\",\"meta\",\"4\",{\"name\":\"og:image:secure_url\",\"content\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785306757/download_1_bq8fyl_j9segm.jpg\"}],[\"$\",\"meta\",\"5\",{\"name\":\"og:image:type\",\"content\":\"image/png\"}],[\"$\",\"meta\",\"6\",{\"name\":\"og:image:width\",\"content\":\"1200\"}],[\"$\",\"meta\",\"7\",{\"name\":\"og:image:height\",\"content\":\"630\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:title\",\"content\":\"Vũ Khánh \u0026 Thị Huế\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:url\",\"content\":\"https://suns-wedding.vercel.app/hang-huy?guest=b%E1%BA%A1n%20Minh%20Hi%E1%BA%BFu\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:locale\",\"content\":\"vi_VN\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:image\",\"content\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785306757/download_1_bq8fyl_j9segm.jpg\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"Vũ Khánh \u0026 Thị Huế\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"17\",{\"name\":\"twitter:image\",\"content\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785306757/download_1_bq8fyl_j9segm.jpg\"}],[\"$\",\"link\",\"18\",{\"rel\":\"icon\",\"href\":\"/icon-light-32x32.png\",\"media\":\"(prefers-color-scheme: light)\"}],[\"$\",\"link\",\"19\",{\"rel\":\"icon\",\"href\":\"/icon-light-32x32.png\",\"media\":\"(prefers-color-scheme: dark)\"}],[\"$\",\"link\",\"20\",{\"rel\":\"icon\",\"href\":\"/icon-light-32x32.png\",\"type\":\"image/svg+xml\"}],[\"$\",\"link\",\"21\",{\"rel\":\"apple-touch-icon\",\"href\":\"/icon-light-32x32.png\"}],[\"$\",\"$L11\",\"22\",{}]],\"error\":null,\"digest\":\"$undefined\"}\n"])</script>
+  <script>self.__next_f.push([1, "5:[\"$\", \"$L10\", null, {\"initialData\": {\"id\": \"dc62406c-3f00-4261-b053-d2599e3b4eca\", \"name\": \"Vũ Khánh & Nguyễn Huế Wedding\", \"slug\": \"khanh-hue\", \"version\": 2, \"hero\": {\"city\": \"Hà Nội, Việt Nam\", \"date\": \"2026-11-29\", \"date2\": \"\", \"image\": \"images/download_1_bq8fyl_j9segm.jpg\", \"title\": \"LỄ THÀNH HÔN\", \"lunarDate\": \"\", \"metaImage\": \"\", \"nameLayout\": \"two-lines\"}, \"page\": {\"order\": [\"hero\", \"couple\", \"story\", \"location\", \"timeline\", \"gift\", \"gallery\", \"countdown\", \"thankyou\"]}, \"side\": \"groom\", \"story\": {\"image\": \"images/download_4_wiubgq.jpg\", \"content\": [{\"desc\": \"Giữa biển người xa lạ năm ấy, ánh mắt em là điều duy nhất khiến thời gian trong anh ngừng lại. Nụ cười nhẹ nhàng của em như vạt nắng đầu mùa, sưởi ấm và thắp sáng cả khoảng trời thanh xuân chông chênh của anh.\", \"title\": \"Lần Đầu Gặp Gỡ\"}, {\"desc\": \"\", \"title\": \"Lời Tỏ Tình\"}, {\"desc\": \"\", \"title\": \"Lời Cầu Hôn\"}]}, \"theme\": \"pink02\", \"video\": {\"url\": \"\", \"desc\": \"\", \"title\": \"\"}, \"couple\": {\"groom\": {\"bio\": \"\", \"name\": \"Vũ Khánh\", \"rank\": \"\", \"image\": \"images/ef1b6b49-facd-486a-82db-9fa953cbecfd.webp\", \"father\": \"Vũ Văn Khang \", \"mother\": \"Phạm Thị Tính\", \"address\": \"Cát Thành, Trực Ninh, Nam Định\", \"shortName\": \"\"}, \"bride\": {\"bio\": \"\", \"name\": \"Nguyễn Huế\", \"rank\": \"\", \"image\": \"images/790acde3-5d0c-425d-855f-2787de9c312d.webp\", \"father\": \"Nguyễn Văn Huy \", \"mother\": \"Nguyễn Thị Sáu\", \"address\": \"Quảng Bị, Chương Mỹ, Hà Nội\", \"shortName\": \"\"}, \"title\": \"Đôi Nét Về Chúng Tôi\"}, \"events\": [{\"icon\": \"📷\", \"time\": \"9:00\", \"title\": \"Đón khách\", \"location\": \"\", \"description\": \"\"}, {\"icon\": \"🥂\", \"time\": \"11:00\", \"title\": \"Khai tiệc\", \"location\": \"\", \"description\": \"\"}], \"venues\": [{\"area\": \"Cát Thành, Trực Ninh, Nam Định\", \"icon\": \"🏠\", \"time\": \"9:00 - 11:30\", \"image\": \"images/download_u9sseh.jpg\", \"title\": \"Nhà Trai\", \"mapUrl\": \"\", \"address\": \"Tư gia Nhà Trai\"}, {\"area\": \"Quảng Bị, Chương Mỹ, Hà Nội\", \"icon\": \"💒\", \"time\": \"11:00 - 14:00\", \"image\": \"images/download_1_bq8fyl.jpg\", \"title\": \"Nhà Gái\", \"mapUrl\": \"\", \"address\": \"Tư gia Nhà Gái\"}], \"wishes\": {\"coverImage\": \"images/ef1b6b49-facd-486a-82db-9fa953cbecfd.webp\"}, \"gallery\": {\"title\": \"\", \"portrait\": [{\"src\": \"images/download_u9sseh.jpg\"}, {\"src\": \"images/download_1_bq8fyl.jpg\"}, {\"src\": \"images/download_4_wiubgq.jpg\"}, {\"src\": \"images/download_2_ankule.jpg\"}], \"editorial\": [], \"landscape\": [], \"loveFlowey\": []}, \"features\": {\"lang\": \"vi\", \"showRSVP\": false, \"customLogo\": \"\", \"showWishes\": false, \"showNickname\": false, \"titlePreview\": \"\", \"showInvitedBy\": false, \"showRSVPField\": false, \"partnerWeddingId\": \"\", \"requireAttending\": false, \"requireInvitedBy\": false, \"wishesFirstInForm\": false, \"requireNoOfAttendee\": false}, \"playlist\": [{\"src\": \"media/le-duong-b33db5e2.mp3\", \"title\": \"Lễ đường\", \"artist\": \"\"}], \"thankyou\": {\"title\": \"\", \"coverImage\": \"images/download_2_ankule.jpg\", \"description\": \"\"}, \"countdown\": {\"coverImage\": \"\", \"showSeconds\": true, \"useFirstDate\": true}, \"groomsmen\": [], \"bridesmaids\": [], \"dressColors\": [], \"bankAccounts\": [{\"qr\": \"images/9f74ef9e-6625-488b-a3fb-5f98abf8f2c9.webp\", \"bankName\": \"Vietcombank\", \"accountHolder\": \"VU KHANH\", \"accountNumber\": \"1234567890\"}, {\"qr\": \"images/5af401dd-f7eb-4be4-8f35-681263087a9f.webp\", \"bankName\": \"Vietcombank\", \"accountHolder\": \"NGUYEN HUE\", \"accountNumber\": \"9876543210\"}]}}]\n"])</script>
+"])</script>
+  <script>self.__next_f.push([1, "9:{\"metadata\":[[\"$\",\"title\",\"0\",{\"children\":\"Vũ Khánh \u0026 Nguyễn Huế\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"2\",{\"name\":\"generator\",\"content\":\"v0.app\"}],[\"$\",\"meta\",\"3\",{\"name\":\"og:image\",\"content\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785306757/download_1_bq8fyl_j9segm.jpg\"}],[\"$\",\"meta\",\"4\",{\"name\":\"og:image:secure_url\",\"content\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785306757/download_1_bq8fyl_j9segm.jpg\"}],[\"$\",\"meta\",\"5\",{\"name\":\"og:image:type\",\"content\":\"image/png\"}],[\"$\",\"meta\",\"6\",{\"name\":\"og:image:width\",\"content\":\"1200\"}],[\"$\",\"meta\",\"7\",{\"name\":\"og:image:height\",\"content\":\"630\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:title\",\"content\":\"Vũ Khánh \u0026 Nguyễn Huế\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:url\",\"content\":\"https://suns-wedding.vercel.app/hang-huy?guest=b%E1%BA%A1n%20Minh%20Hi%E1%BA%BFu\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:locale\",\"content\":\"vi_VN\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:image\",\"content\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785306757/download_1_bq8fyl_j9segm.jpg\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"Vũ Khánh \u0026 Nguyễn Huế\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"17\",{\"name\":\"twitter:image\",\"content\":\"https://res.cloudinary.com/djrwanubz/image/upload/v1785306757/download_1_bq8fyl_j9segm.jpg\"}],[\"$\",\"link\",\"18\",{\"rel\":\"icon\",\"href\":\"/icon-light-32x32.png\",\"media\":\"(prefers-color-scheme: light)\"}],[\"$\",\"link\",\"19\",{\"rel\":\"icon\",\"href\":\"/icon-light-32x32.png\",\"media\":\"(prefers-color-scheme: dark)\"}],[\"$\",\"link\",\"20\",{\"rel\":\"icon\",\"href\":\"/icon-light-32x32.png\",\"type\":\"image/svg+xml\"}],[\"$\",\"link\",\"21\",{\"rel\":\"apple-touch-icon\",\"href\":\"/icon-light-32x32.png\"}],[\"$\",\"$L11\",\"22\",{}]],\"error\":null,\"digest\":\"$undefined\"}\n"])</script>
   <script>self.__next_f.push([1, "e:\"$9:metadata\"\n"])</script>
+  <script>
+    (() => {
+      const section = document.getElementById('wedding-gift');
+      if (!section) return;
+      const sectionParent = section.parentElement;
+      const heroSection = sectionParent && sectionParent.firstElementChild;
+      if (heroSection && heroSection !== section) heroSection.after(section);
+      const trigger = section.querySelector('.gift-trigger');
+      const hint = section.querySelector('.gift-hint');
+      const scrollCue = section.querySelector('.wedding-scroll-cue');
+      const touchGuide = section.querySelector('.wedding-gift-hand-guide');
+      const modal = section.querySelector('.gift-modal');
+      const dialog = section.querySelector('.gift-dialog');
+      const closeButton = section.querySelector('.gift-close');
+      let lastFocus = null;
+
+      function makeConfetti() {
+        const colors = ['#d4af37', '#8b1e3f', '#f4d978', '#e77895', '#fff4c7'];
+        for (let i = 0; i < 34; i++) {
+          const bit = document.createElement('i');
+          const angle = (Math.PI * 2 * i / 34) + (Math.random() * .35);
+          const distance = 75 + Math.random() * 115;
+          bit.className = 'gift-particle';
+          bit.style.setProperty('--x', `${Math.cos(angle) * distance}px`);
+          bit.style.setProperty('--y', `${Math.sin(angle) * distance - 35}px`);
+          bit.style.setProperty('--r', `${Math.random() * 720 - 360}deg`);
+          bit.style.background = colors[i % colors.length];
+          bit.style.animationDelay = `${Math.random() * 90}ms`;
+          section.appendChild(bit);
+          bit.addEventListener('animationend', () => bit.remove(), { once: true });
+        }
+      }
+
+      function swipePageUp(distance) {
+        const scroller = section.closest('.overflow-y-auto') || document.scrollingElement || document.documentElement;
+        const startTop = scroller.scrollTop;
+        const targetTop = startTop + distance;
+        const duration = Math.min(950, Math.max(620, distance * 0.85));
+        const startTime = performance.now();
+
+        function animateScroll(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          // Ease-out cubic tạo cảm giác tay vuốt nhanh rồi chậm dần.
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const currentMax = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+          const nextTop = Math.min(startTop + (targetTop - startTop) * eased, currentMax);
+          scroller.scrollTop = nextTop;
+          if (progress < 1) window.requestAnimationFrame(animateScroll);
+        }
+
+        window.requestAnimationFrame(animateScroll);
+      }
+
+      function openGift() {
+        if (modal.classList.contains('is-visible')) return;
+        lastFocus = document.activeElement;
+        if (touchGuide) touchGuide.classList.add('is-hidden');
+        if (scrollCue) scrollCue.classList.add('is-hidden');
+        section.style.height = 'auto';
+        modal.classList.add('is-visible');
+        modal.scrollTop = 0;
+        dialog.scrollTop = 0;
+        makeConfetti();
+
+        // Đợi browser tính xong chiều cao layout QR rồi cuộn trang lên đúng
+        // bằng chiều cao thực tế của khối vừa mở.
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            const qrLayoutHeight = modal.scrollHeight + 22;
+            swipePageUp(qrLayoutHeight);
+            closeButton.focus({ preventScroll: true });
+          });
+        });
+      }
+
+      function closeGift() {
+        modal.classList.remove('is-visible');
+        window.setTimeout(() => { section.style.height = 'auto'; }, 650);
+        if (lastFocus) lastFocus.focus();
+      }
+
+      function scrollBackToGift() {
+        modal.classList.remove('is-visible');
+        window.setTimeout(() => { section.style.height = 'auto'; }, 650);
+        window.setTimeout(() => {
+          section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          trigger.focus({ preventScroll: true });
+        }, 80);
+      }
+
+      trigger.addEventListener('click', openGift);
+      if (hint) hint.addEventListener('click', openGift);
+      if (scrollCue) {
+        scrollCue.addEventListener('click', () => {
+          scrollCue.classList.add('is-hidden');
+          swipePageUp(Math.min(420, window.innerHeight * .55));
+        });
+      }
+      const pageScroller = section.closest('.overflow-y-auto') || document.scrollingElement || document.documentElement;
+      const pageScrollTarget = pageScroller === document.scrollingElement ? window : pageScroller;
+      pageScrollTarget.addEventListener('scroll', () => {
+        if (pageScroller.scrollTop <= 8) return;
+        const currentCue = document.querySelector('#wedding-gift .wedding-scroll-cue');
+        if (currentCue) currentCue.classList.add('is-hidden');
+      }, { passive: true });
+      closeButton.addEventListener('click', closeGift);
+      modal.addEventListener('click', event => { if (event.target === modal) closeGift(); });
+      modal.querySelectorAll('.gift-qr').forEach(qr => {
+        qr.addEventListener('click', scrollBackToGift);
+        qr.addEventListener('keydown', event => {
+          if (event.key !== 'Enter' && event.key !== ' ') return;
+          event.preventDefault();
+          scrollBackToGift();
+        });
+      });
+      document.addEventListener('keydown', event => {
+        if (!modal.classList.contains('is-visible')) return;
+        if (event.key === 'Escape') closeGift();
+        if (event.key === 'Tab') {
+          const items = [...dialog.querySelectorAll('button,[href],[tabindex]:not([tabindex="-1"])')];
+          const first = items[0], last = items[items.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
+      });
+      modal.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', async () => {
+        const value = button.dataset.copy;
+        try { await navigator.clipboard.writeText(value); }
+        catch (_) {
+          const input = document.createElement('textarea'); input.value = value; document.body.appendChild(input);
+          input.select(); document.execCommand('copy'); input.remove();
+        }
+        const oldText = button.textContent;
+        button.textContent = '✓ Đã sao chép';
+        window.setTimeout(() => { button.textContent = oldText; }, 1800);
+      }));
+    })();
+  </script>
+  <script>
+    (function() {
+      function startMusic() {
+        var audios = document.querySelectorAll('audio');
+        audios.forEach(function(audio) {
+          audio.volume = 0.7;
+          audio.loop = true;
+          var p = audio.play();
+          if (p && p.catch) {
+            p.catch(function() {});
+          }
+        });
+      }
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        startMusic();
+      } else {
+        document.addEventListener('DOMContentLoaded', startMusic);
+      }
+      window.addEventListener('load', startMusic);
+      ['click', 'touchstart', 'touchend', 'pointerdown', 'scroll'].forEach(function(evt) {
+        window.addEventListener(evt, startMusic, { once: true, passive: true });
+      });
+    })();
+  </script>
+
+  <!-- Hiệu ứng Pháo hoa Đám cưới Sang trọng -->
+  <script>
+    (function() {
+      function initWeddingFireworks() {
+      if (document.getElementById('wedding-fireworks-canvas')) return;
+
+      // Tạo canvas sau khi Next.js hydrate để React không loại nó khỏi DOM.
+      const canvas = document.createElement('canvas');
+      canvas.id = 'wedding-fireworks-canvas';
+      canvas.setAttribute('aria-hidden', 'true');
+      canvas.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483646;display:block;';
+      document.body.appendChild(canvas);
+
+      // Tim nhỏ bay liên tục giữa các đợt pháo hoa.
+      const heartsLayer = document.createElement('div');
+      heartsLayer.className = 'wedding-ambient-hearts';
+      heartsLayer.setAttribute('aria-hidden', 'true');
+      for (let i = 0; i < 14; i++) {
+        const heart = document.createElement('span');
+        heart.className = 'wedding-ambient-heart';
+        heart.textContent = i % 3 === 0 ? '♡' : '♥';
+        heart.style.setProperty('--left', (3 + Math.random() * 94) + '%');
+        heart.style.setProperty('--size', (11 + Math.random() * 15) + 'px');
+        heart.style.setProperty('--duration', (8 + Math.random() * 7) + 's');
+        heart.style.setProperty('--delay', (-Math.random() * 15) + 's');
+        heart.style.setProperty('--drift', (-45 + Math.random() * 90) + 'px');
+        heartsLayer.appendChild(heart);
+      }
+      document.body.appendChild(heartsLayer);
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+
+      function resize() {
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.round(width * pixelRatio);
+        canvas.height = Math.round(height * pixelRatio);
+        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      }
+      window.addEventListener('resize', resize, { passive: true });
+      resize();
+
+      const particles = [];
+      const rockets = [];
+      const colors = [
+        '#d4af37', '#ffd700', '#f6c0d0', '#ff6b8b', '#ff8fa3',
+        '#fff4cc', '#ffffff', '#e85a71', '#fdbb2d', '#b52d55'
+      ];
+
+      class Rocket {
+        constructor(x, targetY, isHeart = false) {
+          this.x = x || (width * 0.2 + Math.random() * width * 0.6);
+          this.y = height;
+          this.targetY = targetY || (height * 0.15 + Math.random() * height * 0.35);
+          this.speed = 9 + Math.random() * 4;
+          this.angle = -Math.PI / 2 + (Math.random() * 0.2 - 0.1);
+          this.vx = Math.cos(this.angle) * this.speed;
+          this.vy = Math.sin(this.angle) * this.speed;
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+          this.isHeart = isHeart;
+          this.trail = [];
+        }
+
+        update() {
+          this.trail.push({ x: this.x, y: this.y, alpha: 1 });
+          if (this.trail.length > 7) this.trail.shift();
+          this.trail.forEach(t => t.alpha -= 0.12);
+
+          this.x += this.vx;
+          this.y += this.vy;
+          this.vy += 0.08; // trọng lực nhẹ khi bay lên
+
+          if (this.vy >= -1.2 || this.y <= this.targetY) {
+            this.explode();
+            return false;
+          }
+          return true;
+        }
+
+        draw() {
+          this.trail.forEach(t => {
+            ctx.beginPath();
+            ctx.arc(t.x, t.y, 2, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 230, 160, ${t.alpha})`;
+            ctx.fill();
+          });
+
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = this.color;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+
+        explode() {
+          const count = this.isHeart ? 48 : (45 + Math.floor(Math.random() * 25));
+          const baseColor = this.color;
+
+          if (this.isHeart) {
+            // Nổ hình trái tim
+            for (let i = 0; i < count; i++) {
+              const t = (Math.PI * 2 * i) / count;
+              // Công thức hình trái tim toán học
+              const hx = 16 * Math.pow(Math.sin(t), 3);
+              const hy = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+              const speed = 0.22 + Math.random() * 0.04;
+              particles.push(new Particle(this.x, this.y, hx * speed, hy * speed, baseColor, true));
+            }
+          } else {
+            // Nổ chùm hoa xoè tròn lấp lánh
+            for (let i = 0; i < count; i++) {
+              const angle = Math.random() * Math.PI * 2;
+              const speed = 1.8 + Math.random() * 4.2;
+              const vx = Math.cos(angle) * speed;
+              const vy = Math.sin(angle) * speed;
+              particles.push(new Particle(this.x, this.y, vx, vy, baseColor, false));
+            }
+          }
+        }
+      }
+
+      class Particle {
+        constructor(x, y, vx, vy, color, isHeart = false) {
+          this.x = x;
+          this.y = y;
+          this.vx = vx;
+          this.vy = vy;
+          this.color = Math.random() > 0.35 ? color : colors[Math.floor(Math.random() * colors.length)];
+          this.alpha = 1;
+          this.decay = isHeart ? (0.012 + Math.random() * 0.01) : (0.015 + Math.random() * 0.016);
+          this.size = isHeart ? (2.2 + Math.random() * 1.5) : (1.8 + Math.random() * 2.2);
+          this.gravity = 0.065;
+          this.friction = 0.965;
+          this.flicker = Math.random() > 0.3;
+        }
+
+        update() {
+          this.vx *= this.friction;
+          this.vy *= this.friction;
+          this.vy += this.gravity;
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= this.decay;
+          return this.alpha > 0;
+        }
+
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, this.alpha * (this.flicker && Math.random() > 0.4 ? 0.7 : 1));
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.shadowBlur = 6;
+          ctx.shadowColor = this.color;
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      // Nổ pháo hoa mini tại vị trí chạm/click
+      function burstAt(x, y) {
+        const count = 48 + Math.floor(Math.random() * 28);
+        const burstColor = colors[Math.floor(Math.random() * colors.length)];
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 1.2 + Math.random() * 3.6;
+          particles.push(new Particle(x, y, Math.cos(angle) * speed, Math.sin(angle) * speed, burstColor, Math.random() > 0.7));
+        }
+      }
+
+      window.addEventListener('pointerdown', function(e) {
+        // Không làm người dùng mất tập trung khi thao tác với biểu mẫu hoặc liên kết.
+        if (e.target && e.target.closest('button, input, textarea, select, a, label')) return;
+        burstAt(e.clientX, e.clientY);
+      }, { passive: true });
+
+      // Vòng lặp bắn pháo hoa tự động dày hơn cho không khí lễ hội.
+      let lastAutoLaunch = Date.now();
+      let autoInterval = reducedMotion ? 4500 : 1200;
+      const maxParticles = width < 640 ? 520 : 760;
+
+      // Chuỗi pháo chào mừng lúc mới vào trang
+      function launchWelcomeFireworks() {
+        const wTimeouts = reducedMotion ? [300] : [100, 350, 650, 950, 1250, 1550, 1900, 2250];
+        wTimeouts.forEach((delay, idx) => {
+          setTimeout(() => {
+            const posX = width * (0.12 + Math.random() * 0.76);
+            const isHeart = idx % 2 === 1;
+            rockets.push(new Rocket(posX, height * (0.18 + Math.random() * 0.25), isHeart));
+          }, delay);
+        });
+      }
+
+      setTimeout(launchWelcomeFireworks, 600);
+
+      function loop() {
+        requestAnimationFrame(loop);
+        if (document.hidden) return;
+
+        ctx.clearRect(0, 0, width, height);
+
+        // Tự động bắn pháo hoa định kỳ
+        const now = Date.now();
+        if (now - lastAutoLaunch > autoInterval) {
+          lastAutoLaunch = now;
+          autoInterval = reducedMotion ? 4500 : 900 + Math.random() * 700;
+          const launchCount = reducedMotion ? 1 : (Math.random() > 0.55 ? 3 : 2);
+          for (let i = 0; i < launchCount; i++) {
+            const posX = width * (0.1 + Math.random() * 0.8);
+            const isHeart = Math.random() > 0.58;
+            rockets.push(new Rocket(posX, height * (0.12 + Math.random() * 0.38), isHeart));
+          }
+        }
+
+        // Cập nhật và vẽ rockets
+        for (let i = rockets.length - 1; i >= 0; i--) {
+          if (!rockets[i].update()) {
+            rockets.splice(i, 1);
+          } else {
+            rockets[i].draw();
+          }
+        }
+
+        // Cập nhật và vẽ particles (giới hạn tối đa để mượt 60fps)
+        if (particles.length > maxParticles) {
+          particles.splice(0, particles.length - maxParticles);
+        }
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+          if (!particles[i].update()) {
+            particles.splice(i, 1);
+          } else {
+            particles[i].draw();
+          }
+        }
+      }
+
+      loop();
+      }
+
+      // Các bundle của trang dùng async; chờ load thêm một nhịp để canvas luôn nằm
+      // ngoài cây DOM do React quản lý và không bị mất trong quá trình hydrate.
+      if (document.readyState === 'complete') {
+        setTimeout(initWeddingFireworks, 250);
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(initWeddingFireworks, 250);
+        }, { once: true });
+      }
+    })();
+  </script>
+
 </body>
 
 </html>
