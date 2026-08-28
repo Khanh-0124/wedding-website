@@ -28,7 +28,7 @@
   <script src="js/5563-54046f3635db0d38.js" async=""></script>
   <script src="js/2810-d6b2f5b42f980c21.js" async=""></script>
   <script src="js/6382-f14b34efbd1d008b.js" async=""></script>
-  <script src="js/page-0ed3f40a2bc9315d.js?v=layout-19" async=""></script>
+  <script src="js/page-0ed3f40a2bc9315d.js?v=layout-20" async=""></script>
   <meta name="next-size-adjust" content="">
   <title>Vũ Khánh & Nguyễn Huế</title>
   <meta name="description" content="Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới">
@@ -306,6 +306,18 @@
       opacity: 0;
       transform: translateY(-7px);
       pointer-events: none;
+    }
+    .wedding-scroll-cue.is-viewport-centered {
+      position: fixed;
+      z-index: 70;
+      top: var(--wedding-cue-top);
+      left: 50%;
+      margin-top: 0;
+      white-space: nowrap;
+      transform: translateX(-50%);
+    }
+    .wedding-scroll-cue.is-viewport-centered.is-hidden {
+      transform: translate(-50%, -7px);
     }
     .wedding-scroll-cue-arrows {
       position: relative;
@@ -1158,6 +1170,30 @@
           swipePageUp(Math.min(420, window.innerHeight * .55));
         });
       }
+      function centerScrollCue() {
+        const currentCue = document.querySelector('#wedding-gift .wedding-scroll-cue');
+        const giftTitle = document.querySelector('#wedding-gift h2');
+        if (!currentCue || !giftTitle || currentCue.classList.contains('is-hidden')) return;
+        currentCue.classList.remove('is-viewport-centered');
+        currentCue.style.removeProperty('--wedding-cue-top');
+        window.requestAnimationFrame(() => {
+          const titleBottom = giftTitle.getBoundingClientRect().bottom;
+          const cueHeight = currentCue.offsetHeight;
+          const nextSection = document.querySelector('#wedding-gift').nextElementSibling;
+          const nextSectionVisible = nextSection && parseFloat(window.getComputedStyle(nextSection).opacity) > .05;
+          const lowerBoundary = nextSectionVisible
+            ? Math.min(window.innerHeight, nextSection.getBoundingClientRect().top)
+            : window.innerHeight;
+          const freeHeight = lowerBoundary - titleBottom;
+          if (freeHeight < cueHeight + 80) return;
+          const centeredTop = titleBottom + (freeHeight - cueHeight) / 2;
+          currentCue.style.setProperty('--wedding-cue-top', `${centeredTop}px`);
+          currentCue.classList.add('is-viewport-centered');
+        });
+      }
+      window.requestAnimationFrame(() => window.requestAnimationFrame(centerScrollCue));
+      window.setTimeout(centerScrollCue, 900);
+      window.addEventListener('resize', centerScrollCue, { passive: true });
       const pageScroller = section.closest('.overflow-y-auto') || document.scrollingElement || document.documentElement;
       const pageScrollTarget = pageScroller === document.scrollingElement ? window : pageScroller;
       pageScrollTarget.addEventListener('scroll', () => {

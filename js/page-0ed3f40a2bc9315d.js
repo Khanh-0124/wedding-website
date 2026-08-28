@@ -8845,6 +8845,45 @@
             () => t.removeEventListener("scroll", a)
           );
         }, []);
+        (0, i.useEffect)(() => {
+          let e = 0,
+            t = () => {
+              let a = o.current
+                  ? o.current.querySelector(".wedding-scroll-cue")
+                  : null,
+                n = o.current ? o.current.querySelector("h2") : null;
+              if (!a || !n || a.classList.contains("is-hidden")) return;
+              a.classList.remove("is-viewport-centered"),
+                a.style.removeProperty("--wedding-cue-top"),
+                (e = window.requestAnimationFrame(() => {
+                  let e = n.getBoundingClientRect().bottom,
+                    t = a.offsetHeight,
+                    i = o.current ? o.current.nextElementSibling : null,
+                    s =
+                      i && parseFloat(window.getComputedStyle(i).opacity) > 0.05
+                        ? Math.min(window.innerHeight, i.getBoundingClientRect().top)
+                        : window.innerHeight,
+                    l = s - e;
+                  if (l < t + 80) return;
+                  let r = e + (l - t) / 2;
+                  a.style.setProperty("--wedding-cue-top", "".concat(r, "px")),
+                    a.classList.add("is-viewport-centered");
+                }));
+            },
+            a = window.requestAnimationFrame(() => {
+              e = window.requestAnimationFrame(t);
+            }),
+            n = window.setTimeout(t, 900);
+          return (
+            window.addEventListener("resize", t, { passive: !0 }),
+            () => {
+              window.cancelAnimationFrame(a),
+                window.cancelAnimationFrame(e),
+                window.clearTimeout(n),
+                window.removeEventListener("resize", t);
+            }
+          );
+        }, []);
         return (0, n.jsxs)("section", {
           className:
             "py-1 px-4 relative overflow-hidden select-none flex flex-col justify-center",
