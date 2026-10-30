@@ -507,7 +507,7 @@
 <style>
     html { font-size:106.25%; }
     @media (min-width:768px) { img[alt="Nhà Trai"] { transform:scale(1.35) !important; transform-origin:55% 28% !important; } }
-    @media (max-width:767px) { div:has(> img[alt="Nhà Trai"]), div:has(> img[alt="Nhà Gái"]) { height:auto !important; aspect-ratio:3/4; } img[alt="Nhà Trai"], img[alt="Nhà Gái"] { object-position:50% 20% !important; } }
+    @media (max-width:767px) { .venue-photo { height:auto !important; aspect-ratio:3/4 !important; } .venue-photo img { object-position:50% 15% !important; transform:none !important; } }
     .couple-photo img[alt="Nguyễn Huế"] { transform:scale(1.12) !important; transform-origin:50% 100% !important; }
     .couple-photo img[alt="Vũ Khánh"] { transform:scale(1.12) !important; transform-origin:50% 75% !important; }
     .gift-grid { grid-template-columns:minmax(0,1fr) !important; gap:16px !important; width:100%; }
@@ -893,7 +893,7 @@
             </div>
             <div class="grid gap-3 md:gap-6 grid-cols-1 md:grid-cols-2">
               <div class=" overflow-hidden  bg-[#faf8f5] shadow-md " style="opacity:0;transform:translateY(40px)">
-                <div class="relative overflow-hidden h-70 md:h-[420px] bg-[#e8e2d8]"><img alt="Nhà Trai" loading="lazy"
+                <div class="venue-photo relative overflow-hidden h-70 md:h-[420px] bg-[#e8e2d8]"><img alt="Nhà Trai" loading="lazy"
                     decoding="async" data-nimg="fill" class="object-cover"
                     style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
                     src="images/8.jpg">
@@ -952,7 +952,7 @@
                 </div>
               </div>
               <div class=" overflow-hidden  bg-[#faf8f5] shadow-md " style="opacity:0;transform:translateY(40px)">
-                <div class="relative overflow-hidden h-70 md:h-[420px] bg-[#e8e2d8]"><img alt="Nhà Gái" loading="lazy"
+                <div class="venue-photo relative overflow-hidden h-70 md:h-[420px] bg-[#e8e2d8]"><img alt="Nhà Gái" loading="lazy"
                     decoding="async" data-nimg="fill" class="object-cover"
                     style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
                     src="images/10.jpg">

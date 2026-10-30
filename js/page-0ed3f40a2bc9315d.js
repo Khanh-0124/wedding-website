@@ -6018,7 +6018,7 @@
                       children: [
                         (0, n.jsxs)("div", {
                           className:
-                            "relative overflow-hidden h-70 md:h-[420px]",
+                            "venue-photo relative overflow-hidden h-70 md:h-[420px]",
                           children: [
                             (0, n.jsx)(m.default, {
                               src: e.image,
@@ -10850,7 +10850,7 @@
                       children: [
                         (0, n.jsxs)("div", {
                           className:
-                            "relative overflow-hidden h-70 md:h-[420px]",
+                            "venue-photo relative overflow-hidden h-70 md:h-[420px]",
                           children: [
                             (0, n.jsx)(m.default, {
                               src: e.image,
