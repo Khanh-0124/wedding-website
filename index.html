@@ -34,9 +34,9 @@
   <meta name="description" content="Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới">
   <meta name="generator" content="v0.app">
   <meta name="og:image"
-    content="images/download_1_bq8fyl.jpg">
+    content="images/1.jpg">
   <meta name="og:image:secure_url"
-    content="images/download_1_bq8fyl.jpg">
+    content="images/1.jpg">
   <meta name="og:image:type" content="image/png">
   <meta name="og:image:width" content="1200">
   <meta name="og:image:height" content="630">
@@ -44,17 +44,17 @@
   <meta property="og:description" content="Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới">
   <meta property="og:url" content="https://suns-wedding.vercel.app/hang-huy?guest=b%E1%BA%A1n%20Minh%20Hi%E1%BA%BFu">
   <meta property="og:locale" content="vi_VN">
-  <meta property="og:image" content="images/download_1_bq8fyl.jpg">
+  <meta property="og:image" content="images/1.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Vũ Khánh & Nguyễn Huế">
   <meta name="twitter:description" content="Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới">
   <meta name="twitter:image"
-    content="images/download_1_bq8fyl.jpg">
-  <link rel="icon" href="images/icon-light-32x32.png" media="(prefers-color-scheme: light)">
-  <link rel="icon" href="images/icon-light-32x32.png" media="(prefers-color-scheme: dark)">
-  <link rel="icon" href="images/icon-light-32x32.png" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="images/icon-light-32x32.png">
+    content="images/1.jpg">
+  <link rel="icon" href="images/11.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="images/11.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="images/11.png" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/11.png">
   <script src="js/polyfills-42372ed130431b0a.js" nomodule=""></script>
   <style>
     @keyframes ripple-wave {
@@ -307,7 +307,7 @@
       transform: translateY(-7px);
       pointer-events: none;
     }
-    .wedding-scroll-cue.is-viewport-centered {
+    .wedding-scroll-cue.is-viewport-centered { 
       position: fixed;
       z-index: 70;
       top: var(--wedding-cue-top);
@@ -407,11 +407,31 @@
       transform: translateX(-50%);
       pointer-events: none;
     }
+    #wedding-door-replay.is-waiting { pointer-events: auto; cursor: pointer; }
+    #wedding-door-replay .door-tap-hint {
+      position: absolute;
+      left: 50%;
+      top: 44%;
+      z-index: 4;
+      padding: 10px 22px;
+      border: 1px solid rgba(255,255,255,.7);
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      color: var(--foreground, #fdfdf5);
+      font-size: 15px;
+      letter-spacing: .04em;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity .4s ease;
+      user-select: none;
+    }
+    #wedding-door-replay.is-waiting .door-tap-hint { opacity: 1; animation: door-tap-pulse 1.6s ease-in-out infinite; }
+    @keyframes door-tap-pulse { 0%,100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.06); } }
     #wedding-door-replay .door-replay-panel {
       position: relative;
       width: 50%;
       height: 100%;
-      overflow: hidden;
       background: var(--background, #e9a5b4);
       transition: transform 1.5s cubic-bezier(.25, 1, .5, 1);
       will-change: transform;
@@ -423,7 +443,7 @@
     #wedding-door-replay.is-open .door-replay-right { transform: translate3d(100%,0,0); }
     #wedding-door-replay .door-replay-mark {
       position: absolute;
-      top: 45%;
+      top: 28%;
       z-index: 2;
       width: 100px;
       height: 110px;
@@ -435,21 +455,98 @@
       transform: translateY(-50%);
       user-select: none;
     }
-    #wedding-door-replay .door-replay-mark-left { right: -50px; }
-    #wedding-door-replay .door-replay-mark-right { left: -50px; }
+    /* Mỗi cánh chỉ hiện nửa chữ 囍 của mình (cánh cửa không cắt overflow để tóc chú rể tràn qua khe). */
+    #wedding-door-replay .door-replay-mark-left { right: -50px; clip-path: inset(0 50px 0 0); }
+    #wedding-door-replay .door-replay-mark-right { left: -50px; clip-path: inset(0 0 0 50px); }
     @media (min-width: 768px) {
       #wedding-door-replay { width: 50vw; }
     }
+    #wedding-door-replay .door-couple {
+      position: absolute;
+      left: 50%;
+      bottom: 9%;
+      z-index: 3;
+      width: 0;
+      height: 0;
+    }
+    #wedding-door-replay .door-sticker {
+      position: absolute;
+      bottom: 6%;
+      z-index: 3;
+      --door-h: min(40dvh, 75vw, 320px);
+      height: var(--door-h);
+      width: auto;
+      transform-origin: 50% 100%;
+      animation: door-sticker-in .7s cubic-bezier(.3,1.4,.5,1) both;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    @media (min-width: 768px) { #wedding-door-replay .door-sticker { --door-h: min(40dvh, 20vw, 320px); } }
+    /* Tay hai bạn chạm đúng khe giữa hai cánh cửa. */
+    /* Tay cô dâu cách mép phải ảnh ~7.4% bề ngang (34/459 px; ảnh rộng = 0.6375 × cao × .88). */
+    #wedding-door-replay .door-sticker-bride { right: calc(var(--door-h) * -.0416); height: calc(var(--door-h) * .88); }
+    /* Tóc chú rể nhô sang trái hơn bàn tay ~9% bề ngang ảnh (ảnh rộng = 0.49 × cao). */
+    #wedding-door-replay .door-sticker-groom { left: calc(var(--door-h) * -.0445); }
+    #wedding-door-replay.is-pushing .door-sticker-bride { animation: door-lean-right .6s ease-in-out infinite alternate; }
+    #wedding-door-replay.is-pushing .door-sticker-groom { animation: door-lean-left .6s ease-in-out infinite alternate; }
+    #wedding-door-replay.is-open .door-sticker { animation: door-walk .25s ease-in-out 6 alternate; }
+    #wedding-door-replay .door-couple-heart {
+      position: absolute; left: 50%; bottom: 70%; color: #ff5c8a; font-size: 22px; opacity: 0;
+      text-shadow: 0 0 8px rgba(255,255,255,.9);
+    }
+    #wedding-door-replay.is-open .door-couple-heart { animation: door-heart-up 1.2s ease-out forwards; }
+    #wedding-door-replay.is-open .door-couple-heart:nth-child(2) { animation-delay: .2s; font-size: 16px; margin-left: -22px; }
+    #wedding-door-replay.is-open .door-couple-heart:nth-child(3) { animation-delay: .4s; font-size: 14px; margin-left: 18px; }
+    @keyframes door-sticker-in { from { opacity: 0; transform: translateY(40px) scale(.7); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes door-lean-right { from { transform: rotate(0); } to { transform: rotate(3deg); } }
+    @keyframes door-lean-left { from { transform: rotate(0); } to { transform: rotate(-3deg); } }
+    @keyframes door-walk { from { transform: translateY(0) rotate(-1.5deg); } to { transform: translateY(-8px) rotate(1.5deg); } }
+    @keyframes door-heart-up { 0% { opacity: 0; transform: translate(-50%, 0) scale(.4); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -70px) scale(1.2); } }
+    @media (prefers-reduced-motion: reduce) { #wedding-door-replay .door-sticker, #wedding-door-replay .door-couple * { animation: none !important; } }
   </style>
+<style>
+    .gift-grid { grid-template-columns:minmax(0,1fr) !important; gap:16px !important; width:100%; }
+    @media (min-width:640px) { .gift-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; } }
+    .gift-grid > div:not(.text-center) { min-width:0; padding:clamp(12px,3.5vw,16px) !important; }
+    .gift-grid > .text-center { grid-column:1 / -1; margin-top:4px !important; }
+    .gift-grid > div > div:first-child { flex-direction:column; align-items:center !important; gap:6px; text-align:center; padding-bottom:10px !important; margin-bottom:12px !important; }
+    .gift-grid > div > div:first-child > div:first-child { flex-direction:column; gap:4px; }
+    .gift-grid > div > div:first-child > div:first-child > div:first-child { width:36px !important; height:36px !important; font-size:18px !important; }
+    .gift-grid > div > div:first-child p, .gift-grid > div > div:first-child > :last-child { white-space:nowrap; }
+    .gift-grid > div > div:nth-child(2) { margin-bottom:12px !important; padding:10px !important; }
+    .gift-grid img { width:min(100%,180px) !important; height:auto !important; aspect-ratio:1; }
+    .gift-grid .space-y-3 { text-align:center; }
+    .gift-grid .space-y-3 > :not(:first-child) { margin-top:8px !important; }
+    .gift-grid .space-y-3 > div > div { position:relative; justify-content:center; padding:8px 30px !important; min-width:0; }
+    .gift-grid .font-mono { min-width:0; font-size:clamp(15px,4.2vw,18px) !important; letter-spacing:.04em !important; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .gift-grid .space-y-3 button { position:absolute; top:4px; right:4px; font-size:0 !important; gap:0 !important; padding:4px !important; background:transparent !important; box-shadow:none !important; color:#7D2E44 !important; opacity:.75; }
+    .gift-grid .space-y-3 button:hover { opacity:1; }
+    .gift-grid .space-y-3 button svg { width:14px !important; height:14px !important; }
+    .couple-photo { width:min(38vw,200px) !important; height:auto !important; aspect-ratio:3/4; }
+    .cover-photo { width:min(94vw,520px,calc((100dvh - 300px) * .75)); }
+    .cover-frame { height:min(calc(100dvh - 300px), calc(94vw * 1.45), 754px); }
+    @media (min-width:768px) {
+      .cover-photo { width:min(calc(50vw - 24px),520px,calc((100dvh - 300px) * .75)); }
+      .cover-frame { height:min(calc(100dvh - 300px), calc((50vw - 24px) * 1.45), 754px); }
+    }
+  </style>
+  <link rel="preload" as="image" href="images/door-bride.webp">
+  <link rel="preload" as="image" href="images/door-groom.webp">
 </head>
 
 <body class="__variable_f367f3 __variable_0a80b4 font-sans antialiased">
   <div id="wedding-door-replay" aria-hidden="true">
     <div class="door-replay-panel door-replay-left">
       <div class="door-replay-mark door-replay-mark-left">囍</div>
+      <img class="door-sticker door-sticker-bride" src="images/door-bride.webp" alt="" draggable="false">
     </div>
     <div class="door-replay-panel door-replay-right">
       <div class="door-replay-mark door-replay-mark-right">囍</div>
+      <img class="door-sticker door-sticker-groom" src="images/door-groom.webp" alt="" draggable="false">
+    </div>
+    <div class="door-tap-hint">♥ Chạm để mở thiệp ♥</div>
+    <div class="door-couple">
+      <span class="door-couple-heart">♥</span><span class="door-couple-heart">♥</span><span class="door-couple-heart">♥</span>
     </div>
   </div>
   <script>
@@ -469,19 +566,32 @@
       function playDoorsAfterHydration() {
         if (!stage.isConnected) document.body.appendChild(stage);
 
-        window.requestAnimationFrame(function() {
-          window.requestAnimationFrame(function() {
-            window.setTimeout(function() {
-              stage.classList.add('is-open');
-            }, 1200);
-          });
-        });
+        // Trình duyệt điện thoại chỉ cho phát nhạc sau một lần chạm, nên cửa chờ khách chạm rồi mới mở;
+        // chính lần chạm này cũng bật nhạc (listener click ở script nhạc).
+        stage.classList.add('is-waiting');
+        stage.addEventListener('click', openDoors, { once: true });
+      }
 
+      function openDoors() {
+        stage.classList.remove('is-waiting');
+        var audio = document.querySelector('audio');
+        if (audio && audio.paused) audio.play().catch(function() {});
+
+        // Cô dâu chú rể lấy đà đẩy rồi cửa mới bật mở.
+        stage.classList.add('is-pushing');
+        window.setTimeout(function() {
+          stage.classList.add('is-open');
+          window.__weddingDoorsOpened = true;
+          window.dispatchEvent(new Event('wedding-doors-opened'));
+        }, 900);
+        window.setTimeout(function() {
+          stage.classList.add('is-done');
+        }, 2100);
         window.setTimeout(function() {
           finished = true;
           observer.disconnect();
           stage.remove();
-        }, 2850);
+        }, 2800);
       }
 
       if (document.readyState === 'complete') {
@@ -506,7 +616,7 @@
               <span>29</span><span class="mx-2">.</span><span>11</span><span class="mx-2">.</span><span>2026</span>
             </div>
             <h2
-              class="__className_7d6f79 flex items-center justify-center gap-2 text-[26px] text-accent" style="margin-top:10px;margin-bottom:6px;line-height:1.2">
+              class="__className_7d6f79 flex items-center justify-center gap-2 text-[26px] text-accent" style="margin-top:4px;margin-bottom:2px;line-height:1.2">
               <span class="text-center">Vũ Khánh</span>
               <div><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                   fill="var(--foreground)" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -516,12 +626,12 @@
                   </path>
                 </svg></div><span class="text-center">Nguyễn Huế</span>
             </h2>
-            <div class="relative mx-auto mt-2 flex w-[92vw] md:w-[520px] flex-col items-center" style="width:min(92vw,520px,calc(57dvh - 135px),calc(100% - 24px))">
-              <div class="w-full aspect-[3/4] border-[4px] border-border relative overflow-hidden bg-black shadow-md">
+                        <div class="cover-photo relative mx-auto mt-1 flex flex-col items-center">
+              <div class="cover-frame w-full border-[4px] border-border relative overflow-hidden bg-black shadow-md">
                 <img alt="couple" loading="eager" decoding="async" class="object-cover w-full h-full absolute inset-0"
-                    src="images/download_1_bq8fyl.jpg">
+                    src="images/1.jpg">
               </div>
-              <div class="mt-2 text-center">
+              <div class="text-center" style="margin-top:6px">
                 <p class="__className_85880b text-[13px] uppercase tracking-[0.25em] text-secondary font-bold">Trân Trọng Kính Mời</p>
                 <h3 class="__className_3336bb mt-0.5 text-[17px] leading-none text-[#3a322f]">bạn Minh Hiếu</h3>
                 <div class="hidden" aria-hidden="true"></div>
@@ -570,7 +680,7 @@
           </style>
           <div class="mx-auto max-w-xl flex flex-col items-center text-center">
             <button class="gift-trigger" type="button" aria-label="Mở hộp mừng cưới" aria-haspopup="dialog">
-              <span class="gift-aura"></span><span class="gift-shadow"></span><img src="images/wedding-heart-gift.png" alt="Hộp quà cưới hình trái tim" style="position:relative;z-index:2;width:60px;max-width:none;left:8px;filter:drop-shadow(0 6px 6px rgba(92,36,52,.2));animation:gift-breathe 2.4s ease-in-out infinite">
+              <span class="gift-aura"></span><span class="gift-shadow"></span><img src="images/2.png" alt="Hộp quà cưới hình trái tim" style="position:relative;z-index:2;width:60px;max-width:none;left:8px;filter:drop-shadow(0 6px 6px rgba(92,36,52,.2));animation:gift-breathe 2.4s ease-in-out infinite">
               <span class="wedding-gift-hand-guide" aria-hidden="true">
                 <span class="wedding-gift-tap-ring"></span>
                 <span class="wedding-gift-hand">
@@ -595,8 +705,8 @@
               <button class="gift-close" type="button" aria-label="Đóng">×</button>
               <div class="text-center"><div class="text-3xl">💝</div><h3 id="gift-modal-title" class="__className_7d6f79 text-3xl mt-1" style="color:#5c2434">Mừng cưới Cô Dâu &amp; Chú Rể</h3><p class="text-sm mt-2" style="color:#7d6257">Sự hiện diện và lời chúc của bạn đã là món quà quý giá nhất.</p></div>
               <div class="gift-accounts">
-                <article class="gift-account"><img class="gift-qr" src="images/9f74ef9e-6625-488b-a3fb-5f98abf8f2c9.webp" alt="Mã QR mừng cưới chú rể" loading="lazy" role="button" tabindex="0" title="Chạm để quay về hộp quà"><h4 class="font-semibold mt-3" style="color:#5c2434">Chú rể · VU KHANH</h4><p class="text-sm mt-1 text-gray-600">Vietcombank · 1234567890</p><button class="gift-copy" type="button" data-copy="1234567890">Sao chép số tài khoản</button></article>
-                <article class="gift-account"><img class="gift-qr" src="images/5af401dd-f7eb-4be4-8f35-681263087a9f.webp" alt="Mã QR mừng cưới cô dâu" loading="lazy" role="button" tabindex="0" title="Chạm để quay về hộp quà"><h4 class="font-semibold mt-3" style="color:#5c2434">Cô dâu · NGUYEN HUE</h4><p class="text-sm mt-1 text-gray-600">Vietcombank · 9876543210</p><button class="gift-copy" type="button" data-copy="9876543210">Sao chép số tài khoản</button></article>
+                <article class="gift-account"><img class="gift-qr" src="images/3.webp" alt="Mã QR mừng cưới chú rể" loading="lazy" role="button" tabindex="0" title="Chạm để quay về hộp quà"><h4 class="font-semibold mt-3" style="color:#5c2434">Chú rể · VU KHANH</h4><p class="text-sm mt-1 text-gray-600">TP Bank · 7100124112001</p><button class="gift-copy" type="button" data-copy="7100124112001">Sao chép số tài khoản</button></article>
+                <article class="gift-account"><img class="gift-qr" src="images/4.webp" alt="Mã QR mừng cưới cô dâu" loading="lazy" role="button" tabindex="0" title="Chạm để quay về hộp quà"><h4 class="font-semibold mt-3" style="color:#5c2434">Cô dâu · NGUYEN HUE</h4><p class="text-sm mt-1 text-gray-600">TP Bank · 81342238888</p><button class="gift-copy" type="button" data-copy="81342238888">Sao chép số tài khoản</button></article>
               </div>
             </div>
           </div>
@@ -608,7 +718,7 @@
             <div class="relative w-full h-[82%] bg-[#e2e0d9] overflow-hidden"><img alt="Dâu Rể" loading="lazy"
                 decoding="async" data-nimg="fill" class="object-cover"
                 style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                src="images/download_4_wiubgq.jpg"></div>
+                src="images/5.jpg"></div>
             <div class="__className_7d6f79 text-[#4a5548] text-center text-lg mt-2 leading-none">Save the date</div>
           </div>
           <div class="w-[53%] flex flex-col justify-center pl-2">
@@ -725,20 +835,20 @@
           </div>
           <div class="flex items-start justify-between bg-background px-2 md:px-6">
             <div class="flex flex-col items-center p-2">
-              <div class="relative h-40 w-30 overflow-hidden shadow-sm mb-3 bg-[#e2e0d9]"><img alt="Vũ Khánh" loading="lazy"
+              <div class="couple-photo relative h-40 w-30 overflow-hidden shadow-sm mb-3 bg-[#e2e0d9]"><img alt="Vũ Khánh" loading="lazy"
                   decoding="async" data-nimg="fill" class="object-cover scale-110"
                   style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                  src="images/ef1b6b49-facd-486a-82db-9fa953cbecfd.webp"></div>
+                  src="images/6.webp"></div>
               <p class="mb-2 text-[8px] uppercase tracking-[0.2em] text-white/70"></p>
               <p class="__className_7d6f79 text-2xl text-white transform">Vũ Khánh</p>
             </div>
             <div class="self-stretch flex items-center"><span
                 class="__className_7d6f79 text-2xl text-white/70 italic">&</span></div>
             <div class="flex flex-col items-center p-2">
-              <div class="relative h-40 w-30 overflow-hidden shadow-sm mb-3 bg-[#e2e0d9]"><img alt="Nguyễn Huế" loading="lazy"
+              <div class="couple-photo relative h-40 w-30 overflow-hidden shadow-sm mb-3 bg-[#e2e0d9]"><img alt="Nguyễn Huế" loading="lazy"
                   decoding="async" data-nimg="fill" class="object-cover scale-110"
                   style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                  src="images/790acde3-5d0c-425d-855f-2787de9c312d.webp"></div>
+                  src="images/7.webp"></div>
               <p class="mb-2 text-[8px] uppercase tracking-[0.2em] text-white/70"></p>
               <p class="__className_7d6f79 text-2xl text-white transform">Nguyễn Huế</p>
             </div>
@@ -781,7 +891,7 @@
                 <div class="relative overflow-hidden h-70 md:h-[420px] bg-[#e8e2d8]"><img alt="Nhà Trai" loading="lazy"
                     decoding="async" data-nimg="fill" class="object-cover"
                     style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                    src="images/download_u9sseh.jpg">
+                    src="images/8.jpg">
                   <div class="absolute inset-0 bg-black/10"></div>
                 </div>
                 <div class="p-3 md:p-5">
@@ -830,7 +940,7 @@
                           text-[#8b6b54]
                           md:text-[14px]
                           font-medium
-                        ">Cát Thành, Trực Ninh, Nam Định</p>
+                        ">thôn Cát Chử, xã Cát Thành, tỉnh Ninh bình</p>
                       </div>
                     </div>
                   </div>
@@ -840,7 +950,7 @@
                 <div class="relative overflow-hidden h-70 md:h-[420px] bg-[#e8e2d8]"><img alt="Nhà Gái" loading="lazy"
                     decoding="async" data-nimg="fill" class="object-cover"
                     style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                    src="images/download_1_bq8fyl.jpg">
+                    src="images/1.jpg">
                   <div class="absolute inset-0 bg-black/10"></div>
                 </div>
                 <div class="p-3 md:p-5">
@@ -889,7 +999,7 @@
                           text-[#8b6b54]
                           md:text-[14px]
                           font-medium
-                        ">Quảng Bị, Chương Mỹ, Hà Nội</p>
+                        ">thôn Duyên Ứng, xãQuảng Bị, thành phố Hà Nội</p>
                       </div>
                     </div>
                   </div>
@@ -897,39 +1007,6 @@
               </div>
             </div>
 
-          </div>
-        </section>
-        <section class="py-10 md:py-16 wedding-timeline-section">
-          <div class="mx-auto max-w-xl px-5">
-            <div class="mb-10 text-center" style="opacity:0;transform:translateY(40px)">
-              <p class="__className_7d6f79 text-3xl text-secondary mb-2">Lịch Trình Tiệc Cưới</p>
-              <div class="mx-auto h-0.5 w-16 bg-gradient-to-r from-transparent via-secondary to-transparent opacity-60"></div>
-            </div>
-            <div class="wedding-timeline-list relative">
-              <div class="wedding-timeline-line"></div>
-
-              <div class="wedding-timeline-item" style="opacity:0;transform:translateY(30px) scale(0.95)">
-                <div class="wedding-timeline-node">
-                  <span class="wedding-timeline-icon">📷</span>
-                </div>
-                <div class="wedding-timeline-card">
-                  <span class="wedding-timeline-time">9:00</span>
-                  <h3 class="wedding-timeline-title">Đón khách</h3>
-                  <p class="wedding-timeline-desc">Chụp ảnh lưu niệm cùng Cô dâu &amp; Chú rể</p>
-                </div>
-              </div>
-
-              <div class="wedding-timeline-item" style="opacity:0;transform:translateY(30px) scale(0.95)">
-                <div class="wedding-timeline-node">
-                  <span class="wedding-timeline-icon">🥂</span>
-                </div>
-                <div class="wedding-timeline-card">
-                  <span class="wedding-timeline-time">11:00</span>
-                  <h3 class="wedding-timeline-title">Khai tiệc</h3>
-                  <p class="wedding-timeline-desc">Nâng ly chúc mừng hạnh phúc đôi uyên ương</p>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -953,17 +1030,17 @@
                 style="opacity:0;transform:translateX(-100px) translateY(30px) scale(0.9)"><img alt="" loading="lazy"
                   decoding="async" data-nimg="fill" class="object-cover"
                   style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                  src="images/download_u9sseh.jpg"></div>
+                  src="images/8.jpg"></div>
               <div class="relative aspect-[3/4] cursor-pointer overflow-hidden bg-[#e8e2d8]"
                 style="opacity:0;transform:translateY(30px) scale(0.9)"><img alt="" loading="lazy" decoding="async"
                   data-nimg="fill" class="object-cover"
                   style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                  src="images/download_1_bq8fyl.jpg"></div>
+                  src="images/1.jpg"></div>
               <div class="relative aspect-[3/4] cursor-pointer overflow-hidden bg-[#e8e2d8]"
                 style="opacity:0;transform:translateX(100px) translateY(30px) scale(0.9)"><img alt="" loading="lazy"
                   decoding="async" data-nimg="fill" class="object-cover"
                   style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                  src="images/download_4_wiubgq.jpg"></div>
+                  src="images/5.jpg"></div>
             </div>
           </div>
         </section>
@@ -998,7 +1075,7 @@
           <div class="relative aspect-[3/4] w-full bg-[#e8e2d8]"><img alt="Thank you from the couple" loading="lazy" decoding="async"
               data-nimg="fill" class="object-cover object-top"
               style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-              src="images/download_2_ankule.jpg">
+              src="images/9.jpg">
             <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
             <div class="absolute bottom-4 left-0 right-0 text-center">
               <p class="__className_7d6f79 text-[26px] text-white/90">Rất hân hạnh được đón tiếp</p>
@@ -1068,9 +1145,9 @@
   <script>self.__next_f.push([1, "0:{\"P\":null,\"b\":\"fGNIe_P0_vyVQB4kQ1kNW\",\"p\":\"\",\"c\":[\"\",\"hang-huy?guest=b%25E1%25BA%25A1n%2520Minh%2520Hi%25E1%25BA%25BFu\"],\"i\":false,\"f\":[[[\"\",{\"children\":[[\"slug\",\"hang-huy\",\"d\"],{\"children\":[\"__PAGE__?{\\\"guest\\\":\\\"b%E1%BA%A1n%20Minh%20Hi%E1%BA%BFu\\\"}\",{}]}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/0e25af96e424a88d.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/8a1d248376c1523d.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"suppressHydrationWarning\":true,\"lang\":\"vi\",\"className\":\"bg-background font-sans __variable_246ccd\",\"children\":[\"$\",\"body\",null,{\"className\":\"__variable_f367f3 __variable_0a80b4 font-sans antialiased\",\"children\":[[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"$L4\",null,{}]]}]}]]}],{\"children\":[[\"slug\",\"hang-huy\",\"d\"],[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[\"$L5\",[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/bc9a5f4b634e0d5a.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/e37503463b981e2f.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"2\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/3589a66456341371.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"3\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/65d7d42e0e662d1e.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"$L6\",null,{\"children\":[\"$L7\",[\"$\",\"$L8\",null,{\"promise\":\"$@9\"}]]}]]}],{},null,false]},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[[\"$\",\"$La\",null,{\"children\":\"$Lb\"}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]],[\"$\",\"$Lc\",null,{\"children\":[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$d\",null,{\"fallback\":null,\"children\":\"$Le\"}]}]}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$f\",[]],\"s\":false,\"S\":false}\n"])</script>
   <script>self.__next_f.push([1, "b:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n7:null\n"])</script>
   <script>self.__next_f.push([1, "10:I[63472,[\"5479\",\"static/chunks/795d4814-f8bca3e16566d480.js\",\"2150\",\"static/chunks/59650de3-27b48b761a1827c4.js\",\"7672\",\"static/chunks/385cb88d-6f1fb143145cd4d0.js\",\"2666\",\"static/chunks/fcfb803e-6d015a352bb44e77.js\",\"5563\",\"static/chunks/5563-54046f3635db0d38.js\",\"2810\",\"static/chunks/2810-d6b2f5b42f980c21.js\",\"6382\",\"static/chunks/6382-f14b34efbd1d008b.js\",\"7182\",\"static/chunks/app/%5Bslug%5D/page-0ed3f40a2bc9315d.js\"],\"default\"]\n11:I[80622,[],\"IconMark\"]\n"])</script>
-  <script>self.__next_f.push([1, "5:[\"$\", \"$L10\", null, {\"initialData\": {\"id\": \"dc62406c-3f00-4261-b053-d2599e3b4eca\", \"name\": \"Vũ Khánh & Nguyễn Huế Wedding\", \"slug\": \"khanh-hue\", \"version\": 2, \"hero\": {\"city\": \"Hà Nội, Việt Nam\", \"date\": \"2026-11-29\", \"date2\": \"\", \"image\": \"images/download_1_bq8fyl.jpg\", \"title\": \"LỄ THÀNH HÔN\", \"lunarDate\": \"\", \"metaImage\": \"\", \"nameLayout\": \"two-lines\"}, \"page\": {\"order\": [\"hero\", \"couple\", \"story\", \"location\", \"timeline\", \"gift\", \"gallery\", \"countdown\", \"thankyou\"]}, \"side\": \"groom\", \"story\": {\"image\": \"images/download_4_wiubgq.jpg\", \"content\": [{\"desc\": \"Giữa biển người xa lạ năm ấy, ánh mắt em là điều duy nhất khiến thời gian trong anh ngừng lại. Nụ cười nhẹ nhàng của em như vạt nắng đầu mùa, sưởi ấm và thắp sáng cả khoảng trời thanh xuân chông chênh của anh.\", \"title\": \"Lần Đầu Gặp Gỡ\"}, {\"desc\": \"\", \"title\": \"Lời Tỏ Tình\"}, {\"desc\": \"\", \"title\": \"Lời Cầu Hôn\"}]}, \"theme\": \"pink02\", \"video\": {\"url\": \"\", \"desc\": \"\", \"title\": \"\"}, \"couple\": {\"groom\": {\"bio\": \"\", \"name\": \"Vũ Khánh\", \"rank\": \"\", \"image\": \"images/ef1b6b49-facd-486a-82db-9fa953cbecfd.webp\", \"father\": \"Vũ Văn Khang \", \"mother\": \"Phạm Thị Tính\", \"address\": \"Cát Thành, Trực Ninh, Nam Định\", \"shortName\": \"\"}, \"bride\": {\"bio\": \"\", \"name\": \"Nguyễn Huế\", \"rank\": \"\", \"image\": \"images/790acde3-5d0c-425d-855f-2787de9c312d.webp\", \"father\": \"Nguyễn Văn Huy \", \"mother\": \"Nguyễn Thị Sáu\", \"address\": \"Quảng Bị, Chương Mỹ, Hà Nội\", \"shortName\": \"\"}, \"title\": \"Đôi Nét Về Chúng Tôi\"}, \"events\": [{\"icon\": \"📷\", \"time\": \"9:00\", \"title\": \"Đón khách\", \"location\": \"\", \"description\": \"\"}, {\"icon\": \"🥂\", \"time\": \"11:00\", \"title\": \"Khai tiệc\", \"location\": \"\", \"description\": \"\"}], \"venues\": [{\"area\": \"Cát Thành, Trực Ninh, Nam Định\", \"icon\": \"🏠\", \"time\": \"9:00 - 11:30\", \"image\": \"images/download_u9sseh.jpg\", \"title\": \"Nhà Trai\", \"mapUrl\": \"\", \"address\": \"Tư gia Nhà Trai\"}, {\"area\": \"Quảng Bị, Chương Mỹ, Hà Nội\", \"icon\": \"💒\", \"time\": \"11:00 - 14:00\", \"image\": \"images/download_1_bq8fyl.jpg\", \"title\": \"Nhà Gái\", \"mapUrl\": \"\", \"address\": \"Tư gia Nhà Gái\"}], \"wishes\": {\"coverImage\": \"images/ef1b6b49-facd-486a-82db-9fa953cbecfd.webp\"}, \"gallery\": {\"title\": \"\", \"portrait\": [{\"src\": \"images/download_u9sseh.jpg\"}, {\"src\": \"images/download_1_bq8fyl.jpg\"}, {\"src\": \"images/download_4_wiubgq.jpg\"}, {\"src\": \"images/download_2_ankule.jpg\"}], \"editorial\": [], \"landscape\": [], \"loveFlowey\": []}, \"features\": {\"lang\": \"vi\", \"showRSVP\": false, \"customLogo\": \"\", \"showWishes\": false, \"showNickname\": false, \"titlePreview\": \"\", \"showInvitedBy\": false, \"showRSVPField\": false, \"partnerWeddingId\": \"\", \"requireAttending\": false, \"requireInvitedBy\": false, \"wishesFirstInForm\": false, \"requireNoOfAttendee\": false}, \"playlist\": [{\"src\": \"media/vay-cuoi.mp3\", \"title\": \"Lễ đường\", \"artist\": \"\"}], \"thankyou\": {\"title\": \"\", \"coverImage\": \"images/download_2_ankule.jpg\", \"description\": \"\"}, \"countdown\": {\"coverImage\": \"\", \"showSeconds\": true, \"useFirstDate\": true}, \"groomsmen\": [], \"bridesmaids\": [], \"dressColors\": [], \"bankAccounts\": [{\"qr\": \"images/9f74ef9e-6625-488b-a3fb-5f98abf8f2c9.webp\", \"bankName\": \"Vietcombank\", \"accountHolder\": \"VU KHANH\", \"accountNumber\": \"1234567890\"}, {\"qr\": \"images/5af401dd-f7eb-4be4-8f35-681263087a9f.webp\", \"bankName\": \"Vietcombank\", \"accountHolder\": \"NGUYEN HUE\", \"accountNumber\": \"9876543210\"}]}}]\n"])</script>
+  <script>self.__next_f.push([1, "5:[\"$\", \"$L10\", null, {\"initialData\": {\"id\": \"dc62406c-3f00-4261-b053-d2599e3b4eca\", \"name\": \"Vũ Khánh & Nguyễn Huế Wedding\", \"slug\": \"khanh-hue\", \"version\": 2, \"hero\": {\"city\": \"Hà Nội, Việt Nam\", \"date\": \"2026-11-29\", \"date2\": \"\", \"image\": \"images/1.jpg\", \"title\": \"LỄ THÀNH HÔN\", \"lunarDate\": \"\", \"metaImage\": \"\", \"nameLayout\": \"two-lines\"}, \"page\": {\"order\": [\"hero\", \"couple\", \"story\", \"location\", \"timeline\", \"gift\", \"gallery\", \"countdown\", \"thankyou\"]}, \"side\": \"groom\", \"story\": {\"image\": \"images/5.jpg\", \"content\": [{\"desc\": \"Giữa biển người xa lạ năm ấy, ánh mắt em là điều duy nhất khiến thời gian trong anh ngừng lại. Nụ cười nhẹ nhàng của em như vạt nắng đầu mùa, sưởi ấm và thắp sáng cả khoảng trời thanh xuân chông chênh của anh.\", \"title\": \"Lần Đầu Gặp Gỡ\"}, {\"desc\": \"\", \"title\": \"Lời Tỏ Tình\"}, {\"desc\": \"\", \"title\": \"Lời Cầu Hôn\"}]}, \"theme\": \"pink02\", \"video\": {\"url\": \"\", \"desc\": \"\", \"title\": \"\"}, \"couple\": {\"groom\": {\"bio\": \"\", \"name\": \"Vũ Khánh\", \"rank\": \"\", \"image\": \"images/6.webp\", \"father\": \"Vũ Văn Khang \", \"mother\": \"Phạm Thị Tính\", \"address\": \"thôn Cát Chử, xã Cát Thành, tỉnh Ninh bình\", \"shortName\": \"\"}, \"bride\": {\"bio\": \"\", \"name\": \"Nguyễn Huế\", \"rank\": \"\", \"image\": \"images/7.webp\", \"father\": \"Nguyễn Văn Huy \", \"mother\": \"Nguyễn Thị Sáu\", \"address\": \"thôn Duyên Ứng, xãQuảng Bị, thành phố Hà Nội\", \"shortName\": \"\"}, \"title\": \"Đôi Nét Về Chúng Tôi\"}, \"events\": [{\"icon\": \"📷\", \"time\": \"9:00\", \"title\": \"Đón khách\", \"location\": \"\", \"description\": \"\"}, {\"icon\": \"🥂\", \"time\": \"11:00\", \"title\": \"Khai tiệc\", \"location\": \"\", \"description\": \"\"}], \"venues\": [{\"area\": \"thôn Cát Chử, xã Cát Thành, tỉnh Ninh bình\", \"icon\": \"🏠\", \"time\": \"9:00 - 11:30\", \"image\": \"images/8.jpg\", \"title\": \"Nhà Trai\", \"mapUrl\": \"\", \"address\": \"Tư gia Nhà Trai\"}, {\"area\": \"thôn Duyên Ứng, xãQuảng Bị, thành phố Hà Nội\", \"icon\": \"💒\", \"time\": \"11:00 - 14:00\", \"image\": \"images/1.jpg\", \"title\": \"Nhà Gái\", \"mapUrl\": \"\", \"address\": \"Tư gia Nhà Gái\"}], \"wishes\": {\"coverImage\": \"images/6.webp\"}, \"gallery\": {\"title\": \"\", \"portrait\": [{\"src\": \"images/8.jpg\"}, {\"src\": \"images/1.jpg\"}, {\"src\": \"images/5.jpg\"}, {\"src\": \"images/9.jpg\"}], \"editorial\": [], \"landscape\": [], \"loveFlowey\": []}, \"features\": {\"lang\": \"vi\", \"showRSVP\": false, \"customLogo\": \"\", \"showWishes\": false, \"showNickname\": false, \"titlePreview\": \"\", \"showInvitedBy\": false, \"showRSVPField\": false, \"partnerWeddingId\": \"\", \"requireAttending\": false, \"requireInvitedBy\": false, \"wishesFirstInForm\": false, \"requireNoOfAttendee\": false}, \"playlist\": [{\"src\": \"media/vay-cuoi.mp3\", \"title\": \"Lễ đường\", \"artist\": \"\"}], \"thankyou\": {\"title\": \"\", \"coverImage\": \"images/9.jpg\", \"description\": \"\"}, \"countdown\": {\"coverImage\": \"\", \"showSeconds\": true, \"useFirstDate\": true}, \"groomsmen\": [], \"bridesmaids\": [], \"dressColors\": [], \"bankAccounts\": [{\"qr\": \"images/3.webp\", \"bankName\": \"MB Bank\", \"accountHolder\": \"VU VAN KHANH\", \"accountNumber\": \"7100124112001\"}, {\"qr\": \"images/4.webp\", \"bankName\": \"TP Bank\", \"accountHolder\": \"NGUYEN THI HUE\", \"accountNumber\": \"81342238888\"}]}}]\n"])</script>
 "])</script>
-  <script>self.__next_f.push([1, "9:{\"metadata\":[[\"$\",\"title\",\"0\",{\"children\":\"Vũ Khánh \u0026 Nguyễn Huế\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"2\",{\"name\":\"generator\",\"content\":\"v0.app\"}],[\"$\",\"meta\",\"3\",{\"name\":\"og:image\",\"content\":\"images/download_1_bq8fyl.jpg\"}],[\"$\",\"meta\",\"4\",{\"name\":\"og:image:secure_url\",\"content\":\"images/download_1_bq8fyl.jpg\"}],[\"$\",\"meta\",\"5\",{\"name\":\"og:image:type\",\"content\":\"image/png\"}],[\"$\",\"meta\",\"6\",{\"name\":\"og:image:width\",\"content\":\"1200\"}],[\"$\",\"meta\",\"7\",{\"name\":\"og:image:height\",\"content\":\"630\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:title\",\"content\":\"Vũ Khánh \u0026 Nguyễn Huế\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:url\",\"content\":\"https://suns-wedding.vercel.app/hang-huy?guest=b%E1%BA%A1n%20Minh%20Hi%E1%BA%BFu\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:locale\",\"content\":\"vi_VN\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:image\",\"content\":\"images/download_1_bq8fyl.jpg\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"Vũ Khánh \u0026 Nguyễn Huế\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"17\",{\"name\":\"twitter:image\",\"content\":\"images/download_1_bq8fyl.jpg\"}],[\"$\",\"link\",\"18\",{\"rel\":\"icon\",\"href\":\"/icon-light-32x32.png\",\"media\":\"(prefers-color-scheme: light)\"}],[\"$\",\"link\",\"19\",{\"rel\":\"icon\",\"href\":\"/icon-light-32x32.png\",\"media\":\"(prefers-color-scheme: dark)\"}],[\"$\",\"link\",\"20\",{\"rel\":\"icon\",\"href\":\"/icon-light-32x32.png\",\"type\":\"image/svg+xml\"}],[\"$\",\"link\",\"21\",{\"rel\":\"apple-touch-icon\",\"href\":\"/icon-light-32x32.png\"}],[\"$\",\"$L11\",\"22\",{}]],\"error\":null,\"digest\":\"$undefined\"}\n"])</script>
+  <script>self.__next_f.push([1, "9:{\"metadata\":[[\"$\",\"title\",\"0\",{\"children\":\"Vũ Khánh \u0026 Nguyễn Huế\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"2\",{\"name\":\"generator\",\"content\":\"v0.app\"}],[\"$\",\"meta\",\"3\",{\"name\":\"og:image\",\"content\":\"images/1.jpg\"}],[\"$\",\"meta\",\"4\",{\"name\":\"og:image:secure_url\",\"content\":\"images/1.jpg\"}],[\"$\",\"meta\",\"5\",{\"name\":\"og:image:type\",\"content\":\"image/png\"}],[\"$\",\"meta\",\"6\",{\"name\":\"og:image:width\",\"content\":\"1200\"}],[\"$\",\"meta\",\"7\",{\"name\":\"og:image:height\",\"content\":\"630\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:title\",\"content\":\"Vũ Khánh \u0026 Nguyễn Huế\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:url\",\"content\":\"https://suns-wedding.vercel.app/hang-huy?guest=b%E1%BA%A1n%20Minh%20Hi%E1%BA%BFu\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:locale\",\"content\":\"vi_VN\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:image\",\"content\":\"images/1.jpg\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:title\",\"content\":\"Vũ Khánh \u0026 Nguyễn Huế\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:description\",\"content\":\"Trân trọng kính mời bạn Minh Hiếu đến tham dự lễ cưới\"}],[\"$\",\"meta\",\"17\",{\"name\":\"twitter:image\",\"content\":\"images/1.jpg\"}],[\"$\",\"link\",\"18\",{\"rel\":\"icon\",\"href\":\"/images/11.png\",\"media\":\"(prefers-color-scheme: light)\"}],[\"$\",\"link\",\"19\",{\"rel\":\"icon\",\"href\":\"/images/11.png\",\"media\":\"(prefers-color-scheme: dark)\"}],[\"$\",\"link\",\"20\",{\"rel\":\"icon\",\"href\":\"/images/11.png\",\"type\":\"image/svg+xml\"}],[\"$\",\"link\",\"21\",{\"rel\":\"apple-touch-icon\",\"href\":\"/images/11.png\"}],[\"$\",\"$L11\",\"22\",{}]],\"error\":null,\"digest\":\"$undefined\"}\n"])</script>
   <script>self.__next_f.push([1, "e:\"$9:metadata\"\n"])</script>
   <script>
     (() => {
@@ -1236,26 +1313,25 @@
   </script>
   <script>
     (function() {
+      var events = ['touchend', 'click', 'pointerup', 'keydown'];
+      var started = false;
       function startMusic() {
-        var audios = document.querySelectorAll('audio');
-        audios.forEach(function(audio) {
-          audio.volume = 0.7;
-          audio.loop = true;
-          var p = audio.play();
-          if (p && p.catch) {
-            p.catch(function() {});
-          }
-        });
+        if (started) return;
+        var audio = document.querySelector('audio');
+        if (!audio) return;
+        audio.volume = 0.7;
+        audio.loop = true;
+        var p = audio.play();
+        var ok = function() {
+          started = true;
+          events.forEach(function(evt) { window.removeEventListener(evt, startMusic, true); });
+        };
+        if (p && p.then) p.then(ok).catch(function() {});
+        else if (!audio.paused) ok();
       }
-      if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        startMusic();
-      } else {
-        document.addEventListener('DOMContentLoaded', startMusic);
-      }
+      // iOS Safari chỉ cho phát nhạc sau một lần chạm thật; thử lại ở mỗi lần chạm cho tới khi phát được.
+      events.forEach(function(evt) { window.addEventListener(evt, startMusic, true); });
       window.addEventListener('load', startMusic);
-      ['click', 'touchstart', 'touchend', 'pointerdown', 'scroll'].forEach(function(evt) {
-        window.addEventListener(evt, startMusic, { once: true, passive: true });
-      });
     })();
   </script>
 
@@ -1310,35 +1386,293 @@
 
       const particles = [];
       const rockets = [];
+      const flashes = [];
       const colors = [
         '#d4af37', '#ffd700', '#f6c0d0', '#ff6b8b', '#ff8fa3',
         '#fff4cc', '#ffffff', '#e85a71', '#fdbb2d', '#b52d55'
       ];
+      const palettes = [
+        ['#ffd700', '#fff4cc', '#d4af37'],
+        ['#ff6b8b', '#f6c0d0', '#ffffff'],
+        ['#e85a71', '#ffd700', '#fff4cc'],
+        ['#b52d55', '#ff8fa3', '#fdbb2d'],
+        ['#ffffff', '#f6c0d0', '#d4af37']
+      ];
+      const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+      const rand = (a, b) => a + Math.random() * (b - a);
+
+      // Sprite phát sáng dựng sẵn cho từng màu — nhẹ hơn nhiều so với shadowBlur.
+      const glowCache = {};
+      function glow(color) {
+        if (glowCache[color]) return glowCache[color];
+        const s = 64;
+        const c = document.createElement('canvas');
+        c.width = c.height = s;
+        const g = c.getContext('2d');
+        const grad = g.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
+        grad.addColorStop(0, '#ffffff');
+        grad.addColorStop(0.18, color);
+        grad.addColorStop(0.45, color + '55');
+        grad.addColorStop(1, color + '00');
+        g.fillStyle = grad;
+        g.fillRect(0, 0, s, s);
+        return (glowCache[color] = c);
+      }
+
+      class Particle {
+        constructor(x, y, vx, vy, color, opts = {}) {
+          this.x = x;
+          this.y = y;
+          this.vx = vx;
+          this.vy = vy;
+          this.color = color;
+          this.life = 0;
+          this.maxLife = opts.life || rand(55, 85);
+          this.size = opts.size || rand(1.4, 2.4);
+          this.gravity = opts.gravity != null ? opts.gravity : 0.05;
+          this.drag = opts.drag || 0.975;
+          this.trailLen = opts.trail != null ? opts.trail : 5;
+          this.twinkle = !!opts.twinkle;
+          this.crackle = !!opts.crackle;
+          this.glitter = !!opts.glitter;
+          this.onDie = opts.onDie || null;
+          this.hidden = !!opts.hidden;
+          this.sparkleOut = !!opts.sparkleOut;
+          this.history = [];
+        }
+
+        update(f) {
+          this.history.push(this.x, this.y);
+          if (this.history.length > this.trailLen * 2) this.history.splice(0, 2);
+          const d = Math.pow(this.drag, f);
+          this.vx *= d;
+          this.vy *= d;
+          this.vy += this.gravity * f;
+          this.x += this.vx * f;
+          this.y += this.vy * f;
+          this.life += f;
+          // Đuôi kim tuyến rơi nhẹ phía sau hạt.
+          if (this.glitter && Math.random() < 0.25 * f && particles.length < maxParticles) {
+            particles.push(new Particle(this.x, this.y, rand(-0.3, 0.3), rand(0, 0.4), '#fff4cc',
+              { life: rand(14, 26), size: rand(0.6, 1.1), gravity: 0.03, drag: 0.92, trail: 0, twinkle: true }));
+          }
+          if (this.life >= this.maxLife) {
+            if (this.crackle) crackleAt(this.x, this.y);
+            if (this.onDie) this.onDie(this.x, this.y);
+            return false;
+          }
+          return true;
+        }
+
+        draw() {
+          if (this.hidden) {
+            ctx.globalAlpha = 0.5;
+            ctx.drawImage(glow(this.color), this.x - 3, this.y - 3, 6, 6);
+            return;
+          }
+          const t = this.life / this.maxLife;
+          let alpha = t < 0.7 ? 1 : 1 - (t - 0.7) / 0.3;
+          if (this.twinkle && Math.random() < 0.35) alpha *= 0.25;
+          if (this.sparkleOut && t > 0.55) {
+            // Nhấp nháy mạnh dần rồi tắt hẳn.
+            alpha = (1 - (t - 0.55) / 0.45) * (Math.random() < 0.45 ? 0.15 : 1);
+          }
+          if (alpha <= 0) return;
+
+          const h = this.history;
+          // Lúc nhấp nháy tan biến thì bỏ đuôi, chỉ còn đốm sáng.
+          if (h.length >= 4 && !(this.sparkleOut && t > 0.55)) {
+            ctx.globalAlpha = alpha * 0.55;
+            ctx.strokeStyle = this.color;
+            ctx.lineWidth = this.size * 0.9;
+            ctx.beginPath();
+            ctx.moveTo(h[0], h[1]);
+            for (let i = 2; i < h.length; i += 2) ctx.lineTo(h[i], h[i + 1]);
+            ctx.lineTo(this.x, this.y);
+            ctx.stroke();
+          }
+
+          const r = this.size * 4 * (1 - t * 0.4);
+          ctx.globalAlpha = alpha;
+          ctx.drawImage(glow(this.color), this.x - r, this.y - r, r * 2, r * 2);
+        }
+      }
+
+      function crackleAt(x, y) {
+        const n = 5 + Math.floor(Math.random() * 4);
+        for (let i = 0; i < n && particles.length < maxParticles; i++) {
+          const a = Math.random() * Math.PI * 2;
+          const s = rand(0.8, 2);
+          particles.push(new Particle(x, y, Math.cos(a) * s, Math.sin(a) * s, '#fff4cc',
+            { life: rand(8, 16), size: 0.9, gravity: 0.02, drag: 0.9, trail: 2 }));
+        }
+      }
+
+      // Các kiểu pháo: mỗi kiểu một nhịp điệu riêng để màn trình diễn không lặp lại.
+      const shells = {
+        peony(x, y, pal) {
+          const n = 70;
+          for (let i = 0; i < n; i++) {
+            const a = (Math.PI * 2 * i) / n + rand(-0.05, 0.05);
+            const s = rand(3.2, 4.4);
+            particles.push(new Particle(x, y, Math.cos(a) * s, Math.sin(a) * s, pick(pal),
+              { twinkle: Math.random() < 0.4, trail: 4 }));
+          }
+        },
+        chrysanthemum(x, y, pal) {
+          const n = 80;
+          for (let i = 0; i < n; i++) {
+            const a = (Math.PI * 2 * i) / n;
+            const s = rand(3.6, 4.6);
+            particles.push(new Particle(x, y, Math.cos(a) * s, Math.sin(a) * s, pal[0],
+              { trail: 10, glitter: Math.random() < 0.3, crackle: Math.random() < 0.35, life: rand(60, 80) }));
+          }
+        },
+        willow(x, y) {
+          const n = 60;
+          for (let i = 0; i < n; i++) {
+            const a = Math.random() * Math.PI * 2;
+            const s = rand(1.5, 3.6);
+            particles.push(new Particle(x, y, Math.cos(a) * s, Math.sin(a) * s, i % 3 ? '#d4af37' : '#ffd700',
+              { life: rand(110, 150), drag: 0.955, gravity: 0.035, trail: 14, size: rand(1.1, 1.7), glitter: Math.random() < 0.35 }));
+          }
+        },
+        ring(x, y, pal) {
+          const n = 56;
+          const tilt = rand(0.35, 0.75);
+          const rot = rand(0, Math.PI);
+          for (let i = 0; i < n; i++) {
+            const a = (Math.PI * 2 * i) / n;
+            const px = Math.cos(a) * 4, py = Math.sin(a) * 4 * tilt;
+            const vx = px * Math.cos(rot) - py * Math.sin(rot);
+            const vy = px * Math.sin(rot) + py * Math.cos(rot);
+            particles.push(new Particle(x, y, vx, vy, pal[i % 2 ? 0 : 1], { trail: 6, twinkle: true }));
+          }
+          // Nhụy sáng ở giữa.
+          for (let i = 0; i < 18; i++) {
+            const a = Math.random() * Math.PI * 2, s = rand(0.5, 1.6);
+            particles.push(new Particle(x, y, Math.cos(a) * s, Math.sin(a) * s, pal[2], { life: rand(40, 60), trail: 2 }));
+          }
+        },
+        heart(x, y, pal) {
+          const n = 64;
+          const scale = rand(0.22, 0.27);
+          for (let i = 0; i < n; i++) {
+            const t = (Math.PI * 2 * i) / n;
+            const hx = 16 * Math.pow(Math.sin(t), 3);
+            const hy = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+            particles.push(new Particle(x, y, hx * scale, hy * scale, i % 4 ? pal[0] : '#ffffff',
+              { drag: 0.955, gravity: 0.022, life: rand(80, 100), trail: 5, twinkle: Math.random() < 0.3, size: rand(1.6, 2.4) }));
+          }
+          // Tim nhỏ lồng bên trong.
+          for (let i = 0; i < n / 2; i++) {
+            const t = (Math.PI * 4 * i) / n;
+            const hx = 16 * Math.pow(Math.sin(t), 3);
+            const hy = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+            particles.push(new Particle(x, y, hx * scale * 0.5, hy * scale * 0.5, pal[1],
+              { drag: 0.955, gravity: 0.022, life: rand(70, 90), trail: 3, size: 1.4 }));
+          }
+        }
+      };
+      // Quả pháo lớn: ba tầng nổ, phủ gần kín màn hình.
+      shells.grand = function(x, y) {
+        // Pháo "hoa con nhiều tầng": vỏ chính bắn ra nhiều viên nhỏ theo vòng tròn,
+        // mỗi viên nở thành một bông — lõi nhiều màu, vòng ngoài vàng champagne rủ đuôi.
+        const R = Math.min(width * 0.5, height * 0.48);
+        const q = width < 640 ? 0.65 : 1;
+        const core = ['#3ddc84', '#2ee6c8', '#7dffb0', '#ff4f8b', '#d81b60', '#9b5bff', '#ffffff'];
+        const gold = ['#f3c58a', '#e8a86a', '#fff0d0', '#d99a5b'];
+
+        // Viên mang bay ra đúng bán kính r rồi nở (quãng đường ≈ v·(1-d^L)/(1-d)).
+        const carrier = (angle, r, life, bloom) => {
+          const drag = 0.93;
+          const v = r * (1 - drag) / (1 - Math.pow(drag, life));
+          particles.push(new Particle(x, y, Math.cos(angle) * v, Math.sin(angle) * v, '#fff0d0',
+            { life, drag, gravity: 0, trail: 0, hidden: true, onDie: bloom }));
+        };
+
+        const puff = (px, py, n, speed, colorsOf, opts) => {
+          for (let i = 0; i < n; i++) {
+            const a = (Math.PI * 2 * i) / n + rand(-0.15, 0.15);
+            const sp = speed * rand(0.7, 1.05);
+            particles.push(new Particle(px, py, Math.cos(a) * sp, Math.sin(a) * sp, pick(colorsOf), opts()));
+          }
+        };
+
+        // Lõi giữa nhiều màu, dạng cây cọ có đuôi.
+        const nCore = Math.round(22 * q);
+        for (let i = 0; i < nCore; i++) {
+          const a = (Math.PI * 2 * i) / nCore + rand(-0.1, 0.1);
+          const c = [pick(core)];
+          carrier(a, R * rand(0.12, 0.3), 18, (px, py) => puff(px, py, Math.round(30 * q), 2.1 * (R / 300), c,
+            () => ({ sparkleOut: true, life: rand(140, 180), drag: 0.96, gravity: 0.012, trail: 10, size: rand(1.3, 1.9), twinkle: Math.random() < 0.3 })));
+        }
+
+        // Bốn vòng hoa con: hồng, ngọc, tím, ngoài cùng vàng champagne, vòng ngoài nở muộn hơn, rủ đuôi dài như liễu.
+        const ringColors = [
+          ['#ff4f8b', '#ff8fb8', '#ffd1e3'],
+          ['#2ee6c8', '#3ddc84', '#a8ffe0'],
+          ['#9b5bff', '#5b8bff', '#d7c2ff'],
+          gold
+        ];
+        [[0.45, 18, 22], [0.64, 24, 27], [0.82, 30, 32], [1, 38, 37]].forEach(([rr, cnt, life], ri) => {
+          const n = Math.round(cnt * q);
+          const off = Math.random() * Math.PI;
+          for (let i = 0; i < n; i++) {
+            const a = off + (Math.PI * 2 * i) / n + rand(-0.06, 0.06);
+            carrier(a, R * rr * rand(0.93, 1.05), life, (px, py) => puff(px, py, Math.round(26 * q), 1.9 * (R / 300), ringColors[ri],
+              () => ({ sparkleOut: true, life: rand(140, 180), drag: 0.955, gravity: 0.012, trail: 16, size: rand(1.1, 1.6) })));
+          }
+        });
+
+        // Lõi trắng sáng ngay tâm.
+        for (let i = 0; i < 40; i++) {
+          const a = Math.random() * Math.PI * 2, sp = rand(0.4, 1.8);
+          particles.push(new Particle(x, y, Math.cos(a) * sp, Math.sin(a) * sp, '#ffffff',
+            { life: rand(90, 120), trail: 3, twinkle: true }));
+        }
+        grandUntil = Date.now() + 3000;
+      };
+      let grandUntil = 0;
+      let nextGrand = Date.now() + 1250; // khởi động sau khi mở cửa 0,25s, nên quả to bay lên ở giây thứ 1,5
+      let grandLeft = 0; // đã tắt quả pháo hoa lớn
+      let dim = 0;
+      const grandBusy = () => rockets.some(r => r.type === 'grand') || Date.now() < grandUntil + 2500;
+
+      const shellTypes = ['peony', 'chrysanthemum', 'willow', 'ring', 'peony', 'chrysanthemum'];
 
       class Rocket {
         constructor(x, targetY, isHeart = false) {
           this.x = x || (width * 0.2 + Math.random() * width * 0.6);
-          this.y = height;
+          this.y = height + 10;
           this.targetY = targetY || (height * 0.15 + Math.random() * height * 0.35);
-          this.speed = 9 + Math.random() * 4;
-          this.angle = -Math.PI / 2 + (Math.random() * 0.2 - 0.1);
-          this.vx = Math.cos(this.angle) * this.speed;
-          this.vy = Math.sin(this.angle) * this.speed;
-          this.color = colors[Math.floor(Math.random() * colors.length)];
-          this.isHeart = isHeart;
-          this.trail = [];
+          const dist = this.y - this.targetY;
+          // Vận tốc vừa đủ để đạt độ cao mục tiêu đúng lúc chậm lại.
+          this.vy = -Math.sqrt(2 * 0.06 * dist) * rand(1.0, 1.05);
+          this.vx = rand(-0.6, 0.6);
+          this.palette = pick(palettes);
+          this.type = isHeart === 'grand' ? 'grand' : isHeart ? 'heart' : pick(shellTypes);
+          this.wobble = Math.random() * 10;
+          this.history = [];
+          if (this.type === 'grand') this.vx = 0;
         }
 
-        update() {
-          this.trail.push({ x: this.x, y: this.y, alpha: 1 });
-          if (this.trail.length > 7) this.trail.shift();
-          this.trail.forEach(t => t.alpha -= 0.12);
-
-          this.x += this.vx;
-          this.y += this.vy;
-          this.vy += 0.08; // trọng lực nhẹ khi bay lên
-
-          if (this.vy >= -1.2 || this.y <= this.targetY) {
+        update(f) {
+          this.wobble += 0.3 * f;
+          if (this.type === 'grand') {
+            this.history.push(this.x, this.y);
+            if (this.history.length > 150) this.history.splice(0, 2);
+          }
+          const wob = this.type === 'grand' ? 0 : Math.sin(this.wobble) * 0.25;
+          this.x += (this.vx + wob) * f;
+          this.y += this.vy * f;
+          this.vy += 0.06 * f;
+          // Tàn lửa rơi theo đuôi rocket.
+          if (this.type !== 'grand' && Math.random() < 0.8 && particles.length < maxParticles) {
+            particles.push(new Particle(this.x + rand(-1, 1), this.y + 4, rand(-0.4, 0.4), rand(0.5, 1.5), '#ffd9a0',
+              { life: rand(14, 24), size: rand(0.7, 1.2), gravity: 0.04, drag: 0.94, trail: 0, twinkle: true }));
+          }
+          if (this.vy >= -0.8 || this.y <= this.targetY) {
             this.explode();
             return false;
           }
@@ -1346,114 +1680,73 @@
         }
 
         draw() {
-          this.trail.forEach(t => {
-            ctx.beginPath();
-            ctx.arc(t.x, t.y, 2, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 230, 160, ${t.alpha})`;
-            ctx.fill();
-          });
-
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
-          ctx.fillStyle = this.color;
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = this.color;
-          ctx.fill();
-          ctx.shadowBlur = 0;
+          ctx.globalAlpha = 1;
+          const h = this.history;
+          if (h.length >= 4) {
+            // Vệt sao băng: thẳng, thon dần về đuôi, lõi trắng sáng ở đầu.
+            const n = h.length / 2;
+            const streak = (frac, w, c0, c1, alpha) => {
+              const i = Math.floor((n - 1) * (1 - frac)) * 2;
+              const g = ctx.createLinearGradient(h[i], h[i + 1], this.x, this.y);
+              g.addColorStop(0, c0);
+              g.addColorStop(1, c1);
+              ctx.globalAlpha = alpha;
+              ctx.strokeStyle = g;
+              ctx.lineWidth = w;
+              ctx.beginPath();
+              ctx.moveTo(h[i], h[i + 1]);
+              ctx.lineTo(this.x, this.y);
+              ctx.stroke();
+            };
+            // Mảnh như sao băng thật: đuôi xanh lam mờ, thân hồng, đầu trắng.
+            streak(1, 1.4, 'rgba(120,170,255,0)', 'rgba(170,200,255,0.9)', 0.8);
+            streak(0.55, 2, 'rgba(255,140,180,0)', 'rgba(255,190,215,1)', 0.9);
+            streak(0.25, 1.4, 'rgba(255,255,255,0)', 'rgba(255,255,255,1)', 1);
+            streak(0.25, 5, 'rgba(255,200,225,0)', 'rgba(255,200,225,0.35)', 0.6);
+            ctx.globalAlpha = 1;
+          }
+          const r = this.type === 'grand' ? 4 : 7;
+          ctx.drawImage(glow('#fff1c1'), this.x - r, this.y - r, r * 2, r * 2);
         }
 
         explode() {
-          const count = this.isHeart ? 48 : (45 + Math.floor(Math.random() * 25));
-          const baseColor = this.color;
-
-          if (this.isHeart) {
-            // Nổ hình trái tim
-            for (let i = 0; i < count; i++) {
-              const t = (Math.PI * 2 * i) / count;
-              // Công thức hình trái tim toán học
-              const hx = 16 * Math.pow(Math.sin(t), 3);
-              const hy = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
-              const speed = 0.22 + Math.random() * 0.04;
-              particles.push(new Particle(this.x, this.y, hx * speed, hy * speed, baseColor, true));
-            }
-          } else {
-            // Nổ chùm hoa xoè tròn lấp lánh
-            for (let i = 0; i < count; i++) {
-              const angle = Math.random() * Math.PI * 2;
-              const speed = 1.8 + Math.random() * 4.2;
-              const vx = Math.cos(angle) * speed;
-              const vy = Math.sin(angle) * speed;
-              particles.push(new Particle(this.x, this.y, vx, vy, baseColor, false));
-            }
-          }
-        }
-      }
-
-      class Particle {
-        constructor(x, y, vx, vy, color, isHeart = false) {
-          this.x = x;
-          this.y = y;
-          this.vx = vx;
-          this.vy = vy;
-          this.color = Math.random() > 0.35 ? color : colors[Math.floor(Math.random() * colors.length)];
-          this.alpha = 1;
-          this.decay = isHeart ? (0.012 + Math.random() * 0.01) : (0.015 + Math.random() * 0.016);
-          this.size = isHeart ? (2.2 + Math.random() * 1.5) : (1.8 + Math.random() * 2.2);
-          this.gravity = 0.065;
-          this.friction = 0.965;
-          this.flicker = Math.random() > 0.3;
-        }
-
-        update() {
-          this.vx *= this.friction;
-          this.vy *= this.friction;
-          this.vy += this.gravity;
-          this.x += this.vx;
-          this.y += this.vy;
-          this.alpha -= this.decay;
-          return this.alpha > 0;
-        }
-
-        draw() {
-          ctx.save();
-          ctx.globalAlpha = Math.max(0, this.alpha * (this.flicker && Math.random() > 0.4 ? 0.7 : 1));
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = this.color;
-          ctx.shadowBlur = 6;
-          ctx.shadowColor = this.color;
-          ctx.fill();
-          ctx.restore();
+          shells[this.type](this.x, this.y, this.palette);
+          const big = this.type === 'grand';
+          flashes.push({ x: this.x, y: this.y, life: 0, color: big ? '#fff4cc' : this.palette[0], big });
         }
       }
 
       // Nổ pháo hoa mini tại vị trí chạm/click
       function burstAt(x, y) {
-        const count = 48 + Math.floor(Math.random() * 28);
-        const burstColor = colors[Math.floor(Math.random() * colors.length)];
-        for (let i = 0; i < count; i++) {
-          const angle = Math.random() * Math.PI * 2;
-          const speed = 1.2 + Math.random() * 3.6;
-          particles.push(new Particle(x, y, Math.cos(angle) * speed, Math.sin(angle) * speed, burstColor, Math.random() > 0.7));
+        const pal = pick(palettes);
+        const n = 46;
+        for (let i = 0; i < n; i++) {
+          const a = (Math.PI * 2 * i) / n + rand(-0.1, 0.1);
+          const s = rand(1.8, 3.2);
+          particles.push(new Particle(x, y, Math.cos(a) * s, Math.sin(a) * s, pick(pal),
+            { life: rand(40, 60), trail: 5, twinkle: Math.random() < 0.4, crackle: Math.random() < 0.15 }));
         }
+        flashes.push({ x, y, life: 0, color: pal[0] });
       }
 
       window.addEventListener('pointerdown', function(e) {
         // Không làm người dùng mất tập trung khi thao tác với biểu mẫu hoặc liên kết.
         if (e.target && e.target.closest('button, input, textarea, select, a, label')) return;
+        if (grandBusy()) return;
         burstAt(e.clientX, e.clientY);
       }, { passive: true });
 
       // Vòng lặp bắn pháo hoa tự động dày hơn cho không khí lễ hội.
       let lastAutoLaunch = Date.now();
       let autoInterval = reducedMotion ? 4500 : 1200;
-      const maxParticles = width < 640 ? 520 : 760;
+      const maxParticles = width < 640 ? 3000 : 6000;
 
       // Chuỗi pháo chào mừng lúc mới vào trang
       function launchWelcomeFireworks() {
         const wTimeouts = reducedMotion ? [300] : [100, 350, 650, 950, 1250, 1550, 1900, 2250];
         wTimeouts.forEach((delay, idx) => {
           setTimeout(() => {
+            if (grandBusy()) return;
             const posX = width * (0.12 + Math.random() * 0.76);
             const isHeart = idx % 2 === 1;
             rockets.push(new Rocket(posX, height * (0.18 + Math.random() * 0.25), isHeart));
@@ -1463,59 +1756,99 @@
 
       setTimeout(launchWelcomeFireworks, 600);
 
-      function loop() {
+      let lastFrame = performance.now();
+      function loop(now) {
         requestAnimationFrame(loop);
+        now = now || performance.now();
+        const f = Math.min((now - lastFrame) / 16.67, 3);
+        lastFrame = now;
         if (document.hidden) return;
 
+        ctx.globalCompositeOperation = 'source-over';
         ctx.clearRect(0, 0, width, height);
 
+        // Làm tối nhẹ màn hình 1s khi quả pháo lớn nổ để tôn pháo hoa.
+        const grandFlying = rockets.some(r => r.type === 'grand');
+        // Tối từ lúc dải sáng bắt đầu bay lên cho tới 1s sau khi nổ.
+        const grandActive = grandFlying || Date.now() < grandUntil;
+        dim += ((grandActive ? 0.55 : 0) - dim) * (grandActive ? 0.2 : 0.1) * f;
+        if (dim > 0.005) {
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = `rgba(6, 8, 22, ${dim})`;
+          ctx.fillRect(0, 0, width, height);
+        }
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.lineCap = 'round';
+
         // Tự động bắn pháo hoa định kỳ
-        const now = Date.now();
-        if (now - lastAutoLaunch > autoInterval) {
-          lastAutoLaunch = now;
-          autoInterval = reducedMotion ? 4500 : 900 + Math.random() * 700;
-          const launchCount = reducedMotion ? 1 : (Math.random() > 0.55 ? 3 : 2);
+        const t = Date.now();
+        if (!reducedMotion && grandLeft > 0 && t > nextGrand) {
+          grandLeft--;
+          nextGrand = t + 3000;
+          lastAutoLaunch = t;
+          // Dọn sân: bỏ rocket đang bay và cho hạt còn lại tắt nhanh để chỉ còn quả to.
+          rockets.length = 0;
+          particles.forEach(p => { p.life = Math.max(p.life, p.maxLife - 12); p.crackle = false; p.glitter = false; });
+          rockets.push(new Rocket(width * 0.5, height * 0.48, 'grand'));
+        }
+        if (!grandBusy() && t - lastAutoLaunch > autoInterval) {
+          lastAutoLaunch = t;
+          autoInterval = reducedMotion ? 4500 : 1700 + Math.random() * 1300;
+          const launchCount = reducedMotion ? 1 : (Math.random() > 0.85 ? 2 : 1);
           for (let i = 0; i < launchCount; i++) {
             const posX = width * (0.1 + Math.random() * 0.8);
-            const isHeart = Math.random() > 0.58;
-            rockets.push(new Rocket(posX, height * (0.12 + Math.random() * 0.38), isHeart));
+            const isHeart = Math.random() > 0.7;
+            rockets.push(new Rocket(posX, height * (0.12 + Math.random() * 0.33), isHeart));
           }
         }
 
-        // Cập nhật và vẽ rockets
+        // Chớp sáng khi nổ
+        for (let i = flashes.length - 1; i >= 0; i--) {
+          const fl = flashes[i];
+          fl.life += f;
+          const k = fl.life / (fl.big ? 30 : 10);
+          if (k >= 1) { flashes.splice(i, 1); continue; }
+          const r = fl.big ? 120 + k * Math.max(width, height) * 0.6 : 30 + k * 50;
+          ctx.globalAlpha = (1 - k) * (fl.big ? 0.9 : 0.6);
+          ctx.drawImage(glow(fl.color), fl.x - r, fl.y - r, r * 2, r * 2);
+        }
+
         for (let i = rockets.length - 1; i >= 0; i--) {
-          if (!rockets[i].update()) {
-            rockets.splice(i, 1);
-          } else {
-            rockets[i].draw();
-          }
+          if (!rockets[i].update(f)) rockets.splice(i, 1);
+          else rockets[i].draw();
         }
 
-        // Cập nhật và vẽ particles (giới hạn tối đa để mượt 60fps)
+        // Giới hạn tối đa để giữ mượt 60fps
         if (particles.length > maxParticles) {
           particles.splice(0, particles.length - maxParticles);
         }
 
         for (let i = particles.length - 1; i >= 0; i--) {
-          if (!particles[i].update()) {
-            particles.splice(i, 1);
-          } else {
-            particles[i].draw();
-          }
+          if (!particles[i].update(f)) particles.splice(i, 1);
+          else particles[i].draw();
         }
+        ctx.globalAlpha = 1;
       }
 
-      loop();
+      requestAnimationFrame(loop);
       }
 
       // Các bundle của trang dùng async; chờ load thêm một nhịp để canvas luôn nằm
       // ngoài cây DOM do React quản lý và không bị mất trong quá trình hydrate.
-      if (document.readyState === 'complete') {
-        setTimeout(initWeddingFireworks, 250);
-      } else {
-        window.addEventListener('load', function() {
+      // Chỉ bắn pháo khi khách đã chạm mở cửa thiệp.
+      function startWhenDoorsOpen() {
+        if (window.__weddingDoorsOpened || !document.getElementById('wedding-door-replay')) {
           setTimeout(initWeddingFireworks, 250);
-        }, { once: true });
+        } else {
+          window.addEventListener('wedding-doors-opened', function() {
+            setTimeout(initWeddingFireworks, 250);
+          }, { once: true });
+        }
+      }
+      if (document.readyState === 'complete') {
+        startWhenDoorsOpen();
+      } else {
+        window.addEventListener('load', startWhenDoorsOpen, { once: true });
       }
     })();
   </script>

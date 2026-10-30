@@ -3620,14 +3620,14 @@
         eh = a(67081);
       let ep = [
         {
-          bankName: "Vietcombank",
-          accountNumber: "1234567890123",
+          bankName: "TP Bank",
+          accountNumber: "7100124112001123",
           accountHolder: "NGUYEN ANH TUAN NGOC",
           qr: "/qr-groom.png",
         },
         {
           bankName: "Techcombank",
-          accountNumber: "9876543210987",
+          accountNumber: "81342238888987",
           accountHolder: "NGUYEN THI THUY TRINH",
           qr: "/qr-bride.png",
         },
@@ -4988,13 +4988,16 @@
                 try {
                   ((e.volume = 0.7), await e.play(), m(!0));
                 } catch (e) {
+                  T.current = !1;
                   console.log("Autoplay failed");
                 }
-            };
+              else T.current = !1;
+            },
+              t = ["pointerup", "touchend", "click", "keydown"];
             return (
-              document.addEventListener("pointerdown", e),
+              t.forEach((a) => document.addEventListener(a, e, { passive: !0 })),
               () => {
-                document.removeEventListener("pointerdown", e);
+                t.forEach((a) => document.removeEventListener(a, e));
               }
             );
           }, []),
@@ -5716,8 +5719,8 @@
                       " flex items-center justify-center gap-2 text-[26px] text-accent",
                     ),
                     style: {
-                      marginTop: 10,
-                      marginBottom: 6,
+                      marginTop: 4,
+                      marginBottom: 2,
                       lineHeight: 1.2,
                     },
                     children: [
@@ -5746,17 +5749,13 @@
                   }),
               (0, n.jsxs)("div", {
                 className:
-                  "relative mx-auto mt-2 flex w-[92vw] md:w-[520px] flex-col items-center",
-                style: {
-                  width:
-                    "min(92vw,520px,calc(57dvh - 135px),calc(100% - 24px))",
-                },
+                  "cover-photo relative mx-auto mt-1 flex flex-col items-center",
                 children: [
                   (0, n.jsx)("div", {
                     className:
-                      "w-full aspect-[3/4] border-[4px] border-border relative overflow-hidden bg-black shadow-md",
+                      "cover-frame w-full border-[4px] border-border relative overflow-hidden bg-black shadow-md",
                     children: (0, n.jsx)(m.default, {
-                      src: (null == a ? void 0 : a.image) || "images/download_1_bq8fyl_j9segm.jpg",
+                      src: (null == a ? void 0 : a.image) || "images/10.jpg",
                       alt: "couple",
                       fill: !0,
                       className: "object-cover",
@@ -5766,7 +5765,8 @@
                     }),
                   }),
                   (0, n.jsxs)("div", {
-                    className: "mt-2 text-center",
+                    className: "text-center",
+                    style: { marginTop: 6 },
                     children: [
                       (0, n.jsx)("p", {
                         className: "".concat(
@@ -7024,7 +7024,7 @@
                           I &&
                             (0, n.jsx)("div", {
                               className:
-                                "relative h-40 w-30 overflow-hidden  shadow-sm mb-3",
+                                "couple-photo relative h-40 w-30 overflow-hidden  shadow-sm mb-3",
                               children: (0, n.jsx)(m.default, {
                                 src: I,
                                 alt: S,
@@ -7079,7 +7079,7 @@
                           _ &&
                             (0, n.jsx)("div", {
                               className:
-                                "relative h-40 w-30 overflow-hidden shadow-sm mb-3",
+                                "couple-photo relative h-40 w-30 overflow-hidden shadow-sm mb-3",
                               children: (0, n.jsx)(m.default, {
                                 src: _,
                                 alt: V,
@@ -7132,7 +7132,7 @@
                           _ &&
                             (0, n.jsx)("div", {
                               className:
-                                "relative h-40 w-30 overflow-hidden shadow-sm mb-3",
+                                "couple-photo relative h-40 w-30 overflow-hidden shadow-sm mb-3",
                               children: (0, n.jsx)(m.default, {
                                 src: _,
                                 alt: V,
@@ -7187,7 +7187,7 @@
                           I &&
                             (0, n.jsx)("div", {
                               className:
-                                "relative h-40 w-30 overflow-hidden  shadow-sm mb-3",
+                                "couple-photo relative h-40 w-30 overflow-hidden  shadow-sm mb-3",
                               children: (0, n.jsx)(m.default, {
                                 src: I,
                                 alt: S,
@@ -8519,13 +8519,16 @@
                 try {
                   ((e.volume = 0.7), await e.play(), c(!0));
                 } catch (e) {
+                  k.current = !1;
                   console.log("Autoplay failed");
                 }
-            };
+              else k.current = !1;
+            },
+              t = ["pointerup", "touchend", "click", "keydown"];
             return (
-              document.addEventListener("pointerdown", e),
+              t.forEach((a) => document.addEventListener(a, e, { passive: !0 })),
               () => {
-                document.removeEventListener("pointerdown", e);
+                t.forEach((a) => document.removeEventListener(a, e));
               }
             );
           }, []),
@@ -8799,14 +8802,14 @@
         tv = a.n(tg);
       let tf = [
         {
-          bankName: "Vietcombank",
-          accountNumber: "1234567890123",
+          bankName: "TP Bank",
+          accountNumber: "7100124112001123",
           accountHolder: "NGUYEN ANH TUAN NGOC",
           qr: "/qr-groom.png",
         },
         {
           bankName: "Techcombank",
-          accountNumber: "9876543210987",
+          accountNumber: "81342238888987",
           accountHolder: "NGUYEN THI THUY TRINH",
           qr: "/qr-bride.png",
         },
@@ -8917,7 +8920,7 @@
                       },
                     }),
                     (0, n.jsx)(l.P.img, {
-                      src: "images/wedding-heart-gift.png",
+                      src: "images/2.png",
                       alt: "Hộp quà cưới hình trái tim",
                       draggable: !1,
                       className:
@@ -9012,7 +9015,7 @@
                 },
                 className: "mx-auto max-w-3xl mt-8",
                 children: (0, n.jsxs)("div", {
-                  className: "grid gap-6 md:grid-cols-2 text-left",
+                  className: "gift-grid grid gap-6 md:grid-cols-2 text-left",
                   children: [
                     ...u.map((e, t) =>
                       (0, n.jsxs)(
@@ -9055,8 +9058,8 @@
                                           style: { color: "#A33A52" },
                                           children:
                                             0 === e.originalIndex
-                                              ? "CHÚ RỂ (NHÀ TRAI)"
-                                              : "CÔ DÂU (NHÀ GÁI)",
+                                              ? "CHÚ RỂ"
+                                              : "CÔ DÂU",
                                         }),
                                       ],
                                     }),
@@ -9552,7 +9555,7 @@
               (null == (i = e.description) ? void 0 : i.trim())
             );
           });
-        return 0 === r.length
+        return !0 || 0 === r.length
           ? null
           : (0, n.jsx)("section", {
               className: "py-10 md:py-20",
@@ -12661,13 +12664,16 @@
                 try {
                   ((e.volume = 0.7), await e.play(), c(!0));
                 } catch (e) {
+                  k.current = !1;
                   console.log("Autoplay failed");
                 }
-            };
+              else k.current = !1;
+            },
+              t = ["pointerup", "touchend", "click", "keydown"];
             return (
-              document.addEventListener("pointerdown", e),
+              t.forEach((a) => document.addEventListener(a, e, { passive: !0 })),
               () => {
-                document.removeEventListener("pointerdown", e);
+                t.forEach((a) => document.removeEventListener(a, e));
               }
             );
           }, []),
@@ -12940,14 +12946,14 @@
         ak = a.n(aw);
       let aC = [
         {
-          bankName: "Vietcombank",
-          accountNumber: "1234567890123",
+          bankName: "TP Bank",
+          accountNumber: "7100124112001123",
           accountHolder: "NGUYEN ANH TUAN NGOC",
           qr: "/qr-groom.png",
         },
         {
           bankName: "Techcombank",
-          accountNumber: "9876543210987",
+          accountNumber: "81342238888987",
           accountHolder: "NGUYEN THI THUY TRINH",
           qr: "/qr-bride.png",
         },
