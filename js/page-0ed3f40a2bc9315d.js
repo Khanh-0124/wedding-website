@@ -8835,6 +8835,20 @@
           [copiedIdx, setCopiedIdx] = (0, i.useState)(null),
           [hasScrolled, setHasScrolled] = (0, i.useState)(!1);
         (0, i.useEffect)(() => {
+          // Mở hộp quà: tự cuộn trang lên một chút để lộ phần QR/tài khoản.
+          if (!isOpen || !o.current) return;
+          let e = o.current.closest(".overflow-y-auto"),
+            t = window.setTimeout(() => {
+              let a = o.current ? o.current.querySelector(".gift-grid") : null;
+              if (!a) return;
+              let n = a.getBoundingClientRect().top - 0.22 * window.innerHeight,
+                s = Math.max(0, Math.min(n, 0.5 * window.innerHeight));
+              s > 0 &&
+                (e || window).scrollBy({ top: s, behavior: "smooth" });
+            }, 120);
+          return () => window.clearTimeout(t);
+        }, [isOpen]);
+        (0, i.useEffect)(() => {
           let e = o.current
             ? o.current.closest(".overflow-y-auto")
             : null,
