@@ -987,7 +987,7 @@
                 className:
                   "fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500 ".concat(
                     u
-                      ? "bg-background/95 backdrop-blur-sm shadow-sm py-3"
+                      ? "bg-background/95 shadow-sm py-3"
                       : "bg-transparent py-6",
                   ),
                 children: (0, n.jsxs)("nav", {
@@ -1143,14 +1143,14 @@
                   ]
               : [];
         return (0, n.jsxs)("section", {
-          className: "relative h-screen w-full overflow-hidden border-white",
+          className: "relative h-[100svh] w-full overflow-hidden border-white",
           children: [
             (0, n.jsx)(l.P.div, {
               initial: { scale: 1.1 },
               animate: { scale: 1 },
               transition: { duration: 6, ease: "easeOut" },
               className:
-                "absolute inset-[-2px] bg-cover bg-center bg-no-repeat border-white mx-auto md:w-[50%]",
+                "absolute inset-[-2px] transform-gpu will-change-transform bg-cover bg-center bg-no-repeat border-white mx-auto md:w-[50%]",
               style: { backgroundImage: "url('".concat(p, "')") },
               children: (0, n.jsx)("div", {
                 className: "absolute inset-[-2px] bg-black/25",
@@ -3151,7 +3151,7 @@
                         animate: x ? { opacity: 1, scale: 1 } : {},
                         transition: { duration: 0.5, delay: 0.3 + 0.1 * t },
                         className:
-                          "rounded-lg bg-white/10 p-6 backdrop-blur-sm",
+                          "rounded-lg bg-white/10 p-6",
                         children: [
                           (0, n.jsx)(l.P.span, {
                             initial: { scale: 1 },
@@ -3470,7 +3470,7 @@
               u &&
                 (0, n.jsx)("div", {
                   className:
-                    "fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4",
+                    "fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4",
                   onClick: (e) => {
                     m.current && !m.current.contains(e.target) && x(!1);
                   },
@@ -5036,7 +5036,7 @@
                             x: { duration: 0.25 },
                           },
                           className:
-                            " relative px-3 py-1 rounded-[5px] bg-white backdrop-blur-md border border-white/20 text-primary text-sm shadow-md whitespace-nowrap  after:content-[''] after:absolute after:top-1/2 after:-right-1 after:-translate-y-1/2 after:w-2 after:h-2 after:rotate-45 after:bg-white after:border-r after:border-b after:border-white/20 ",
+                            " relative px-3 py-1 rounded-[5px] bg-white border border-white/20 text-primary text-sm shadow-md whitespace-nowrap  after:content-[''] after:absolute after:top-1/2 after:-right-1 after:-translate-y-1/2 after:w-2 after:h-2 after:rotate-45 after:bg-white after:border-r after:border-b after:border-white/20 ",
                           children: c ? d.ud.playing[s] : d.ud.idle[s],
                         }),
                     }),
@@ -5052,7 +5052,7 @@
                               exit: { opacity: 0, y: 10, scale: 0.9 },
                               transition: { duration: 0.2 },
                               className:
-                                "bg-background/95 backdrop-blur-md border border-primary/20 rounded-2xl p-4 shadow-xl w-64",
+                                "bg-background/95 border border-primary/20 rounded-2xl p-4 shadow-xl w-64",
                               children: [
                                 (0, n.jsxs)("div", {
                                   className: "flex items-center gap-3 mb-3",
@@ -5193,7 +5193,7 @@
                             "cursor-pointer w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 ".concat(
                               c
                                 ? "bg-primary text-primary-foreground"
-                                : "bg-background/95 backdrop-blur-md border border-primary/20 text-primary",
+                                : "bg-background/95 border border-primary/20 text-primary",
                             ),
                           children: c
                             ? (0, n.jsx)("div", {
@@ -5237,7 +5237,7 @@
                               (e.stopPropagation(), I());
                             },
                             className:
-                              "absolute -left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-secondary/80 backdrop-blur-sm hidden items-center justify-center text-foreground hover:bg-secondary transition-colors shadow-md",
+                              "absolute -left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-secondary/80 hidden items-center justify-center text-foreground hover:bg-secondary transition-colors shadow-md",
                             children: c
                               ? (0, n.jsx)("svg", {
                                   className: "w-4 h-4",
@@ -5559,7 +5559,7 @@
                   x: { duration: 0.25 },
                 },
                 className:
-                  " relative px-3 py-1 rounded-[5px] bg-white backdrop-blur-md border border-white/20 text-primary text-sm shadow-md whitespace-nowrap  after:content-[''] after:absolute after:top-1/2 after:-right-1 after:-translate-y-1/2 after:w-2 after:h-2 after:rotate-45 after:bg-white after:border-r after:border-b after:border-white/20 cursor-pointer ",
+                  " relative px-3 py-1 rounded-[5px] bg-white border border-white/20 text-primary text-sm shadow-md whitespace-nowrap  after:content-[''] after:absolute after:top-1/2 after:-right-1 after:-translate-y-1/2 after:w-2 after:h-2 after:rotate-45 after:bg-white after:border-r after:border-b after:border-white/20 cursor-pointer ",
                 onClick: o,
                 children: d.ud.wishes[t],
               }),
@@ -5575,7 +5575,7 @@
                 whileHover: { scale: 1.08 },
                 whileTap: { scale: 0.92 },
                 className:
-                  " cursor-pointer flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-primary shadow-xl hover:bg-white/20 transition-all ",
+                  " cursor-pointer flex h-14 w-14 items-center justify-center rounded-full bg-white/10 border border-white/20 text-primary shadow-xl hover:bg-white/20 transition-all ",
                 children: (0, n.jsx)(eP.A, { className: "w-6 h-6" }),
               }),
             ],
@@ -6406,7 +6406,7 @@
                       }),
                       (0, n.jsxs)("div", {
                         className:
-                          "absolute left-4 top-4 z-[60] rounded-full bg-black/30 px-3 py-1 text-sm md:text-base text-white/90 backdrop-blur-sm",
+                          "absolute left-4 top-4 z-[60] rounded-full bg-black/30 px-3 py-1 text-sm md:text-base text-white/90",
                         children: ["(", N + 1, "/", C.length, ")"],
                       }),
                       (0, n.jsx)("button", {
@@ -6414,7 +6414,7 @@
                           (e.stopPropagation(), S());
                         },
                         className:
-                          "cursor-pointer absolute left-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/80 backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:text-white md:left-6",
+                          "cursor-pointer absolute left-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-all duration-300 hover:bg-white/20 hover:text-white md:left-6",
                         children: (0, n.jsx)(eK.A, { size: 24 }),
                       }),
                       (0, n.jsx)(l.P.div, {
@@ -6443,7 +6443,7 @@
                           (e.stopPropagation(), I());
                         },
                         className:
-                          "cursor-pointer absolute right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/80 backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:text-white md:right-6",
+                          "cursor-pointer absolute right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-all duration-300 hover:bg-white/20 hover:text-white md:right-6",
                         children: (0, n.jsx)(eX.A, { size: 24 }),
                       }),
                     ],
@@ -7666,7 +7666,7 @@
               u &&
                 (0, n.jsx)("div", {
                   className:
-                    "fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4",
+                    "fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4",
                   onClick: (e) => {
                     m.current && !m.current.contains(e.target) && x(!1);
                   },
@@ -8568,7 +8568,7 @@
                             x: { duration: 0.25 },
                           },
                           className:
-                            " relative px-3 py-1 rounded-[5px] bg-white backdrop-blur-md border border-white/20 text-primary text-sm shadow-md whitespace-nowrap  after:content-[''] after:absolute after:top-1/2 after:-right-1 after:-translate-y-1/2 after:w-2 after:h-2 after:rotate-45 after:bg-white after:border-r after:border-b after:border-white/20 ",
+                            " relative px-3 py-1 rounded-[5px] bg-white border border-white/20 text-primary text-sm shadow-md whitespace-nowrap  after:content-[''] after:absolute after:top-1/2 after:-right-1 after:-translate-y-1/2 after:w-2 after:h-2 after:rotate-45 after:bg-white after:border-r after:border-b after:border-white/20 ",
                           children: o
                             ? "Đang ph\xe1t nhạc \uD83C\uDFB5"
                             : "Bật nhạc \uD83C\uDFB6",
@@ -8586,7 +8586,7 @@
                               exit: { opacity: 0, y: 10, scale: 0.9 },
                               transition: { duration: 0.2 },
                               className:
-                                "bg-background/80 backdrop-blur-md border border-primary/20 rounded-2xl p-4 shadow-xl w-64",
+                                "bg-background/80 border border-primary/20 rounded-2xl p-4 shadow-xl w-64",
                               children: [
                                 (0, n.jsxs)("div", {
                                   className: "flex items-center gap-3 mb-3",
@@ -8726,7 +8726,7 @@
                             "cursor-pointer w-10 h-10 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 ".concat(
                               o
                                 ? "bg-primary text-primary-foreground"
-                                : "bg-background/95 backdrop-blur-md border border-primary/20 text-primary",
+                                : "bg-background/95 border border-primary/20 text-primary",
                             ),
                           children: o
                             ? (0, n.jsx)("div", {
@@ -8770,7 +8770,7 @@
                               (e.stopPropagation(), P());
                             },
                             className:
-                              "absolute -left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-secondary/80 backdrop-blur-sm hidden items-center justify-center text-foreground hover:bg-secondary transition-colors shadow-md",
+                              "absolute -left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-secondary/80 hidden items-center justify-center text-foreground hover:bg-secondary transition-colors shadow-md",
                             children: o
                               ? (0, n.jsx)("svg", {
                                   className: "w-4 h-4",
@@ -10506,7 +10506,7 @@
             };
           })(null == a ? void 0 : a.date, null == a ? void 0 : a.date2);
         return (0, n.jsx)("div", {
-          className: "relative h-screen w-full overflow-hidden shadow-xl",
+          className: "relative h-[100svh] w-full overflow-hidden shadow-xl",
           children: (0, n.jsxs)("div", {
             className: "flex h-full flex-col px-5 pt-4 pb-12",
             children: [
@@ -11228,7 +11228,7 @@
                       }),
                       (0, n.jsxs)("div", {
                         className:
-                          "absolute left-4 top-4 z-[60] rounded-full bg-black/30 px-3 py-1 text-sm md:text-base text-white/90 backdrop-blur-sm",
+                          "absolute left-4 top-4 z-[60] rounded-full bg-black/30 px-3 py-1 text-sm md:text-base text-white/90",
                         children: ["(", N + 1, "/", C.length, ")"],
                       }),
                       (0, n.jsx)("button", {
@@ -11236,7 +11236,7 @@
                           (e.stopPropagation(), S());
                         },
                         className:
-                          "cursor-pointer absolute left-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/80 backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:text-white md:left-6",
+                          "cursor-pointer absolute left-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-all duration-300 hover:bg-white/20 hover:text-white md:left-6",
                         children: (0, n.jsx)(eK.A, { size: 24 }),
                       }),
                       (0, n.jsx)(l.P.div, {
@@ -11265,7 +11265,7 @@
                           (e.stopPropagation(), I());
                         },
                         className:
-                          "cursor-pointer absolute right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/80 backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:text-white md:right-6",
+                          "cursor-pointer absolute right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-all duration-300 hover:bg-white/20 hover:text-white md:right-6",
                         children: (0, n.jsx)(eX.A, { size: 24 }),
                       }),
                     ],
@@ -11921,7 +11921,7 @@
               d &&
                 (0, n.jsx)("div", {
                   className:
-                    "fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4",
+                    "fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4",
                   onClick: (e) => {
                     c.current && !c.current.contains(e.target) && m(!1);
                   },
@@ -12726,7 +12726,7 @@
                             x: { duration: 0.25 },
                           },
                           className:
-                            " relative px-3 py-1 rounded-[5px] bg-white backdrop-blur-md border border-white/20 text-primary text-sm shadow-md whitespace-nowrap  after:content-[''] after:absolute after:top-1/2 after:-right-1 after:-translate-y-1/2 after:w-2 after:h-2 after:rotate-45 after:bg-white after:border-r after:border-b after:border-white/20 ",
+                            " relative px-3 py-1 rounded-[5px] bg-white border border-white/20 text-primary text-sm shadow-md whitespace-nowrap  after:content-[''] after:absolute after:top-1/2 after:-right-1 after:-translate-y-1/2 after:w-2 after:h-2 after:rotate-45 after:bg-white after:border-r after:border-b after:border-white/20 ",
                           children: o
                             ? "Đang ph\xe1t nhạc \uD83C\uDFB5"
                             : "Bật nhạc \uD83C\uDFB6",
@@ -12744,7 +12744,7 @@
                               exit: { opacity: 0, y: 10, scale: 0.9 },
                               transition: { duration: 0.2 },
                               className:
-                                "bg-background/80 backdrop-blur-md border border-primary/20 rounded-2xl p-4 shadow-xl w-64",
+                                "bg-background/80 border border-primary/20 rounded-2xl p-4 shadow-xl w-64",
                               children: [
                                 (0, n.jsxs)("div", {
                                   className: "flex items-center gap-3 mb-3",
@@ -12884,7 +12884,7 @@
                             "cursor-pointer w-10 h-10 rounded-full shadow-xl flex items-center justify-center transition-all duration-300 ".concat(
                               o
                                 ? "bg-primary text-primary-foreground"
-                                : "bg-background/95 backdrop-blur-md border border-primary/20 text-primary",
+                                : "bg-background/95 border border-primary/20 text-primary",
                             ),
                           children: o
                             ? (0, n.jsx)("div", {
@@ -12928,7 +12928,7 @@
                               (e.stopPropagation(), P());
                             },
                             className:
-                              "absolute -left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-secondary/80 backdrop-blur-sm hidden items-center justify-center text-foreground hover:bg-secondary transition-colors shadow-md",
+                              "absolute -left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-secondary/80 hidden items-center justify-center text-foreground hover:bg-secondary transition-colors shadow-md",
                             children: o
                               ? (0, n.jsx)("svg", {
                                   className: "w-4 h-4",
