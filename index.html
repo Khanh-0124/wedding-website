@@ -47,7 +47,7 @@
   <script src="js/5563-54046f3635db0d38.js" async=""></script>
   <script src="js/2810-d6b2f5b42f980c21.js" async=""></script>
   <script src="js/6382-f14b34efbd1d008b.js" async=""></script>
-  <script src="js/page-0ed3f40a2bc9315d.js?v=layout-21" async=""></script>
+  <script src="js/page-0ed3f40a2bc9315d.js?v=layout-22" async=""></script>
   <meta name="next-size-adjust" content="">
   <link rel="icon" href="images/icon-180.png" media="(prefers-color-scheme: light)">
   <link rel="icon" href="images/icon-180.png" media="(prefers-color-scheme: dark)">
@@ -531,20 +531,45 @@
   </style>
   <script>
     (function lockStableViewportHeight() {
-      var root = document.documentElement;
-      var lastWidth = 0;
-      function apply() {
-        var width = window.innerWidth;
-        // Chỉ cập nhật khi đổi chiều rộng (xoay máy), bỏ qua thay đổi chiều cao do cuộn.
-        if (width === lastWidth) return;
-        lastWidth = width;
-        root.style.setProperty('--stable-vh', window.innerHeight + 'px');
+      var styleId = 'stable-vh-style';
+      var lockedHeight = 0;
+      var lastIsLandscape = null;
+
+      // Ghi biến vào thẻ <style> riêng: React hydrate có thể ghi đè style của <html>.
+      function writeStyle() {
+        if (!lockedHeight) return;
+        var style = document.getElementById(styleId);
+        if (!style) {
+          style = document.createElement('style');
+          style.id = styleId;
+          (document.head || document.documentElement).appendChild(style);
+        }
+        var css = ':root{--stable-vh:' + lockedHeight + 'px}';
+        if (style.textContent !== css) style.textContent = css;
       }
-      apply();
-      window.addEventListener('resize', apply, { passive: true });
+
+      function measure() {
+        var isLandscape = window.innerWidth > window.innerHeight;
+        // Chỉ đo lại khi xoay ngang/dọc; trình duyệt app FB đổi kích thước khi thanh công cụ ẩn/hiện lúc cuộn.
+        if (isLandscape === lastIsLandscape) return;
+        lastIsLandscape = isLandscape;
+        lockedHeight = window.innerHeight;
+        writeStyle();
+      }
+
+      measure();
       window.addEventListener('orientationchange', function () {
-        lastWidth = 0;
-        window.setTimeout(apply, 300);
+        window.setTimeout(measure, 300);
+      });
+
+      // Gắn lại thẻ <style> nếu bị React xoá khi hydrate.
+      var observer = new MutationObserver(function () {
+        if (!document.getElementById(styleId)) writeStyle();
+      });
+      observer.observe(document.documentElement, { childList: true, subtree: true });
+      window.addEventListener('load', function () {
+        writeStyle();
+        window.setTimeout(function () { observer.disconnect(); writeStyle(); }, 5000);
       });
     })();
   </script>

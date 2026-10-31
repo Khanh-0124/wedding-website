@@ -6309,13 +6309,10 @@
                                 l.P.div,
                                 {
                                   className: "absolute inset-0 cursor-pointer",
-                                  initial: { opacity: 0, scale: 1.05 },
-                                  whileInView: { scale: 1 },
-                                  viewport: { once: !0 },
+                                  initial: { opacity: 0 },
                                   animate: { opacity: +(t === h) },
                                   transition: {
                                     opacity: { duration: 1 },
-                                    scale: { duration: 1.2 },
                                   },
                                   onClick: () => T(e.src),
                                   children: [
@@ -6360,16 +6357,14 @@
                                 opacity: 0,
                                 x: t % 3 == 0 ? -100 : 100 * (t % 3 == 2),
                                 y: 30,
-                                scale: 0.9,
                               },
-                              whileInView: { opacity: 1, x: 0, scale: 1 },
+                              whileInView: { opacity: 1, x: 0 },
                               viewport: { once: !0, amount: 0.2 },
                               transition: {
                                 duration: 0.8,
                                 delay: 0.08 * t,
                                 ease: "easeOut",
                               },
-                              whileHover: { scale: 1.03 },
                               onClick: () => T(e.src),
                               children: (0, n.jsx)(m.default, {
                                 src: e.src,
@@ -11131,13 +11126,10 @@
                                 l.P.div,
                                 {
                                   className: "absolute inset-0 cursor-pointer",
-                                  initial: { opacity: 0, scale: 1.05 },
-                                  whileInView: { scale: 1 },
-                                  viewport: { once: !0 },
+                                  initial: { opacity: 0 },
                                   animate: { opacity: +(t === h) },
                                   transition: {
                                     opacity: { duration: 1 },
-                                    scale: { duration: 1.2 },
                                   },
                                   onClick: () => T(e.src),
                                   children: [
@@ -11182,16 +11174,14 @@
                                 opacity: 0,
                                 x: t % 3 == 0 ? -100 : 100 * (t % 3 == 2),
                                 y: 30,
-                                scale: 0.9,
                               },
-                              whileInView: { opacity: 1, x: 0, scale: 1 },
+                              whileInView: { opacity: 1, x: 0 },
                               viewport: { once: !0, amount: 0.2 },
                               transition: {
                                 duration: 0.8,
                                 delay: 0.08 * t,
                                 ease: "easeOut",
                               },
-                              whileHover: { scale: 1.03 },
                               onClick: () => T(e.src),
                               children: (0, n.jsx)(m.default, {
                                 src: e.src,
