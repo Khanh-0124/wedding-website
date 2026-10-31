@@ -1146,9 +1146,6 @@
           className: "relative h-[100svh] w-full overflow-hidden border-white",
           children: [
             (0, n.jsx)(l.P.div, {
-              initial: { scale: 1.1 },
-              animate: { scale: 1 },
-              transition: { duration: 6, ease: "easeOut" },
               className:
                 "absolute inset-[-2px] transform-gpu will-change-transform bg-cover bg-center bg-no-repeat border-white mx-auto md:w-[50%]",
               style: { backgroundImage: "url('".concat(p, "')") },
