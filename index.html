@@ -232,19 +232,14 @@
       38% { transform: scale(.55); opacity: .85; }
       68% { transform: scale(1.65); opacity: 0; }
     }
-    body .text-secondary {
-      animation: wedding-title-glow 3.2s ease-in-out infinite;
-    }
-    section img {
-      animation: wedding-photo-breathe 6s ease-in-out infinite;
-    }
+    /* Đã bỏ animation filter lặp vô hạn vì gây nóng máy */
+    /* Đã bỏ animation filter lặp vô hạn vì gây nóng máy */
     svg.lucide-heart {
       transform-origin: center;
       animation: wedding-heart-beat 2.2s ease-in-out infinite;
     }
     .wedding-timeline-line {
       background-size: 100% 180px;
-      animation: wedding-line-flow 3s linear infinite;
     }
     .wedding-timeline-item {
       opacity: 1 !important;
@@ -258,7 +253,7 @@
       animation: wedding-soft-float 2.8s ease-in-out infinite;
     }
     .wedding-timeline-card {
-      animation: wedding-card-glow 3.5s ease-in-out infinite;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.15);
     }
     .wedding-ambient-hearts {
       position: fixed;
@@ -1321,7 +1316,7 @@
       const heartsLayer = document.createElement('div');
       heartsLayer.className = 'wedding-ambient-hearts';
       heartsLayer.setAttribute('aria-hidden', 'true');
-      for (let i = 0; i < 14; i++) {
+      for (let i = 0; i < 6; i++) {
         const heart = document.createElement('span');
         heart.className = 'wedding-ambient-heart';
         heart.textContent = i % 3 === 0 ? '♡' : '♥';
@@ -1343,7 +1338,7 @@
       let height = window.innerHeight;
 
       function resize() {
-        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
         width = window.innerWidth;
         height = window.innerHeight;
         canvas.width = Math.round(width * pixelRatio);
@@ -1708,7 +1703,7 @@
       // Vòng lặp bắn pháo hoa tự động dày hơn cho không khí lễ hội.
       let lastAutoLaunch = Date.now();
       let autoInterval = reducedMotion ? 4500 : 1200;
-      const maxParticles = width < 640 ? 3000 : 6000;
+      const maxParticles = width < 640 ? 700 : 2000;
 
       // Chuỗi pháo chào mừng lúc mới vào trang
       function launchWelcomeFireworks() {
@@ -1729,6 +1724,8 @@
       function loop(now) {
         requestAnimationFrame(loop);
         now = now || performance.now();
+        // Giới hạn ~30fps để máy đỡ nóng
+        if (now - lastFrame < 30) return;
         const f = Math.min((now - lastFrame) / 16.67, 3);
         lastFrame = now;
         if (document.hidden) return;
