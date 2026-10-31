@@ -521,13 +521,33 @@
     .gift-grid .space-y-3 button:hover { opacity:1; }
     .gift-grid .space-y-3 button svg { width:14px !important; height:14px !important; }
     .couple-photo { width:min(38vw,200px) !important; height:auto !important; aspect-ratio:3/4; }
-    .cover-photo { width:min(94vw,520px,calc((100svh - 300px) * .75)); }
-    .cover-frame { height:min(calc(100svh - 300px), calc(94vw * 1.45), 754px); }
+    /* --stable-vh: chiều cao viewport khoá bằng px (JS bên dưới), tránh khung ảnh co giãn khi thanh công cụ app FB ẩn/hiện */
+    .cover-photo { width:min(94vw,520px,calc((var(--stable-vh, 100vh) - 300px) * .75)); }
+    .cover-frame { height:min(calc(var(--stable-vh, 100vh) - 300px), calc(94vw * 1.45), 754px); }
     @media (min-width:768px) {
-      .cover-photo { width:min(calc(50vw - 24px),520px,calc((100svh - 300px) * .75)); }
-      .cover-frame { height:min(calc(100svh - 300px), calc((50vw - 24px) * 1.45), 754px); }
+      .cover-photo { width:min(calc(50vw - 24px),520px,calc((var(--stable-vh, 100vh) - 300px) * .75)); }
+      .cover-frame { height:min(calc(var(--stable-vh, 100vh) - 300px), calc((50vw - 24px) * 1.45), 754px); }
     }
   </style>
+  <script>
+    (function lockStableViewportHeight() {
+      var root = document.documentElement;
+      var lastWidth = 0;
+      function apply() {
+        var width = window.innerWidth;
+        // Chỉ cập nhật khi đổi chiều rộng (xoay máy), bỏ qua thay đổi chiều cao do cuộn.
+        if (width === lastWidth) return;
+        lastWidth = width;
+        root.style.setProperty('--stable-vh', window.innerHeight + 'px');
+      }
+      apply();
+      window.addEventListener('resize', apply, { passive: true });
+      window.addEventListener('orientationchange', function () {
+        lastWidth = 0;
+        window.setTimeout(apply, 300);
+      });
+    })();
+  </script>
   <link rel="preload" as="image" href="images/door-bride.webp">
   <link rel="preload" as="image" href="images/door-groom.webp">
 </head>
