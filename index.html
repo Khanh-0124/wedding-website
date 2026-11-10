@@ -676,7 +676,7 @@
               </div>
               <div class="text-center" style="margin-top:6px">
                 <p class="__className_85880b text-[13px] uppercase tracking-[0.25em] text-secondary font-bold">Trân Trọng Kính Mời</p>
-                <h3 class="__className_3336bb mt-0.5 text-[17px] leading-none text-[#3a322f]">bạn</h3>
+                <h3 class="__className_3336bb mt-0.5 text-[17px] leading-none text-[#3a322f]" id="guest-name">bạn</h3>
                 <div class="hidden" aria-hidden="true"></div>
               </div>
             </div>
@@ -1864,6 +1864,26 @@
     })();
   </script>
 
+<script>
+(function(){
+  function decode(t){try{t=t.replace(/-/g,'+').replace(/_/g,'/');while(t.length%4)t+='=';var b=atob(t),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return JSON.parse(new TextDecoder().decode(u));}catch(e){return null;}}
+  var q=new URLSearchParams(location.search).get('to'); if(!q)return;
+  var d=decode(q); if(!d||!d.n)return;
+  function apply(){
+    var ps=document.querySelectorAll('p'),anchor=null;
+    for(var i=0;i<ps.length;i++){if(/trân trọng kính mời/i.test(ps[i].textContent)){anchor=ps[i];break;}}
+    if(!anchor)return;
+    var old=anchor.parentNode.querySelector('h3');if(old&&old.id!=='guest-name-x')old.style.display='none';
+    var el=document.getElementById('guest-name-x');
+    if(!el){el=document.createElement('div');el.id='guest-name-x';el.className='__className_7d6f79';
+      el.style.cssText="font-size:28px;line-height:1.1;color:#000;text-align:center;width:fit-content;min-width:60%;max-width:90%;margin:6px auto 0;padding:0 12px 0;border-bottom:2px dotted #c9707d";
+      anchor.parentNode.insertBefore(el,anchor.nextSibling);}
+    if(el.textContent!==d.n)el.textContent=d.n;
+  }
+  apply();document.addEventListener('DOMContentLoaded',apply);window.addEventListener('load',apply);
+  new MutationObserver(function(){if(!document.getElementById('guest-name-x')||document.getElementById('guest-name-x').textContent!==d.n)apply();}).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
 </body>
 
 </html>

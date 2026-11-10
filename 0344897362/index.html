@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Quản lý khách mời</title>
+<style>
+  body{font-family:system-ui,-apple-system,sans-serif;background:#fdfcf5;color:#3a322f;max-width:720px;margin:0 auto;padding:20px}
+  h1{color:#c9707d;font-size:22px}
+  form{display:flex;gap:8px;margin-bottom:20px}
+  input{flex:1;padding:10px;border:1px solid #ddd;border-radius:8px;font-size:16px}
+  button{padding:10px 14px;border:0;border-radius:8px;background:#c9707d;color:#fff;font-size:14px;cursor:pointer}
+  button.ghost{background:#eee;color:#333}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  td,th{padding:8px;border-bottom:1px solid #eee;text-align:left;vertical-align:middle}
+  .link{font-size:12px;color:#888;word-break:break-all}
+  .actions{white-space:nowrap}
+  .bar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<h1>Quản lý khách mời</h1>
+<form id="f">
+  <input id="name" placeholder="Tên khách mời (vd: Anh Nam &amp; gia đình)" required autocomplete="off">
+  <button>Tạo link</button>
+</form>
+<div class="bar">
+  <button class="ghost" id="export">Xuất danh sách (JSON)</button>
+  <button class="ghost" id="importBtn">Nhập danh sách</button>
+  <input type="file" id="import" accept=".json" hidden>
+</div>
+<table>
+  <thead><tr><th>#</th><th>Tên / Link</th><th></th></tr></thead>
+  <tbody id="list"></tbody>
+</table>
+<script>
+  var KEY = 'wedding_guests';
+  var BASE = new URL('../', location.href).href;
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch(e){ return []; } }
+  function save(g){ localStorage.setItem(KEY, JSON.stringify(g)); }
+  function rid(){ var a = new Uint8Array(4); crypto.getRandomValues(a); return Array.from(a, function(b){ return b.toString(16).padStart(2,'0'); }).join(''); }
+  function encode(obj){
+    var bytes = new TextEncoder().encode(JSON.stringify(obj)), s = '';
+    bytes.forEach(function(b){ s += String.fromCharCode(b); });
+    return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  }
+  function linkFor(g){ return BASE + '?to=' + encode({ i: g.id, n: g.name }); }
+  function esc(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+  function render(){
+    var g = load(), tb = document.getElementById('list');
+    tb.innerHTML = g.map(function(x, i){
+      return '<tr><td>' + (i+1) + '</td><td><b>' + esc(x.name) + '</b> <small>#' + x.id + '</small><div class="link">' + esc(linkFor(x)) + '</div></td>' +
+        '<td class="actions"><button data-copy="' + i + '">Copy</button> <button class="ghost" data-edit="' + i + '">Sửa</button> <button class="ghost" data-open="' + i + '">Xem</button> <button class="ghost" data-del="' + i + '">Xoá</button></td></tr>';
+    }).join('');
+  }
+
+  document.getElementById('f').onsubmit = function(e){
+    e.preventDefault();
+    var inp = document.getElementById('name'), name = inp.value.trim();
+    if (!name) return;
+    var g = load(); g.unshift({ id: rid(), name: name, created: Date.now() }); save(g);
+    inp.value = ''; render();
+    navigator.clipboard && navigator.clipboard.writeText(linkFor(g[0])).catch(function(){});
+  };
+
+  document.getElementById('list').onclick = function(e){
+    var t = e.target, g = load();
+    if (t.dataset.copy != null) {
+      var l = linkFor(g[t.dataset.copy]);
+      navigator.clipboard.writeText(l).then(function(){ t.textContent = 'Đã copy'; setTimeout(function(){ t.textContent = 'Copy'; }, 1200); }, function(){ prompt('Copy link:', l); });
+    } else if (t.dataset.edit != null) {
+      var item = g[t.dataset.edit];
+      var nn = prompt('Sửa tên khách mời:\n(Lưu ý: link sẽ thay đổi, cần gửi lại link mới)', item.name);
+      if (nn != null && nn.trim() && nn.trim() !== item.name) { item.name = nn.trim(); save(g); render(); }
+    } else if (t.dataset.open != null) {
+      window.open(linkFor(g[t.dataset.open]), '_blank');
+    } else if (t.dataset.del != null && confirm('Xoá "' + g[t.dataset.del].name + '"?')) {
+      g.splice(t.dataset.del, 1); save(g); render();
+    }
+  };
+
+  document.getElementById('export').onclick = function(){
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(load(), null, 2)], { type: 'application/json' }));
+    a.download = 'khach-moi.json'; a.click();
+  };
+  document.getElementById('importBtn').onclick = function(){ document.getElementById('import').click(); };
+  document.getElementById('import').onchange = function(e){
+    var file = e.target.files[0]; if (!file) return;
+    file.text().then(function(t){
+      try {
+        var incoming = JSON.parse(t), g = load(), ids = new Set(g.map(function(x){ return x.id; }));
+        incoming.forEach(function(x){ if (x.id && x.name && !ids.has(x.id)) g.push(x); });
+        save(g); render();
+      } catch(err){ alert('File không hợp lệ'); }
+    });
+  };
+  render();
+</script>
+</body>
+</html>
