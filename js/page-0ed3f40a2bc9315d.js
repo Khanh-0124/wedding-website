@@ -8926,7 +8926,7 @@
                       },
                     }),
                     (0, n.jsx)(l.P.img, {
-                      src: "images/2.png",
+                      src: "images/gift.png",
                       alt: "Hộp quà cưới hình trái tim",
                       draggable: !1,
                       className:
